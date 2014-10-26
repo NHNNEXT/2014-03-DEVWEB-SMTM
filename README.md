@@ -6,6 +6,6 @@
 team April,
 이경륜, 조부용, 손명준, 김학결.
 
-project : Show Me The Money
+project name : Show Me The Money
 
-codename : Skateboard
+code name : Skateboard
