@@ -16,10 +16,10 @@ public class LoginDao {
 		ResultSet rs = null;
 		Usr returnUsr = null;
 		
-		String address = "jdbc:mysql://10.73.45.134/SMARTJUNDB";
-		String id = "smartjun";
-		String pw = "smartjun";
-		String sql = "SELECT USR_ID, USR_NM, USR_PW FROM TB_USR WHERE USR_ID=? AND USR_PW=?";	
+		String address = "jdbc:mysql://10.73.45.134/DEV";
+		String id = "erin314";
+		String pw = "1234";
+		String sql = "SELECT USR_ID, USR_NM, USR_PW, USR_PHONE1, USR_GENDER, USR_BIRTH FROM TB_USR WHERE USR_ID=? AND USR_PW=?";	
 		
 		try {	
 			Class.forName("com.mysql.jdbc.Driver");
@@ -31,7 +31,8 @@ public class LoginDao {
 			rs = pstmt.executeQuery();
 			while(rs.next()){
 				returnUsr = new Usr(rs.getString("USR_ID"), 
-						rs.getString("USR_PW"),rs.getString("USR_NM"));
+						rs.getString("USR_PW"),rs.getString("USR_NM"),rs.getString("USR_PHONE1"),rs.getString("USR_GENDER"),rs.getString("USR_BIRTH"));
+	
 			}
 		} catch (Exception e) {
 			System.out.println(e.toString());
