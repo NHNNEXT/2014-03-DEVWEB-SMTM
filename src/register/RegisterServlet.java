@@ -28,10 +28,18 @@ public class RegisterServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("registerId");
-		String password = request.getParameter("registerPw");
-		String name = request.getParameter("registerName");
-		Usr usr = new Usr(id, password, name);
+		String registerId = request.getParameter("registerId");
+		String registerPw = request.getParameter("registerPw");
+		String registerName = request.getParameter("registerName");
+		String registerPhone1_0 = request.getParameter("registerPhone1_0");
+		String registerPhone1_1 = request.getParameter("registerPhone1_1");
+		String registerPhone1_2 = request.getParameter("registerPhone1_2");
+		String registerPhone1 = registerPhone1_0+"-"+registerPhone1_1+"-"+registerPhone1_2;
+		String registerGender = request.getParameter("registerGender");
+		String registerBirth = request.getParameter("registerBirth");
+		
+		Usr usr = new Usr(registerId, registerPw, registerName, registerPhone1, registerGender, registerBirth);
+		System.out.println("usr :"+usr);
 		
 		RegisterBiz registerBiz = new RegisterBiz();
 		int updatedRows = registerBiz.registerBiz(usr);

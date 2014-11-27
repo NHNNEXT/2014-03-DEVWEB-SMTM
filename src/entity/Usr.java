@@ -4,16 +4,25 @@ public class Usr {
 	String id;
 	String pw;
 	String name;
+	String phone1;
+	String gender;
+	String birth;
+	
 	
 	public Usr (String id, String pw) {
 		this.id = id;
 		this.pw = pw;
 	}
 	
-	public Usr (String id, String pw, String name) {
+	public Usr(String id, String pw, String name, String phone1, String gender,
+			String birth) {
+		super();
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
+		this.phone1 = phone1;
+		this.gender = gender;
+		this.birth = birth;
 	}
 	
 	public String getId() {
@@ -26,10 +35,24 @@ public class Usr {
 	public String getName() {
 		return name;
 	}
+	
+	public String getPhone1() {
+		return phone1;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public String getBirth() {
+		return birth;
+	}
+
 
 	@Override
 	public String toString() {
-		return "Usr [id=" + id + ", pw=" + pw + ", name=" + name + "]";
+		return "Usr [id=" + id + ", pw=" + pw + ", name=" + name + ", phone1="
+				+ phone1 + ", gender=" + gender + ", birth=" + birth + "]";
 	}
 	
 }
