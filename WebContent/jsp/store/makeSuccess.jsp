@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ page import ="entity.Usr"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -8,10 +9,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<a href="/LoginServlet">로그인</a>
-	<a href="/RegisterServlet">회원가입</a>
-	<a href="/MakeStoreServlet">점포생성</a>
-	<a href="/RetrieveStoreListServlet">근로 요청</a>
-	
+성공
+ 
+<a href="/jsp/index.jsp">돌아가기</a>
+<a href="/LogoutServlet">로그아웃 하기 </a>
+
 </body>
 </html>
