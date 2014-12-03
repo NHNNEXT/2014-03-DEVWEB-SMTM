@@ -12,6 +12,7 @@
 	<a href="/RegisterServlet">회원가입</a>
 	<a href="/MakeStoreServlet">점포생성</a>
 	<a href="/RetrieveStoreListServlet">근로 요청</a>
-	
+	<a href="/WorkServlet">출퇴근하기</a>
+
 </body>
 </html>

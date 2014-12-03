@@ -1,6 +1,8 @@
 package entity;
 
 public class Usr {	
+	String seq;
+
 	String id;
 	String pw;
 	String name;
@@ -8,10 +10,21 @@ public class Usr {
 	String gender;
 	String birth;
 	
-	
 	public Usr (String id, String pw) {
 		this.id = id;
 		this.pw = pw;
+	}
+	
+	public Usr(String seq, String id, String pw, String name, String phone1, String gender,
+			String birth) {
+		super();
+		this.seq = seq;
+		this.id = id;
+		this.pw = pw;
+		this.name = name;
+		this.phone1 = phone1;
+		this.gender = gender;
+		this.birth = birth;
 	}
 	
 	public Usr(String id, String pw, String name, String phone1, String gender,
@@ -25,6 +38,10 @@ public class Usr {
 		this.birth = birth;
 	}
 	
+	public String getSeq() {
+		return seq;
+	}
+
 	public String getId() {
 		return id;
 	}
