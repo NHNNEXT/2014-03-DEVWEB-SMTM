@@ -17,10 +17,19 @@
 <tr>
     <td>${status.count}</td>
     <td>${store.name}</td>
-    <!-- 추후 store 객체에 해당 store를 넣어서 출근, 퇴근 처리요청(request)에 함께 보낸다
-    보낼 때는 forward하면 될 듯 -->
-   	<td><a href="/GoToWorkServlet"><button>출근</button></a></td>
-	<td><a href="/LeaveWorkServlet"><button>퇴근</button></a></td>
+       
+  	<td><a href=
+  		"<c:url value="/GoToWorkServlet">
+		<c:param name="storeSeq" value="${store.seq}" />
+		</c:url>"> 
+  	<button>출근</button></a></td> 
+  	
+	<td><a href=
+		"<c:url value="/LeaveWorkServlet">
+		<c:param name="storeSeq" value="${store.seq}" />
+		</c:url>">
+	<button>퇴근</button></a></td>
+	
 </tr>
 </c:forEach>
 </table> 

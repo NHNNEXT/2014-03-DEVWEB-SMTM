@@ -1,11 +1,16 @@
 package work;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import entity.Usr;
 
 /**
  * Servlet implementation class GoToWorkServlet
@@ -26,7 +31,20 @@ public class GoToWorkServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String storeSeq = request.getParameter("storeSeq");
+		HttpSession session = request.getSession();
+		Usr usr = (Usr)session.getAttribute("loginUsr");
+		
+		GoToWorkDao dao = new GoToWorkDao();
+		int updatedRows = dao.workDao(usr, storeSeq);
+		
+		if (updatedRows > 0){
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/registerSuccess.jsp");
+			rd.forward(request, response);
+		} else {
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/error.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	/**
