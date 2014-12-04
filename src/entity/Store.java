@@ -2,7 +2,6 @@ package entity;
 
 public class Store {
 
-	String seq;
 	String usr;
 	String name;
 	String addr;
@@ -15,18 +14,9 @@ public class Store {
 		this.addr = addr;
 		this.phone1 = phone1;
 	}
-	
-	public Store(String seq, String usr, String name, String addr, String phone1) {
-		super();
-		this.seq = seq;
-		this.usr = usr;
-		this.name = name;
-		this.addr = addr;
-		this.phone1 = phone1;
-	}
 
-	public String getSeq() {
-		return seq;
+	public Store(String name) {
+		this(null, name, null, null);
 	}
 
 	public String getUsr() {
