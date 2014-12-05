@@ -1,7 +1,6 @@
 package entity;
 
-public class Usr {	
-	
+public class Usr {
 	String seq;
 	String id;
 	String pw;

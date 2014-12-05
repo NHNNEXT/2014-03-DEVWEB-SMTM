@@ -27,7 +27,7 @@
 		<a href="/WorkServlet">출퇴근요청</a>
 	</c:if>
 	<c:if test="${usrType == '2002'}">
-		<a href="/WorkServlet">출퇴근승인</a>
+		<a href="/ConfirmListServlet">출퇴근승인</a>
 	</c:if>
 </body>
 </html>

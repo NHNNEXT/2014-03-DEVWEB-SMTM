@@ -15,33 +15,18 @@ import entity.Store;
 import entity.Usr;
 
 /**
- * Servlet implementation class WorkServlet
+ * Servlet implementation class ConfirmWorkServlet
  */
-@WebServlet("/WorkServlet")
-public class WorkServlet extends HttpServlet {
+@WebServlet("/ConfirmWorkServlet")
+public class ConfirmWorkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public WorkServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session= request.getSession();
+		String workSeq = request.getParameter("workSeq");
+		HttpSession session = request.getSession();
 		Usr usr = (Usr)session.getAttribute("loginUsr");
-		WorkDao dao = new WorkDao();
-		
-		ArrayList<Store> storeList = dao.workDao(usr);
-		
-		request.setAttribute("storeList", storeList);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/work.jsp");
-		rd.forward(request, response);	
+		System.out.println(workSeq);	
 	}
 
 	/**

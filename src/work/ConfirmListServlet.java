@@ -11,37 +11,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import entity.Store;
 import entity.Usr;
+import entity.Work;
 
 /**
- * Servlet implementation class WorkServlet
+ * Servlet implementation class ConfrimListServlet
  */
-@WebServlet("/WorkServlet")
-public class WorkServlet extends HttpServlet {
+@WebServlet("/ConfirmListServlet")
+public class ConfirmListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public WorkServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session= request.getSession();
+		HttpSession session = request.getSession();
 		Usr usr = (Usr)session.getAttribute("loginUsr");
-		WorkDao dao = new WorkDao();
+		ConfirmListDao dao = new ConfirmListDao();
 		
-		ArrayList<Store> storeList = dao.workDao(usr);
+		ArrayList<Work> workList = dao.confirmListDao(usr);
 		
-		request.setAttribute("storeList", storeList);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/work.jsp");
-		rd.forward(request, response);	
+		request.setAttribute("workList", workList);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/workList.jsp");
+		rd.forward(request, response);
 	}
 
 	/**
