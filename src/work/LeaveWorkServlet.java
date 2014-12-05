@@ -13,16 +13,16 @@ import javax.servlet.http.HttpSession;
 import entity.Usr;
 
 /**
- * Servlet implementation class GoToWorkServlet
+ * Servlet implementation class LeaveWorkServlet
  */
-@WebServlet("/GoToWorkServlet")
-public class GoToWorkServlet extends HttpServlet {
+@WebServlet("/LeaveWorkServlet")
+public class LeaveWorkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GoToWorkServlet() {
+    public LeaveWorkServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,11 +35,10 @@ public class GoToWorkServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Usr usr = (Usr)session.getAttribute("loginUsr");
 		
-		GoToWorkDao dao = new GoToWorkDao();
-		int updatedWorkSeq = dao.workDao(usr, storeSeq);
+		LeaveWorkDao dao = new LeaveWorkDao();
+		int updatedRows = dao.workDao(usr, storeSeq);
 		
-		if (updatedWorkSeq > 0){
-//			request.setAttribute("updatedWorkSeq", updatedWorkSeq);
+		if (updatedRows > 0){
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/registerSuccess.jsp");
 			rd.forward(request, response);
 		} else {

@@ -1,11 +1,12 @@
 package entity;
 
 public class Usr {	
+	
 	String seq;
-
 	String id;
 	String pw;
 	String name;
+	String type;
 	String phone1;
 	String gender;
 	String birth;
@@ -15,13 +16,14 @@ public class Usr {
 		this.pw = pw;
 	}
 	
-	public Usr(String seq, String id, String pw, String name, String phone1, String gender,
+	public Usr(String seq, String id, String pw, String name, String type, String phone1, String gender,
 			String birth) {
 		super();
 		this.seq = seq;
 		this.id = id;
 		this.pw = pw;
 		this.name = name;
+		this.type = type;
 		this.phone1 = phone1;
 		this.gender = gender;
 		this.birth = birth;
@@ -53,6 +55,10 @@ public class Usr {
 		return name;
 	}
 	
+	public String getType() {
+		return type;
+	}
+	
 	public String getPhone1() {
 		return phone1;
 	}
@@ -68,8 +74,9 @@ public class Usr {
 
 	@Override
 	public String toString() {
-		return "Usr [id=" + id + ", pw=" + pw + ", name=" + name + ", phone1="
-				+ phone1 + ", gender=" + gender + ", birth=" + birth + "]";
+		return "Usr [seq=" + seq + ", id=" + id + ", pw=" + pw + ", name="
+				+ name + ", type=" + type + ", phone1=" + phone1 + ", gender="
+				+ gender + ", birth=" + birth + "]";
 	}
 	
 }
