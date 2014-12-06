@@ -4,8 +4,10 @@
     <%@ page import ="java.util.Map"%>
     <%@ page import ="java.util.Iterator" %>
 <%
-	Map<String, Store> storeList = (Map<String, Store>)session.getAttribute("StoreList");
-	Iterator<String> iterator = storeList.keySet().iterator();
+	Map<String, Store> storeList = (Map<String, Store>)session.getAttribute("storeList");
+	//아무것도 입력 않하고 점포 찾기 를 누르면 select all 되서 전부 나옴 ㅎㅎㅎㅎ
+	//section 으로 저장 되어 있어서 새로고침 누르면 아무것도 않뜨는게 아니라 전에 입력했던 결과가 그대로 있음
+	//map immutable mutable 상태 ?????? iterator 사용하면 좋다고 구글링에 나오네요
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -33,8 +35,8 @@
 				<th>가게 주소</th>
 				<th>가게 전화번호</th>
 			</tr>
-			<% while(iterator.hasNext()){ 
-				Store store = storeList.get((String)iterator.next());%>
+			
+			<% for(Store store : storeList.values()){%>
 			<tr>
 				<th><%=store.getUsr() %></th>
 				<th><%=store.getName() %></th>
