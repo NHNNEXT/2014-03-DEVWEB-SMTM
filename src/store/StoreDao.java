@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
+import entity.Employment;
 import entity.Store;
 
 public class StoreDao {
@@ -79,6 +80,39 @@ public class StoreDao {
 			if(conn != null) try { conn.close(); } catch (SQLException e) {}				
 		}
 		return storeList;
+	}
+
+	public int saveDao(Employment empt) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		String address = "jdbc:mysql://10.73.45.134/DEV";
+		String id = "erin314";
+		String pw = "1234";
+		String sql = "INSERT INTO TB_EMPT(EMPT_STO_SEQ, EMPT_ALBA_SEQ,CREATE_USR) VALUES(?,?,?)";	
+		int updatedRows = 0;
+		
+		try {	
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(address, id, pw);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,empt.getStoreSeq());
+			pstmt.setString(2,empt.getUsrSeq());
+			pstmt.setString(3,new Object() {}.getClass().getEnclosingMethod().getName());
+//			System.out.println("pstmt: "+pstmt); 
+			
+			updatedRows = pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		} finally {
+			if(pstmt != null) try { pstmt.close(); } catch (SQLException e) {}				
+			if(conn != null) try { conn.close(); } catch (SQLException e) {}				
+		}
+		
+		System.out.println(empt.toString());
+		return updatedRows;
+		
 	}
 
 
