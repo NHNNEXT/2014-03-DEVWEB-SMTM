@@ -5,27 +5,27 @@ import java.util.ArrayList;
 import store.StoreDao;
 import entity.Store;
 import entity.Usr;
+import entity.Work;
 
 public class ConfirmWorkBiz {
 
-	public ArrayList<Store> confirmWorkBiz(Usr usr) {
+	public ArrayList<Store> confirmWorkBiz(Usr usr, Work work) {
 		ConfirmWorkDao dao = new ConfirmWorkDao();
-		int updatedRows;
-//		
-//		if("출근승인"){ 
-//			updatedRows = dao.confirmGoToWorkDao(usr);
-//		}
-//		else // 퇴근승인
-//		{
-//			updatedRows = dao.confirmGoToWorkDao(usr);
-//		}
-//		
-		return null;
-	}
-	public int registerBiz(Store store) {
 		
-		StoreDao dao = new StoreDao();
-		int updatedRows = dao.registerDao(store);
-		return updatedRows;
+		if(work.getStus() == "1001")
+		{
+			// 출근 승인만 한다
+		} else if(work.getStus() == "1002" && work.getStartConfirm() == "NULL")
+		{
+			// 
+		} else if(work.getStus() == "1002" && work.getStartConfirm() != "NULL")
+		{
+			
+		}
+		else
+		{
+			
+		}
+		return null;
 	}
 }

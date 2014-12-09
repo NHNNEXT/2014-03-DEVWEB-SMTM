@@ -27,6 +27,11 @@ public class ConfirmListServlet extends HttpServlet {
 		ConfirmListDao dao = new ConfirmListDao();
 		
 		ArrayList<Work> workList = dao.confirmListDao(usr);
+
+		//
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/workList.jsp");
+		rd.forward(request, response);
+		//
 		
 		request.setAttribute("workList", workList);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/workList.jsp");

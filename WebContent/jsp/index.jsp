@@ -15,8 +15,8 @@
 		<a href="/MakeStoreServlet">점포생성</a><br/>
 		<a href="/RetrieveStoreListServlet">근로 요청</a><br/>
 		<br/>
-		<a href="/WorkServlet">출퇴근요청</a><br/>
-		<a href="/ConfirmListServlet">출퇴근승인</a><br/>
+		<a href="/SelectStoreServlet">출퇴근요청</a><br/>
+		<a href="/SelectStoreServlet">출퇴근승인</a><br/>
 		<br/>
 		<a href="/LogoutServlet">로그아웃 하기 </a><br/>
 		<br/>

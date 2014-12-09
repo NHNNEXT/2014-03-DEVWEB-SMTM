@@ -33,7 +33,6 @@ public class LoginServlet extends HttpServlet {
 		Usr usr = new Usr(loginId,loginPw);
 		LoginBiz biz = new LoginBiz();
 		Usr returnUsr = biz.loginBiz(usr);
-		System.out.println(returnUsr);
 		
 		if(returnUsr !=null){
 			HttpSession session = request.getSession();
