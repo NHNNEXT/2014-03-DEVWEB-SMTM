@@ -16,7 +16,7 @@
 
 <%=usr.getId()%>님 안녕하세요
  
-<a href="/jsp/index.jsp">홈으로</a>
+<a href="/jsp/index.jsp">메인으로 </a>
 <a href="/LogoutServlet">로그아웃 하기 </a>
 
 </body>
