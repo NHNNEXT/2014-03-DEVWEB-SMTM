@@ -16,6 +16,9 @@
 	<input type="text" name="registerPhone1_1">-<input type="text" name="registerPhone1_2"><br>
 	<input type="submit" name="registerSubmit" value="만들기">
 </form>
-
+<br/>
+<br/>
+<br/>
+<a href="/jsp/index.jsp">홈 화면으로</a>
 </body>
 </html>

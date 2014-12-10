@@ -56,5 +56,10 @@
 		</table>
 		<input type="submit" name="saveStoreSubmit" value="점포 등록">
 	</form>
+	
+	<br/>
+	<br/>
+	<br/>
+	<a href="/jsp/index.jsp">홈 화면으로</a>
 </body>
 </html>
