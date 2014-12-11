@@ -23,7 +23,7 @@ public class SaveStoreServlet extends HttpServlet {
 		String userSeq = usr.getSeq();
 		String storeSeq = request.getParameter("storeSeq");
 		
-		Employment empt = new Employment(userSeq, storeSeq);
+		Employment empt = new Employment(storeSeq, userSeq);
 		
 		StoreBiz storeBiz = new StoreBiz();
 		int updatedRows = storeBiz.saveBiz(empt);
