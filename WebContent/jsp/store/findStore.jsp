@@ -54,7 +54,7 @@
 			</tr>
 	<% }} %>
 		</table>
-		<input type="submit" name="saveStoreSubmit" value="점포 등록">
+		<input type="submit" name="saveStoreSubmit" value="근로 요청">
 	</form>
 	
 	<br/>
