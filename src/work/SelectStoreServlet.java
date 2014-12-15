@@ -1,4 +1,4 @@
-package newWork;
+package work;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,13 +21,10 @@ public class SelectStoreServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session= request.getSession();
 		Usr usr = (Usr)session.getAttribute("loginUsr");
-		System.out.println("servlet" + usr);
-
+		
 		SelectStoreBiz biz = new SelectStoreBiz();
 		ArrayList<Store> storeList = biz.selectStoreBiz(usr);
-		System.out.println("servlet" + storeList);
 
-		
 		request.setAttribute("storeList", storeList);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/selectStore.jsp");
 		rd.forward(request, response);	

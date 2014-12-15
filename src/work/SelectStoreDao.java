@@ -1,4 +1,4 @@
-package newWork;
+package work;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

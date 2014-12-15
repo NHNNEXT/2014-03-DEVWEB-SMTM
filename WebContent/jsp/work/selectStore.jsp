@@ -54,9 +54,10 @@
 		</c:when>
 		<c:otherwise>
 			<td><a href=
-	  			"<c:url value="/ConfirmListServlet">
+	  			"<c:url value="/SelectWorkServlet">
 				<c:param name="storeSeq" value="${store.seq}" />
-				</c:url>"> 
+				<c:param name="storeName" value="${store.name}" />
+				</c:url>">
 	  		<button>선택</button></a></td> 
 		</c:otherwise>
 		</c:choose>
