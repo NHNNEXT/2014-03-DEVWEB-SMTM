@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entity.Store;
+import entity.Usr;
 
 
 @WebServlet("/RetrieveStoreListServlet")
@@ -26,13 +27,16 @@ public class RetrieveStoreListServlet extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session= request.getSession();
+		Usr usr = (Usr)session.getAttribute("loginUsr");
+		String usrSeq = usr.getSeq();
 		String storeId = request.getParameter("storeId");
-		Store store = new Store(storeId);
 		StoreBiz biz = new StoreBiz();
-		Map<String, Store> storeList = biz.retrieveBiz(store);
-		System.out.println(storeList.values());		
+		
+		Map<String, Store> storeList = biz.retrieveBiz(storeId,usrSeq);
+		System.out.println(storeList.values());
+		
 		if(storeList !=null){
-			HttpSession session = request.getSession();
 			session.setAttribute("storeList",storeList);
 			System.out.println(session.getAttribute("storeList"));
 			

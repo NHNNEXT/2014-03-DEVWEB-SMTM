@@ -33,6 +33,7 @@ public class SaveStoreServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/makeSuccess.jsp");
 			rd.forward(request, response);
 		} else {
+			
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/error.jsp");
 			rd.forward(request, response);
 		}
