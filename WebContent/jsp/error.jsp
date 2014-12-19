@@ -9,10 +9,6 @@
 <body>
 
 <p>Error message</p>
-<%
-	String error = (String)request.getAttribute("error");
-	out.println(error);
-%>
 
 <a href="/LoginServlet">다시 회원가입</a>
 

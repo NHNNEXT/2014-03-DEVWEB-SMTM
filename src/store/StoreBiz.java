@@ -12,18 +12,21 @@ public class StoreBiz {
 		int updatedRows = dao.registerDao(store);
 		return updatedRows;
 	}
-
-	public Map<String, Store> retrieveBiz(Store store) {
+	public Map<String, Store> retrieveBiz(String storeId, String usrSeq) {
 		StoreDao dao = new StoreDao();
-		Map<String, Store> storeList = dao.retrieveDao(store);
+		Map<String, Store> storeList = dao.retrieveDao(storeId, usrSeq);
 		return storeList;
 	}
 
 	public int saveBiz(Employment empt) {
 		StoreDao dao = new StoreDao();
-		int updatedRows = dao.saveDao(empt);
+		int updatedRows=0;
+		if(dao.checkDuplicationEmptDao(empt)==false){
+			updatedRows = dao.saveDao(empt);
+		}
 		return updatedRows;
 	}
+
 
 	
 
