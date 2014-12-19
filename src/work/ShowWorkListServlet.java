@@ -11,28 +11,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import entity.WorkAndUsrName;
+import entity.Store;
+import entity.Usr;
+import entity.Work;
 
 /**
- * Servlet implementation class ConfrimListServlet
+ * Servlet implementation class ShowWorkList
  */
-@WebServlet("/SelectWorkServlet")
-public class SelectWorkServlet extends HttpServlet {
+@WebServlet("/ShowWorkListServlet")
+public class ShowWorkListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String storeSeq = request.getParameter("storeSeq");
-		String storeName = request.getParameter("storeName");
+		HttpSession session= request.getSession();
+		Usr usr = (Usr)session.getAttribute("loginUsr");
 		
-		SelectWorkDao dao = new SelectWorkDao();
+		ShowWorkDao dao = new ShowWorkDao();
+		ArrayList<Work> workList = dao.showWorkDao(usr);
 
-		HttpSession session = request.getSession();
-		ArrayList<WorkAndUsrName> workList = dao.selectWorkDao(storeSeq);
-		request.setAttribute("storeName", storeName);
-		session.setAttribute("workList", workList);
-
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/selectWork.jsp");
-		rd.forward(request, response);
+		request.setAttribute("workList", workList);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/showAlbaWork.jsp");
+		rd.forward(request, response);	
 	}
 
 	/**

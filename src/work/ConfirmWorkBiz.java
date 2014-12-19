@@ -1,31 +1,23 @@
 package work;
 
-import java.util.ArrayList;
-
-import store.StoreDao;
-import entity.Store;
-import entity.Usr;
 import entity.Work;
 
 public class ConfirmWorkBiz {
 
-	public ArrayList<Store> confirmWorkBiz(Usr usr, Work work) {
+	public int confirmWorkBiz(Work work) {
 		ConfirmWorkDao dao = new ConfirmWorkDao();
+		int updatedRows;
+		String stus = work.getStus();
 		
-		if(work.getStus() == "1001")
-		{
-			// 출근 승인만 한다
-		} else if(work.getStus() == "1002" && work.getStartConfirm() == "NULL")
-		{
-			// 
-		} else if(work.getStus() == "1002" && work.getStartConfirm() != "NULL")
-		{
-			
-		}
+		if(stus.equals("1001"))
+			updatedRows = dao.confirmGoToWork(work);
+		
+		else if(stus.equals("1002"))
+			updatedRows = dao.confirmBoth(work);
+		
 		else
-		{
-			
-		}
-		return null;
+			updatedRows = dao.confirmLeaveWork(work);
+		
+		return updatedRows;
 	}
 }

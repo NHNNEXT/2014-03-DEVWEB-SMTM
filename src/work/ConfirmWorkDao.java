@@ -5,15 +5,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
-import entity.Store;
 import entity.Work;
 
 public class ConfirmWorkDao {
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
+	int updatedRows = 0;
 	String address = "jdbc:mysql://10.73.45.134/DEV";
 	String id = "erin314";
 	String pw = "1234";
@@ -44,6 +43,66 @@ public class ConfirmWorkDao {
 		}		
 		
 		return work;		
+	}
+
+	public int confirmGoToWork(Work work) {
+		String sql = "UPDATE TB_WORK SET WRK_START_CONFIRM=NOW(), WRK_STUS=1003 WHERE WRK_SEQ=?";	
+		
+		try {	
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(address, id, pw);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, work.getSeq());
+			
+			updatedRows = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		} finally {
+			if(pstmt != null) try { pstmt.close(); } catch (SQLException e) {}				
+			if(conn != null) try { conn.close(); } catch (SQLException e) {}				
+		}		
+		
+		return updatedRows;		
+	}
+
+	public int confirmBoth(Work work) {
+		String sql = "UPDATE TB_WORK SET WRK_START_CONFIRM=NOW(), WRK_FINISH_CONFIRM=NOW(), WRK_STUS=1004 WHERE WRK_SEQ=?";	
+		
+		try {	
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(address, id, pw);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, work.getSeq());
+			
+			updatedRows = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		} finally {
+			if(pstmt != null) try { pstmt.close(); } catch (SQLException e) {}				
+			if(conn != null) try { conn.close(); } catch (SQLException e) {}				
+		}		
+		
+		return updatedRows;	
+	}
+
+	public int confirmLeaveWork(Work work) {
+		String sql = "UPDATE TB_WORK SET WRK_FINISH_CONFIRM=NOW(), WRK_STUS=1004 WHERE WRK_SEQ=?";	
+		
+		try {	
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(address, id, pw);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, work.getSeq());
+			
+			updatedRows = pstmt.executeUpdate();
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		} finally {
+			if(pstmt != null) try { pstmt.close(); } catch (SQLException e) {}				
+			if(conn != null) try { conn.close(); } catch (SQLException e) {}				
+		}		
+		
+		return updatedRows;	
 	}
 	
 }

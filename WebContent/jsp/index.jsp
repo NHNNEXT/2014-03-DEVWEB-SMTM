@@ -18,13 +18,13 @@
 		<a href="/SelectStoreServlet">출퇴근요청</a><br/>
 		<a href="/SelectStoreServlet">출퇴근승인</a><br/>
 		<br/>
+		<a href="/ShowWorkListServlet">근무기록확인</a><br/>
 		<a href="/LogoutServlet">로그아웃 하기 </a><br/>
 		<br/>
 	</c:when>
 	<c:otherwise>
 		<a href="/LoginServlet">로그인</a><br/>
 		<a href="/RegisterServlet">회원가입</a><br/>
-		
 	</c:otherwise>
 </c:choose>
 </body>

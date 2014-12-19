@@ -29,8 +29,8 @@ public class ConfirmWorkServlet extends HttpServlet {
 		System.out.println(work);
 		
 		
-		//ConfirmWorkBiz biz = new ConfirmWorkBiz();
-		//biz.confirmWorkBiz(usr, work);
+		ConfirmWorkBiz biz = new ConfirmWorkBiz();
+		biz.confirmWorkBiz(work);
 	}
 
 	/**
