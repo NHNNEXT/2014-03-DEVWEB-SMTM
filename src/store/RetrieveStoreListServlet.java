@@ -37,8 +37,8 @@ public class RetrieveStoreListServlet extends HttpServlet {
 		System.out.println(storeList.values());
 		
 		if(storeList !=null){
-			session.setAttribute("storeList",storeList);
-			System.out.println(session.getAttribute("storeList"));
+			request.setAttribute("storeList",storeList);
+//			System.out.println(request.getAttribute("storeList"));
 			
 		} else {
 			//alert 띄워주기
