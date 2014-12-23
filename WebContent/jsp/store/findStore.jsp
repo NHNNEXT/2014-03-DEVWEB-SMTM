@@ -30,14 +30,13 @@
 				<th>가게 전화번호</th>
 			</tr>
 			<c:if test="${not empty storeList}">
-				<c:forEach items="storeList" var="store">
+				<c:forEach items="${storeList.values()}" var="store">
 					<tr>
-						<th><input type="radio" name="storeSeq"
-							value="${store.getSeq}"></th>
-						<th>${store.getUsr()}</th>
-						<th>${store.getName()}</th>
-						<th>${store.getAdder()}</th>
-						<th>${store.getPhone1()}</th>
+						<th><input type="hidden" name="questionId" value="${store.seq}"></th>
+						<th>${store.usr}</th>
+						<th>${store.name}</th>
+						<th>${store.addr}</th>
+						<th>${store.phone1}</th>
 					</tr>
 				</c:forEach>
 			</c:if>
