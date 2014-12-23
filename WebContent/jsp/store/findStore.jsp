@@ -1,8 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="entity.Store"%>
-<%@ page import="java.util.Map"%>
-<%@ page import="java.util.Iterator"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -32,7 +29,7 @@
 			<c:if test="${not empty storeList}">
 				<c:forEach items="${storeList.values()}" var="store">
 					<tr>
-						<th><input type="hidden" name="questionId" value="${store.seq}"></th>
+						<th><input type="radio" name="storeSeq" value="${store.seq}"></th>
 						<th>${store.usr}</th>
 						<th>${store.name}</th>
 						<th>${store.addr}</th>
