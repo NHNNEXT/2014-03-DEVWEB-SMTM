@@ -1,18 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ page import ="entity.Store"%>
-    <%@ page import ="java.util.Map"%>
-    <%@ page import ="java.util.Iterator"%>
-<%
-	Map<String, Store> storeList = (Map<String, Store>)session.getAttribute("storeList");
-	Iterator<String> Ir_keys = null;
-	if(storeList != null){
-		Ir_keys = storeList.keySet().iterator();		
-	}
-%>
-<!-- //아무것도 입력 않하고 점포 찾기 를 누르면 select all 되서 전부 나옴 ㅎㅎㅎㅎ
-	//section 으로 저장 되어 있어서 새로고침 누르면 아무것도 않뜨는게 아니라 전에 입력했던 결과가 그대로 있음
-	//map immutable mutable 상태 ?????? iterator 사용하면 좋다고 구글링에 나오네요 -->
+	pageEncoding="UTF-8"%>
+<%@ page import="entity.Store"%>
+<%@ page import="java.util.Map"%>
+<%@ page import="java.util.Iterator"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,17 +12,16 @@
 </head>
 <body>
 	<h1>근로 요청</h1>
-	
+
 	<form action="/RetrieveStoreListServlet" method="POST">
-	점포 찾기 <br>
-	점포이름 : <input type="text" name="storeId"> <br>
-	<input type="submit" name="findStoreSubmit" value="점포 찾기">
+		점포 찾기 <br> 점포이름 : <input type="text" name="storeId"> <br>
+		<input type="submit" name="findStoreSubmit" value="점포 찾기">
 	</form>
-	
+
 	<br />
 	<br />
 	<form action="/SaveStoreServlet" method="POST">
-		<table >
+		<table>
 			<tr>
 				<th>선택</th>
 				<th>사업자 이름</th>
@@ -39,27 +29,25 @@
 				<th>가게 주소</th>
 				<th>가게 전화번호</th>
 			</tr>
-			
-	<% 
-	if(storeList!=null){
-		while(Ir_keys.hasNext()) {
-		String key = Ir_keys.next();
-		Store store = storeList.get(key);%>
-			<tr>
-				<th><input type="radio" name="storeSeq" value ="<%=key%>" ></th>
-				<th><%=store.getUsr() %></th>
-				<th><%=store.getName() %></th>
-				<th><%=store.getAddr() %></th>
-				<th><%=store.getPhone1() %></th>
-			</tr>
-	<% }} %>
+			<c:if test="${not empty storeList}">
+				<c:forEach items="storeList" var="store">
+					<tr>
+						<th><input type="radio" name="storeSeq"
+							value="${store.getSeq}"></th>
+						<th>${store.getUsr()}</th>
+						<th>${store.getName()}</th>
+						<th>${store.getAdder()}</th>
+						<th>${store.getPhone1()}</th>
+					</tr>
+				</c:forEach>
+			</c:if>
 		</table>
 		<input type="submit" name="saveStoreSubmit" value="근로 요청">
 	</form>
-	
-	<br/>
-	<br/>
-	<br/>
+
+	<br />
+	<br />
+	<br />
 	<a href="/jsp/index.jsp">홈 화면으로</a>
 </body>
 </html>
