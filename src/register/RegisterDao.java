@@ -31,7 +31,7 @@ public class RegisterDao {
 			pstmt.setString(5,usr.getGender());
 			pstmt.setString(6,usr.getBirth());
 			pstmt.setString(7,new Object() {}.getClass().getEnclosingMethod().getName());
-			System.out.println("pstmt: "+pstmt); 
+//			System.out.println("pstmt: "+pstmt); 
 			
 			updatedRows = pstmt.executeUpdate();
 			
@@ -42,7 +42,6 @@ public class RegisterDao {
 			if(conn != null) try { conn.close(); } catch (SQLException e) {}				
 		}
 		
-		System.out.println(usr.toString());
 		return updatedRows;
 	}
 }
