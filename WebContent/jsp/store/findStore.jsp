@@ -29,7 +29,7 @@
 			<c:if test="${not empty storeList}">
 				<c:forEach items="${storeList.values()}" var="store">
 					<tr>
-						<th><input type="radio" name="storeSeq" value="${store.seq}"></th>
+						<th><input type="radio" name="storeSeq" value="${store.seq}">${store.seq}</th>
 						<th>${store.usr}</th>
 						<th>${store.name}</th>
 						<th>${store.addr}</th>

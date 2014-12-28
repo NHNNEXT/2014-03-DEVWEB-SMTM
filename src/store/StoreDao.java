@@ -66,15 +66,13 @@ public class StoreDao {
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(address, id, pw);
 			
-//			System.out.println(""+usrSeq+storeId);
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, Integer.parseInt(usrSeq));
 			pstmt.setString(2,"%"+storeId+"%");
-//			System.out.println(pstmt);
 			rs = pstmt.executeQuery();
 			while(rs.next()){
-				storeList.put( rs.getString("STO_SEQ"), 
-						new Store(rs.getString("STO_ONR_ID"), rs.getString("STO_NM"), 
+				storeList.put(rs.getString("STO_SEQ"), 
+						new Store(rs.getString("STO_SEQ"),rs.getString("STO_ONR_ID"), rs.getString("STO_NM"), 
 							rs.getString("STO_ADDR"), rs.getString("STO_PHONE1")) );
 			}
 		} catch (Exception e) {
@@ -103,7 +101,7 @@ public class StoreDao {
 			pstmt.setString(1,empt.getStoreSeq());
 			pstmt.setString(2,empt.getUsrSeq());
 			pstmt.setString(3,new Object() {}.getClass().getEnclosingMethod().getName());
-//			System.out.println("pstmt: "+pstmt); 
+			System.out.println("pstmt: "+pstmt); 
 			
 			updatedRows = pstmt.executeUpdate();
 			

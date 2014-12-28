@@ -20,8 +20,6 @@ public class RetrieveStoreListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
-		session.removeAttribute("storeList");
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/findStore.jsp");
 		rd.forward(request,response);
 	}
@@ -38,7 +36,6 @@ public class RetrieveStoreListServlet extends HttpServlet {
 		
 		if(storeList !=null){
 			request.setAttribute("storeList",storeList);
-//			System.out.println(request.getAttribute("storeList"));
 			
 		} else {
 			//alert 띄워주기
