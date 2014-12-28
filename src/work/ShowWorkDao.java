@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import entity.Store;
 import entity.Usr;
 import entity.Work;
 
@@ -20,7 +21,7 @@ public class ShowWorkDao {
 	String pw = "1234";
 
 	public ArrayList<Work> showWorkDao(Usr usr) {
-		String sql = "SELECT * FROM TB_WORK WHERE WRK_ALBA_SEQ = ? WHERE WRK_STUS = 1004";	
+		String sql = "SELECT * FROM TB_WORK WHERE WRK_ALBA_SEQ = ? AND WRK_STUS = 1004";	
 		
 		try {	
 			Class.forName("com.mysql.jdbc.Driver");
@@ -28,6 +29,30 @@ public class ShowWorkDao {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, usr.getSeq());
 			System.out.println("pstmt: "+pstmt); 
+			
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				 workList.add(new Work(rs.getString("WRK_SEQ"), rs.getString("WRK_STO_SEQ"), rs.getString("WRK_ALBA_SEQ"), rs.getString("WRK_STUS"), rs.getString("WRK_START"), rs.getString("WRK_FINISH"), rs.getString("WRK_START_CONFIRM"), rs.getString("WRK_FINISH_CONFIRM")));
+			}
+			
+		} catch (Exception e) {
+			System.out.println(e.toString());
+		} finally {
+			if(pstmt != null) try { pstmt.close(); } catch (SQLException e) {}				
+			if(conn != null) try { conn.close(); } catch (SQLException e) {}				
+		}
+		return workList;
+	}
+
+	public ArrayList<Work> showWorkOfStoreDao(String storeSeq) {
+		String sql = "SELECT * FROM TB_WORK WHERE WRK_STO_SEQ = ? AND WRK_STUS = 1004";	
+		
+		try {	
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(address, id, pw);
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, storeSeq);
+			System.out.println("pstmt: "+pstmt);
 			
 			rs = pstmt.executeQuery();
 			while(rs.next()){

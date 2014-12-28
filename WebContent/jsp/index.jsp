@@ -17,7 +17,8 @@
 		<a href="/SelectStoreServlet">출퇴근요청</a><br/>
 		<a href="/SelectStoreServlet">출퇴근승인</a><br/>
 		<br/>
-		<a href="/ShowWorkListServlet">근무기록확인</a><br/>
+		<a href="/ShowWorkListServlet">자신의 근무기록 확인</a><br/>
+		<a href="/ShowStoreListServlet">점포별 근무기록 확인</a>
 		<a href="/LogoutServlet">로그아웃 하기 </a><br/>
 		<br/>
 	</c:when>

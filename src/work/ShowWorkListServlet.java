@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import entity.Store;
 import entity.Usr;
 import entity.Work;
+import entity.WorkAndUsrName;
 
 /**
  * Servlet implementation class ShowWorkList
@@ -29,10 +30,18 @@ public class ShowWorkListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session= request.getSession();
 		Usr usr = (Usr)session.getAttribute("loginUsr");
-		
 		ShowWorkDao dao = new ShowWorkDao();
-		ArrayList<Work> workList = dao.showWorkDao(usr);
-
+		ArrayList<Work> workList = null;
+		
+		if(request.getParameter("storeSeq")==null){
+			workList = dao.showWorkDao(usr);
+		}
+		else{
+			String storeSeq = request.getParameter("storeSeq");
+			String storeName = request.getParameter("storeName");
+			
+			workList = dao.showWorkOfStoreDao(storeSeq);
+		}
 		request.setAttribute("workList", workList);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/showAlbaWork.jsp");
 		rd.forward(request, response);	
@@ -42,7 +51,7 @@ public class ShowWorkListServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+
 	}
 
 }
