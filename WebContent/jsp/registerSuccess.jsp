@@ -9,8 +9,7 @@
 </head>
 <body>
 성공
- 
-<a href="/jsp/index.jsp">돌아가기</a>
 
+<a href="/jsp/index.jsp">홈화면 으로</a>
 </body>
 </html>

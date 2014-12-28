@@ -12,7 +12,6 @@
 
 <a href="/LoginServlet">다시 회원가입</a>
 
-<a href="/jsp/index.jsp">돌아가기</a>
-
+<a href="/jsp/index.jsp">홈화면 으로</a>
 </body>
 </html>

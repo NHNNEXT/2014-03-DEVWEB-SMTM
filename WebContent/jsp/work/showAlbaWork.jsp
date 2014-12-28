@@ -30,5 +30,6 @@
 </tr>
 </c:forEach>
 </table>
+<a href="/jsp/index.jsp">홈화면 으로</a>
 </body>
 </html>

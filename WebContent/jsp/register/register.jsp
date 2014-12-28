@@ -24,6 +24,6 @@
 	생일 : <input type="date" name="registerBirth"> <br>
 	<input type="submit" name="registerSubmit" value="가입">
 </form>
-
+	<a href="/jsp/index.jsp">홈화면 으로</a>
 </body>
 </html>

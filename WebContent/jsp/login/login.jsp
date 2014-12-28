@@ -14,6 +14,6 @@
 	<input type="submit" name="loginSubmit" value="로그인">
 	</form>
 	
-
+	<a href="/jsp/index.jsp">홈화면 으로</a>
 </body>
 </html>
