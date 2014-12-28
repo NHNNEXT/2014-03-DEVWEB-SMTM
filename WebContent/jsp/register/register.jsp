@@ -13,6 +13,8 @@
 	아이디 : <input type="text" name="registerId"> <br>
 	패스워드 : <input type="password" name="registerPw"> <br>
 	이름 : <input type="text" name="registerName"> <br>
+	타입 : <input type="radio" name="registerType" value="2001">알바생
+			<input type="radio" name="registerType" value="2002">점주<br>
 	핸드폰 번호 :<input type="text" name="registerPhone1_0" value="010">-
 	<input type="text" name="registerPhone1_1">-<input type="text" name="registerPhone1_2"> <br>
 	성별 : <input type="radio" name="registerGender" value ="female" >여자 

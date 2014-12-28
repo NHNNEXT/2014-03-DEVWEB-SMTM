@@ -31,6 +31,7 @@ public class RegisterServlet extends HttpServlet {
 		String registerId = request.getParameter("registerId");
 		String registerPw = request.getParameter("registerPw");
 		String registerName = request.getParameter("registerName");
+		String registerType = request.getParameter("registerType");
 		String registerPhone1_0 = request.getParameter("registerPhone1_0");
 		String registerPhone1_1 = request.getParameter("registerPhone1_1");
 		String registerPhone1_2 = request.getParameter("registerPhone1_2");
@@ -38,8 +39,7 @@ public class RegisterServlet extends HttpServlet {
 		String registerGender = request.getParameter("registerGender");
 		String registerBirth = request.getParameter("registerBirth");
 		
-		Usr usr = new Usr(registerId, registerPw, registerName, registerPhone1, registerGender, registerBirth);
-		System.out.println("usr :"+usr);
+		Usr usr = new Usr(registerId, registerPw, registerName, registerType, registerPhone1, registerGender, registerBirth);
 		
 		RegisterBiz registerBiz = new RegisterBiz();
 		int updatedRows = registerBiz.registerBiz(usr);
