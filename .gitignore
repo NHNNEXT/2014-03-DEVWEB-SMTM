@@ -70,3 +70,8 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# user defined
+.classpath
+.project
+/WebContent/WEB-INF/
