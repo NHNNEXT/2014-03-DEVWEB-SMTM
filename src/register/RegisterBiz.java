@@ -1,10 +1,11 @@
 package register;
 
+import dao.UsrDao;
 import entity.Usr;
 
 public class RegisterBiz {
 	public int registerBiz(Usr usr) {
-		RegisterDao dao = new RegisterDao();
+		UsrDao dao = new UsrDao();
 		
 		int updatedRows = dao.registerDao(usr);
 		

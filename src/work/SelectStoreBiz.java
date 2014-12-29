@@ -2,6 +2,7 @@ package work;
 
 import java.util.ArrayList;
 
+import dao.WorkDao;
 import entity.Store;
 import entity.Usr;
 

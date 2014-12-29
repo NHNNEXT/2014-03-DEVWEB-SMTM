@@ -1,13 +1,10 @@
-package work;
+package dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import dao.JdbcTemplate;
-import dao.PreparedStatementSetter;
-import dao.RowMapper;
 import entity.Store;
 import entity.Usr;
 import entity.Work;

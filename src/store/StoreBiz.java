@@ -2,6 +2,7 @@ package store;
 
 import java.util.ArrayList;
 
+import dao.StoreDao;
 import entity.Employment;
 import entity.Store;
 
