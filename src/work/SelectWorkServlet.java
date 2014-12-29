@@ -24,7 +24,7 @@ public class SelectWorkServlet extends HttpServlet {
 		String storeSeq = request.getParameter("storeSeq");
 		String storeName = request.getParameter("storeName");
 		
-		SelectWorkDao dao = new SelectWorkDao();
+		WorkDao dao = new WorkDao();
 
 		HttpSession session = request.getSession();
 		ArrayList<WorkAndUsrName> workList = dao.selectWorkDao(storeSeq);

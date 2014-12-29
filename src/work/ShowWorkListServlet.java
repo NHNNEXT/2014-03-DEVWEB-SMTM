@@ -30,7 +30,7 @@ public class ShowWorkListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session= request.getSession();
 		Usr usr = (Usr)session.getAttribute("loginUsr");
-		ShowWorkDao dao = new ShowWorkDao();
+		WorkDao dao = new WorkDao();
 		ArrayList<Work> workList = null;
 		
 		if(request.getParameter("storeSeq")==null){

@@ -35,8 +35,8 @@ public class GoToWorkServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Usr usr = (Usr)session.getAttribute("loginUsr");
 		
-		GoToWorkDao dao = new GoToWorkDao();
-		int updatedWorkSeq = dao.workDao(usr, storeSeq);
+		WorkDao dao = new WorkDao();
+		int updatedWorkSeq = dao.goToWorkDao(usr, storeSeq);
 		
 		if (updatedWorkSeq > 0){
 //			request.setAttribute("updatedWorkSeq", updatedWorkSeq);

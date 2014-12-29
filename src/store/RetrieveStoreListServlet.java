@@ -1,7 +1,7 @@
 package store;
 
 import java.io.IOException;
-import java.util.Map;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -31,8 +31,7 @@ public class RetrieveStoreListServlet extends HttpServlet {
 		String storeId = request.getParameter("storeId");
 		StoreBiz biz = new StoreBiz();
 		
-		Map<String, Store> storeList = biz.retrieveBiz(storeId,usrSeq);
-		System.out.println(storeList.values());
+		ArrayList<Store> storeList = biz.retrieveBiz(storeId,usrSeq);
 		
 		if(storeList !=null){
 			request.setAttribute("storeList",storeList);

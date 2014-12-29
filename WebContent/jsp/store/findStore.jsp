@@ -27,7 +27,7 @@
 				<th>가게 전화번호</th>
 			</tr>
 			<c:if test="${not empty storeList}">
-				<c:forEach items="${storeList.values()}" var="store">
+				<c:forEach items="${storeList}" var="store">
 					<tr>
 						<th><input type="radio" name="storeSeq" value="${store.seq}">${store.seq}</th>
 						<th>${store.usr}</th>

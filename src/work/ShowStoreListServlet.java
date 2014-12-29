@@ -23,7 +23,7 @@ public class ShowStoreListServlet extends HttpServlet {
 		HttpSession session= request.getSession();
 		Usr usr = (Usr)session.getAttribute("loginUsr");
 		
-		SelectStoreDao dao = new SelectStoreDao();
+		WorkDao dao = new WorkDao();
 		ArrayList<Store> storeList = dao.selectStoreForManager(usr);
 
 		request.setAttribute("storeList", storeList);

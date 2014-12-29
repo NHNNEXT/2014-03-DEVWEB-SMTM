@@ -1,11 +1,11 @@
 package entity;
 
 public class Store {
-	String seq;
-	String usr;
-	String name;
-	String addr;
-	String phone1;
+	private String seq;
+	private String usr;
+	private String name;
+	private String addr;
+	private String phone1;
 
 	public Store(String seq, String usr, String name, String addr, String phone1) {
 		super();

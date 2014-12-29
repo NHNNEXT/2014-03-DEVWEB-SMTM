@@ -7,7 +7,7 @@ import entity.Usr;
 
 public class SelectStoreBiz {
 	public ArrayList<Store> selectStoreBiz(Usr usr) {
-		SelectStoreDao dao = new SelectStoreDao();
+		WorkDao dao = new WorkDao();
 		ArrayList<Store> storeList = null;
 
 		

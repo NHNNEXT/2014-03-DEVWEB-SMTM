@@ -35,8 +35,8 @@ public class LeaveWorkServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		Usr usr = (Usr)session.getAttribute("loginUsr");
 		
-		LeaveWorkDao dao = new LeaveWorkDao();
-		int updatedRows = dao.workDao(usr, storeSeq);
+		WorkDao dao = new WorkDao();
+		int updatedRows = dao.leaveWorkDao(usr, storeSeq);
 		
 		if (updatedRows > 0){
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/registerSuccess.jsp");
