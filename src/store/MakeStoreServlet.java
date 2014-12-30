@@ -26,7 +26,6 @@ public class MakeStoreServlet extends HttpServlet {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		HttpSession session= request.getSession();
 		Usr usr = (Usr)session.getAttribute("loginUsr");
 		

@@ -1,14 +1,20 @@
 package entity;
 
+import javax.validation.constraints.NotNull;
+
 public class Work {
-	String seq;
-	String stoSeq;
-	String albaSeq;
-	String stus;
-	String start;
-	String finish;
-	String startConfirm;
-	String finishConfirm;
+	@NotNull
+	private String seq;
+	@NotNull
+	private String stoSeq;
+	@NotNull
+	private String albaSeq;
+	@NotNull
+	private String stus;
+	private String start;
+	private String finish;
+	private String startConfirm;
+	private String finishConfirm;
 
 	public Work(String seq, String stoSeq, String albaSeq, String stus,
 			String start, String finish) {

@@ -1,7 +1,8 @@
 package entity;
 
-public class Employment {
+import javax.validation.constraints.NotNull;
 
+public class Employment {
 	private String storeSeq;
 	private String UsrSeq;
 	
@@ -18,7 +19,5 @@ public class Employment {
 	public String getUsrSeq() {
 		return UsrSeq;
 	}
-	
-	
 	
 }

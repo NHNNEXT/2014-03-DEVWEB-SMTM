@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,12 +8,13 @@
 	<link rel="stylesheet" media="screen"  href="/css/form.css">
 </head>
 <body>
-
-
 	<div class="header">
 		<%@ include file="/include/top.jspf" %>
 	</div>
 	<div class="section">
+		<c:if test="${not empty errorMessage}">
+			<p>${errorMessage}</p>
+		</c:if>
 		<h2> 로그인 </h2>
 			<form class="form-horizontal" action="/LoginServlet" method="POST">
 			  <div class="line"></div>
