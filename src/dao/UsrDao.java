@@ -7,12 +7,11 @@ import java.sql.SQLException;
 import entity.Usr;
 
 public class UsrDao {
-	public Usr loginDao(final Usr usr) {
+	public Usr findUsrById(final String usrId) {
 		PreparedStatementSetter pss = new PreparedStatementSetter(){
 			public void setParameters(PreparedStatement pstmt)
 					throws SQLException {
-				pstmt.setString(1,usr.getId());
-				pstmt.setString(2,usr.getPw());
+				pstmt.setString(1, usrId);
 			}
 		};
 		RowMapper<Usr> rm = new RowMapper<Usr>(){
@@ -22,7 +21,7 @@ public class UsrDao {
 			}
 		};
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "SELECT USR_SEQ ,USR_ID, USR_NM, USR_PW, USR_TYPE, USR_PHONE1, USR_GENDER, USR_BIRTH FROM TB_USR WHERE USR_ID=? AND USR_PW=?";	
+		String sql = "SELECT USR_SEQ ,USR_ID, USR_NM, USR_PW, USR_TYPE, USR_PHONE1, USR_GENDER, USR_BIRTH FROM TB_USR WHERE USR_ID=?";	
 		return jdbcTemplate.executeQuery(sql, pss, rm);
 	}
 	

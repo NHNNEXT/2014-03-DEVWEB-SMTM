@@ -11,10 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import entity.Usr;
+import exception.PasswordMismatchException;
+import exception.UsrNotFoundException;
 
-/**
- * Servlet implementation class LoginServlet
- */
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -30,20 +29,25 @@ public class LoginServlet extends HttpServlet {
 		String loginId = request.getParameter("loginId");
 		String loginPw = request.getParameter("loginPw");
 		
-		Usr usr = new Usr(loginId,loginPw);
-		LoginBiz biz = new LoginBiz();
-		Usr returnUsr = biz.loginBiz(usr);
-		
-		if(returnUsr !=null){
+		try {
+			LoginBiz biz = new LoginBiz();
+			Usr usr = biz.loginBiz(loginId, loginPw);			
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUsr",returnUsr);
-			RequestDispatcher rd = request.getRequestDispatcher("/jsp/loginSuccess.jsp");
-			rd.forward(request,response);
-			
-		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("/jsp/error.jsp");
-			rd.forward(request, response);
+			session.setAttribute("loginUsr", usr);
+			response.sendRedirect("/jsp/");
+		} catch (UsrNotFoundException e) {
+			forwardJSP(request, response, e.getMessage());
+		} catch (PasswordMismatchException e) {
+			forwardJSP(request, response, e.getMessage());
 		}
+	}
+
+	private void forwardJSP(HttpServletRequest request,
+			HttpServletResponse response, String message)
+			throws ServletException, IOException {
+		request.setAttribute("errorMessage", message);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/login/login.jsp");
+		rd.forward(request,response);
 	}
 
 }

@@ -1,8 +1,8 @@
 package entity;
 
 public class WorkAndUsrName {
-	Work work;
-	String usrName;
+	private Work work;
+	private String usrName;
 	
 	public WorkAndUsrName(Work work, String usrName) {
 		super();
