@@ -1,0 +1,10 @@
+form div.input-group{
+	margin: 10px;
+}
+form input.phone{
+	width:30%;
+	display: inline;
+}
+form div.line{
+	height: 40px;
+}
