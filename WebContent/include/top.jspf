@@ -1,0 +1,44 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<div class="top-bar">
+	<ul class="info">
+		<c:choose>
+			<c:when test="${not empty loginUsr}">
+				<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a>${loginUsr.getName()} 님</a></li>
+				<li><a href="/LogoutServlet">로그아웃</a></li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="/LoginServlet">로그인</a></li>
+				<li><a href="/RegisterServlet">회원가입</a></li>
+			</c:otherwise>
+		</c:choose>
+	</ul>
+</div>
+
+<div class="navbar">
+	<div class="navbar-header">
+		<h2 class="navbar-page-title">
+			<span class="home"><a href="#">SMTM</a></span>
+		</h2>
+	</div>
+				
+	<div class="navbar-collapse">
+		<ul class="navbar-nav">
+			<c:if test="${not empty loginUsr}">
+				<c:choose>
+						<c:when test="${loginUsr.type == '2001'}"> 
+							<li><span class="glyphicon glyphicon-briefcase" aria-hidden="true"></span><a href="/RetrieveStoreListServlet">근로 요청</a></li>
+							<li><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span><a href="/SelectStoreServlet">출퇴근 요청</a></li>
+							<li><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><a href="/ShowWorkListServlet">내 근무기록</a></li>
+						</c:when>
+						<c:otherwise>
+							<li><span class="glyphicon glyphicon-home" aria-hidden="true"></span><a href="/RetrieveStoreListServlet">가게 생성</a></li>
+							<li><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span><a href="/SelectStoreServlet">출퇴근 승인</a></li>
+							<li><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><a href="/ShowWorkListServlet">근무기록 확인</a></li> 
+						</c:otherwise>
+				</c:choose>
+			</c:if>
+		</ul>
+	</div>
+</div>

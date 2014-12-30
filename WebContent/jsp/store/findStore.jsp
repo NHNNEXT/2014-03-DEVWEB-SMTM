@@ -4,46 +4,43 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<%@ include file="/include/header.jspf"%>
 </head>
 <body>
-	<h1>근로 요청</h1>
-
-	<form action="/RetrieveStoreListServlet" method="POST">
-		점포 찾기 <br> 점포이름 : <input type="text" name="storeId"> <br>
-		<input type="submit" name="findStoreSubmit" value="점포 찾기">
-	</form>
-
-	<br />
-	<br />
-	<form action="/SaveStoreServlet" method="POST">
-		<table>
-			<tr>
-				<th>선택</th>
-				<th>사업자 이름</th>
-				<th>가게 이름</th>
-				<th>가게 주소</th>
-				<th>가게 전화번호</th>
-			</tr>
-			<c:if test="${not empty storeList}">
-				<c:forEach items="${storeList}" var="store">
-					<tr>
-						<th><input type="radio" name="storeSeq" value="${store.seq}">${store.seq}</th>
-						<th>${store.usr}</th>
-						<th>${store.name}</th>
-						<th>${store.addr}</th>
-						<th>${store.phone1}</th>
-					</tr>
-				</c:forEach>
-			</c:if>
-		</table>
-		<input type="submit" name="saveStoreSubmit" value="근로 요청">
-	</form>
-
-	<br />
-	<br />
-	<br />
-	<a href="/jsp/index.jsp">홈 화면으로</a>
+	<div class="container">
+		<div class="header">
+			<%@ include file="/include/top.jspf" %>
+		</div>
+		<div class="section">
+			<form class="search form-inline" action="/RetrieveStoreListServlet" method="POST">
+				<div class="input-group">
+					<input class="form-control" type="text" name="storeId" placeholder="가게 이름">
+					<span class="input-group-btn">
+						<input class="btn btn-default" type="submit" name="findStoreSubmit" value="검색">
+					</span>
+				</div>
+			</form>
+		
+			<form class="storeList" action="/SaveStoreServlet" method="POST">
+				<c:if test="${not empty storeList}">
+					<c:forEach items="${storeList}" var="store">
+						<div class="store">
+							<div class="block-heading-two">
+								<h3>
+									<span>${store.name}</span>
+									<input type="radio" name="storeSeq" id="inlineRadio3" value="${store.seq}">
+								</h3>
+							</div>
+							<div class="storeOwner">${store.usr}</div>
+							<div class="storeAddr">${store.addr}</div>
+							<div class="storePhone">${store.phone1}</div>
+							<hr>
+						</div>	
+					</c:forEach>
+					<input class="btn btn-default" type="submit" name="saveStoreSubmit" value="근로 요청">
+				</c:if>					
+			</form>
+		</div>
+	</div>
 </body>
 </html>
