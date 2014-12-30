@@ -40,7 +40,7 @@ public class LeaveWorkServlet extends HttpServlet {
 		int updatedRows = dao.leaveWorkDao(usr, storeSeq);
 		
 		if (updatedRows > 0){
-			RequestDispatcher rd = request.getRequestDispatcher("/jsp/registerSuccess.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/index.jsp");
 			rd.forward(request, response);
 		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/error.jsp");

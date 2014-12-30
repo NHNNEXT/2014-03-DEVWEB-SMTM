@@ -41,7 +41,7 @@ public class GoToWorkServlet extends HttpServlet {
 		
 		if (updatedWorkSeq > 0){
 //			request.setAttribute("updatedWorkSeq", updatedWorkSeq);
-			RequestDispatcher rd = request.getRequestDispatcher("/jsp/registerSuccess.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/index.jsp");
 			rd.forward(request, response);
 		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/error.jsp");

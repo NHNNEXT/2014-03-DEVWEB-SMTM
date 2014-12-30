@@ -3,6 +3,7 @@ package work;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -26,11 +27,18 @@ public class ConfirmWorkServlet extends HttpServlet {
 		ArrayList<WorkAndUsrName> workList = (ArrayList<WorkAndUsrName>)session.getAttribute("workList");
 		int idx = Integer.parseInt(request.getParameter("workIdx"));
 		Work work = workList.get(idx).getWork();		
-		System.out.println(work);
-		
-		
+//		System.out.println(work);
+	
 		ConfirmWorkBiz biz = new ConfirmWorkBiz();
-		biz.confirmWorkBiz(work);
+		int updatedRows = biz.confirmWorkBiz(work);
+		
+		if (updatedRows > 0){
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/index.jsp");
+			rd.forward(request, response);
+		} else {
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/error.jsp");
+			rd.forward(request, response);
+		}
 	}
 
 	/**
