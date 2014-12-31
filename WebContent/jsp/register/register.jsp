@@ -8,12 +8,17 @@
 <link rel="stylesheet" media="screen" href="/css/form.css">
 </head>
 <body>
+	<!-- //아이디가이미 있을경우  -->
 	<div class="container">
 		<div class="header">
 			<%@ include file="/include/top.jspf"%>
 		</div>
 		<div class="section">
 			<h2>회원가입</h2>
+			<c:if test="${not empty errorMessage}">
+			<p>${errorMessage}</p>
+			</c:if>
+			
 
 			<form class="form-horizontal" action="/RegisterServlet" method="POST">
 				<div class="line"></div>

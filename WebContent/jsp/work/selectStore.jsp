@@ -13,16 +13,45 @@
 		</div>
 		<div class="section">
 			<div>
-				이름 : ${loginUsr.name} 직책 :
-				<c:choose>
-					<c:when test="${loginUsr.type == '2001'}"> 
-						알바	
-					</c:when>
-					<c:otherwise>
-						점주
-					</c:otherwise>
-				</c:choose>
+				<div>
+					이름 : ${loginUsr.name} 
+				</div>
+				<div>
+					직책 :
+					<c:choose>
+						<c:when test="${loginUsr.type == '2001'}"> 
+							알바	
+						</c:when>
+						<c:otherwise>
+							점주
+						</c:otherwise>
+					</c:choose>
+				</div>				
 			</div>
+
+			<form class="storeList" action="/SaveStoreServlet" method="POST">
+				<c:if test="${not empty storeList}">
+					<c:forEach items="${storeList}" var="store">
+						<div class="store">
+							<div class="block-heading-two">
+								<h3>
+									<span>${store.name}</span> <input type="radio" name="storeSeq"
+										id="inlineRadio3" value="${store.seq}">
+								</h3>
+							</div>
+							<div class="storeOwner">${store.usr}</div>
+							<div class="storeAddr">${store.addr}</div>
+							<div class="storePhone">${store.phone1}</div>
+							<hr>
+						</div>
+					</c:forEach>
+					<input class="btn btn-default" type="submit" name="saveStoreSubmit"
+						value="근로 요청">
+				</c:if>
+			</form>
+
+
+			
 			<table>
 				<tr>
 					<th>가게 이름</th>

@@ -4,6 +4,7 @@
 <html>
 <head>
 <%@ include file="/include/header.jspf"%>
+<link rel="stylesheet" media="screen" href="/css/form.css">
 </head>
 <body>
 	<div class="container">
@@ -19,7 +20,7 @@
 					<label class="col-sm-2 control-label">점포이름</label>
 					<div class="col-sm-6">
 						<input type="text" class="form-control"
-							placeholder="4~45자의 문자를 입력해 주세요" name="registerId">
+							placeholder="4~45자의 문자를 입력해 주세요" name="registerName">
 					</div>
 				</div>
 				<div class="form-group">

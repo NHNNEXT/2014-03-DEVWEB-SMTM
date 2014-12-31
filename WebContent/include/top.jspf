@@ -33,9 +33,9 @@
 							<li><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><a href="/ShowWorkListServlet">내 근무기록</a></li>
 						</c:when>
 						<c:otherwise>
-							<li><span class="glyphicon glyphicon-home" aria-hidden="true"></span><a href="/RetrieveStoreListServlet">가게 생성</a></li>
+							<li><span class="glyphicon glyphicon-home" aria-hidden="true"></span><a href="/MakeStoreServlet">가게 생성</a></li>
 							<li><span class="glyphicon glyphicon-dashboard" aria-hidden="true"></span><a href="/SelectStoreServlet">출퇴근 승인</a></li>
-							<li><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><a href="/ShowWorkListServlet">근무기록 확인</a></li> 
+							<li><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span><a href="/ShowStoreListServlet">근무기록 확인</a></li> 
 						</c:otherwise>
 				</c:choose>
 			</c:if>
