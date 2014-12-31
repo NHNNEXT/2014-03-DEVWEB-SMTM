@@ -13,7 +13,10 @@
 		<%@ include file="/include/top.jspf" %>
 	</div>
 	<div class="section">
-	
+		정직한 알바 시급 관리 서비스!
+		
+		서비스는 로그인후 이용 가능 합니다
+		
 	</div>
 </div>
 </body>
