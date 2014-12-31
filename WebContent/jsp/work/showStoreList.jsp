@@ -4,12 +4,15 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<%@ include file="/include/header.jspf"%>
 </head>
 <body>
-
-	<div>${loginUsr.name} 님의 점포 입니다.</div>
+<div class="container">
+	<div class="header">
+		<%@ include file="/include/top.jspf" %>
+	</div>
+	<div class="section">
+			<div>${loginUsr.name} 님의 점포 입니다.</div>
 	<table>
 		<tr>
 			<th>가게 이름</th>
@@ -33,6 +36,11 @@
 			</tr>
 		</c:forEach>
 	</table>
-<a href="/jsp/index.jsp">홈화면 으로</a>
+		
+	</div>
+</div>
+
+
+
 </body>
 </html>

@@ -4,21 +4,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<%@ include file="/include/header.jspf"%>
 </head>
 <body>
-
-이름 : ${loginUsr.name} </br>
-직책 :
-<c:choose>
-		<c:when test="${loginUsr.type == '2001'}"> 
-			알바	
-		</c:when>
-		<c:otherwise>
-			점주
-		</c:otherwise>
-</c:choose>
+<div class="container">
+	<div class="header">
+		<%@ include file="/include/top.jspf" %>
+	</div>
+	<div class="section">
+		<div>
+			이름 : ${loginUsr.name} 
+			직책 :
+			<c:choose>
+					<c:when test="${loginUsr.type == '2001'}"> 
+						알바	
+					</c:when>
+					<c:otherwise>
+						점주
+					</c:otherwise>
+			</c:choose>
+		</div>
 <table>
 <tr>
 	<th>가게 이름</th>
@@ -59,8 +64,13 @@
 </tr>
 </c:forEach>
 </table> 
+		
+	</div>
+</div>
 
-<a href="/jsp/index.jsp">홈화면 으로</a>
+
+
+
 
 </body>
 </html>
