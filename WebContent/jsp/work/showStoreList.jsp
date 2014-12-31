@@ -7,38 +7,39 @@
 <%@ include file="/include/header.jspf"%>
 </head>
 <body>
-<div class="container">
-	<div class="header">
-		<%@ include file="/include/top.jspf" %>
-	</div>
-	<div class="section">
-			<div>${loginUsr.name} 님의 점포 입니다.</div>
-	<table>
-		<tr>
-			<th>가게 이름</th>
-			<th>가게 주소</th>
-			<th>가게 전화번호</th>
-			<th>선택</th>
-		</tr>
+	<div class="container">
+		<div class="header">
+			<%@ include file="/include/top.jspf"%>
+		</div>
+		<div class="section">
+			<div>${loginUsr.name}님의 점포 입니다.</div>
+			<table>
+				<tr>
+					<th>가게 이름</th>
+					<th>가게 주소</th>
+					<th>가게 전화번호</th>
+					<th>선택</th>
+				</tr>
 
-		<c:forEach items="${storeList}" var="store" varStatus="status">
-			<tr>
-				<td>${store.name}</td>
-				<td>${store.addr}</td>
-				<td>${store.phone1}</td>
+				<c:forEach items="${storeList}" var="store" varStatus="status">
+					<tr>
+						<td>${store.name}</td>
+						<td>${store.addr}</td>
+						<td>${store.phone1}</td>
 
-				<td><a href="<c:url value="/ShowWorkListServlet">
+						<td><a
+							href="<c:url value="/ShowWorkListServlet">
 				<c:param name="storeSeq" value="${store.seq}" />
 				<c:param name="storeName" value="${store.name}" />
 				</c:url>">
-						<button>선택</button>
-				</a></td>
-			</tr>
-		</c:forEach>
-	</table>
-		
+								<button>선택</button>
+						</a></td>
+					</tr>
+				</c:forEach>
+			</table>
+
+		</div>
 	</div>
-</div>
 
 
 

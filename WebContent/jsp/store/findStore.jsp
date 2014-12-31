@@ -9,36 +9,39 @@
 <body>
 	<div class="container">
 		<div class="header">
-			<%@ include file="/include/top.jspf" %>
+			<%@ include file="/include/top.jspf"%>
 		</div>
 		<div class="section">
-			<form class="search form-inline" action="/RetrieveStoreListServlet" method="POST">
+			<form class="search form-inline" action="/RetrieveStoreListServlet"
+				method="POST">
 				<div class="input-group">
-					<input class="form-control" type="text" name="storeId" placeholder="가게 이름">
-					<span class="input-group-btn">
-						<input class="btn btn-default" type="submit" name="findStoreSubmit" value="검색">
+					<input class="form-control" type="text" name="storeId"
+						placeholder="가게 이름"> <span class="input-group-btn">
+						<input class="btn btn-default" type="submit"
+						name="findStoreSubmit" value="검색">
 					</span>
 				</div>
 			</form>
-		
+
 			<form class="storeList" action="/SaveStoreServlet" method="POST">
 				<c:if test="${not empty storeList}">
 					<c:forEach items="${storeList}" var="store">
 						<div class="store">
 							<div class="block-heading-two">
 								<h3>
-									<span>${store.name}</span>
-									<input type="radio" name="storeSeq" id="inlineRadio3" value="${store.seq}">
+									<span>${store.name}</span> <input type="radio" name="storeSeq"
+										id="inlineRadio3" value="${store.seq}">
 								</h3>
 							</div>
 							<div class="storeOwner">${store.usr}</div>
 							<div class="storeAddr">${store.addr}</div>
 							<div class="storePhone">${store.phone1}</div>
 							<hr>
-						</div>	
+						</div>
 					</c:forEach>
-					<input class="btn btn-default" type="submit" name="saveStoreSubmit" value="근로 요청">
-				</c:if>					
+					<input class="btn btn-default" type="submit" name="saveStoreSubmit"
+						value="근로 요청">
+				</c:if>
 			</form>
 		</div>
 	</div>
