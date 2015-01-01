@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import support.SessionUtils;
+import login.LoginServlet;
 import entity.Store;
 import entity.Usr;
 
@@ -20,13 +22,19 @@ public class RetrieveStoreListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		if (!SessionUtils.isUsrLogin(session, LoginServlet.SESSION_LOGIN_USR)) {
+			response.sendRedirect("/jsp");
+			return;
+		}
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/findStore.jsp");
 		rd.forward(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session= request.getSession();
-		Usr usr = (Usr)session.getAttribute("loginUsr");
+		Usr usr = (Usr)session.getAttribute(LoginServlet.SESSION_LOGIN_USR);
 		String usrSeq = usr.getSeq();
 		String storeId = request.getParameter("storeId");
 		StoreBiz biz = new StoreBiz();

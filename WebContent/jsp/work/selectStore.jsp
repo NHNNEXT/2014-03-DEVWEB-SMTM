@@ -9,7 +9,7 @@
 </head>
 <body>
 
-이름 : ${loginUsr.name} </br>
+이름 : ${loginUsr.name} <br />
 직책 :
 <c:choose>
 		<c:when test="${loginUsr.type == '2001'}"> 

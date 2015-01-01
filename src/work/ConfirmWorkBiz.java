@@ -1,11 +1,12 @@
 package work;
 
+import dao.WorkDao;
 import entity.Work;
 
 public class ConfirmWorkBiz {
 
 	public int confirmWorkBiz(Work work) {
-		ConfirmWorkDao dao = new ConfirmWorkDao();
+		WorkDao dao = new WorkDao();
 		int updatedRows;
 		String stus = work.getStus();
 		

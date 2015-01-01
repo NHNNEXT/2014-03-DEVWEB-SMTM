@@ -9,9 +9,6 @@
 </head>
 <body>
 	<div class="container">
-
-
-
 		<div class="header">
 			<%@ include file="/include/top.jspf"%>
 		</div>

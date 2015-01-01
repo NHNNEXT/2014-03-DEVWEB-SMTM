@@ -5,12 +5,12 @@ import javax.validation.constraints.Size;
 
 public class Store {
 	private String seq;
-	@NotNull
-	@Size(min = 4, max = 45)
+	
+	@NotNull @Size(min = 4, max = 45)
 	private String usr;
-	@NotNull
-	@Size(min = 4, max = 45)
+	@NotNull @Size(min = 4, max = 45)
 	private String name;
+	@NotNull @Size(min = 4, max = 45)
 	private String addr;
 	private String phone1;
 

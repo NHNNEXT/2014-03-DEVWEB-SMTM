@@ -18,7 +18,6 @@ public class Usr {
 	private String name;
 	@NotNull
 	private String type;
-
 	private String phone1;
 	private String gender;
 	@NotBlank

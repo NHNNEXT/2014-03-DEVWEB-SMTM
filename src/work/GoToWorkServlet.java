@@ -10,38 +10,31 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import support.SessionUtils;
+import login.LoginServlet;
 import dao.WorkDao;
 import entity.Usr;
 
-/**
- * Servlet implementation class GoToWorkServlet
- */
+
 @WebServlet("/GoToWorkServlet")
 public class GoToWorkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public GoToWorkServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
-
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
+ 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String storeSeq = request.getParameter("storeSeq");
 		HttpSession session = request.getSession();
-		Usr usr = (Usr)session.getAttribute("loginUsr");
+		Usr usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
+		if (usr == null) {
+			response.sendRedirect("/jsp");
+			return;
+		}
 		
+		String storeSeq = request.getParameter("storeSeq");
 		WorkDao dao = new WorkDao();
 		int updatedWorkSeq = dao.goToWorkDao(usr, storeSeq);
 		
 		if (updatedWorkSeq > 0){
-//			request.setAttribute("updatedWorkSeq", updatedWorkSeq);
-			RequestDispatcher rd = request.getRequestDispatcher("/jsp/registerSuccess.jsp");
+			request.setAttribute("updatedWorkSeq", updatedWorkSeq);
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/index.jsp");
 			rd.forward(request, response);
 		} else {
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/error.jsp");

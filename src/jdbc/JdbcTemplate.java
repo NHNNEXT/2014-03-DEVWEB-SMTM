@@ -1,4 +1,4 @@
-package dao;
+package jdbc;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -6,9 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class JdbcTemplate {
+import exception.DataAccessException;
 
-	public int excuteUpdate(String sql, PreparedStatementSetter pss){
+public class JdbcTemplate {
+	public int executeUpdate(String sql, PreparedStatementSetter pss) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int updatedRows = 0;
@@ -17,26 +18,29 @@ public class JdbcTemplate {
 			conn = ConnectManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pss.setParameters(pstmt);
-//			System.out.println("pstmt: "+pstmt); 
 			updatedRows = pstmt.executeUpdate();
-		} catch(SQLException e) {
-			System.out.println(e.toString());
+		} catch (SQLException e) {
+			throw new DataAccessException(e);
 		} finally {
-			if(pstmt != null) try { pstmt.close(); } catch (SQLException e) {}				
-			if(conn != null) try { conn.close(); } catch (SQLException e) {}				
+			try {
+				if(pstmt != null) { pstmt.close(); }			
+				if(conn != null) { conn.close(); }	
+			} catch (SQLException e) {
+				throw new DataAccessException(e);
+			}
 		}
 		return updatedRows;
 	}
 	
 	public <T> T executeQuery(String sql, PreparedStatementSetter pss, RowMapper<T> rm) {
-		ArrayList<T> list = excuteQueryList(sql, pss, rm);
+		ArrayList<T> list = executeQueryList(sql, pss, rm);
 		if (list.isEmpty()) {
 			return null;
 		}
 		return list.get(0);
 	}
 	
-	public <T> ArrayList<T> excuteQueryList(String sql, PreparedStatementSetter pss, RowMapper<T> rm) {
+	public <T> ArrayList<T> executeQueryList(String sql, PreparedStatementSetter pss, RowMapper<T> rm) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -52,10 +56,15 @@ public class JdbcTemplate {
 				list.add(rm.mapRows(rs));
 			}
 		} catch(SQLException e) {
-			System.out.println(e.toString());
+			throw new DataAccessException(e);
 		} finally {
-			if(pstmt != null) try { pstmt.close(); } catch (SQLException e) {}				
-			if(conn != null) try { conn.close(); } catch (SQLException e) {}				
+			try {
+				if(rs != null) { rs.close(); }
+				if(pstmt != null) { pstmt.close(); }			
+				if(conn != null) { conn.close(); }	
+			} catch (SQLException e) {
+				throw new DataAccessException(e);
+			}
 		}
 		return list;
 	}

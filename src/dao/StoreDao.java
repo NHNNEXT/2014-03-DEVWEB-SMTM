@@ -6,6 +6,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import jdbc.JdbcTemplate;
+import jdbc.PreparedStatementSetter;
+import jdbc.RowMapper;
 import entity.Employment;
 import entity.Store;
 
@@ -24,7 +27,7 @@ public class StoreDao {
 		};
 		JdbcTemplate template = new JdbcTemplate();
 		String sql = "INSERT INTO TB_STO(STO_ONR_ID, STO_NM, STO_ADDR, STO_PHONE1,CREATE_USR) VALUES(?,?,?,?,?)";
-		return template.excuteUpdate(sql, pss);
+		return template.executeUpdate(sql, pss);
 	}
 	
 	public int saveDao(final Employment empt) {
@@ -38,7 +41,7 @@ public class StoreDao {
 		JdbcTemplate template = new JdbcTemplate();		
 		
 		String sql = "INSERT INTO TB_EMPT(EMPT_STO_SEQ, EMPT_ALBA_SEQ,CREATE_USR) VALUES(?,?,?)";	
-		return template.excuteUpdate(sql, pss);
+		return template.executeUpdate(sql, pss);
 	}
 
 	public ArrayList<Store> retrieveDao(final String storeId, final String usrSeq) {
@@ -62,7 +65,7 @@ public class StoreDao {
 				+"(SELECT EMPT_STO_SEQ FROM TB_EMPT WHERE EMPT_ALBA_SEQ = ?) "
 				+"AND STO_NM LIKE ?";
 
-		return template.excuteQueryList(sql, pss, rm);
+		return template.executeQueryList(sql, pss, rm);
 	}
 
 //	public boolean checkDuplicationEmptDao(final Employment empt) {

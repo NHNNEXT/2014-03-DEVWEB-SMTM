@@ -4,6 +4,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import jdbc.JdbcTemplate;
+import jdbc.PreparedStatementSetter;
+import jdbc.RowMapper;
 import entity.Usr;
 
 public class UsrDao {
@@ -42,6 +45,6 @@ public class UsrDao {
 		};
 		JdbcTemplate template = new JdbcTemplate();
 		String sql = "INSERT INTO TB_USR(USR_ID, USR_NM, USR_PW, USR_TYPE, USR_PHONE1, USR_GENDER, USR_BIRTH, CREATE_USR) VALUES(?,?,?,?,?,?,?,?)";	
-		return template.excuteUpdate(sql, pss);
+		return template.executeUpdate(sql, pss);
 	}
 }

@@ -10,7 +10,6 @@ public class SelectStoreBiz {
 	public ArrayList<Store> selectStoreBiz(Usr usr) {
 		WorkDao dao = new WorkDao();
 		ArrayList<Store> storeList = null;
-
 		
 		if(usr.getType().equals("2001"))
 		{
@@ -23,7 +22,6 @@ public class SelectStoreBiz {
 			System.out.println(2002);
 		}
 			
-		
 		return storeList;
 	}
 }
