@@ -13,13 +13,15 @@
 			<%@ include file="/include/top.jspf"%>
 		</div>
 		<div class="section">
+		<c:choose>
 			<c:when test="${not empty errorMessage}">
 				에러 메시지 : ${errorMessage} <br>
-				자세한 사항은 010-1234-5678로 문의해주시기 바랍니다.		
+				자세한 사항은 010-1234-5678로 문의해주시기 바랍니다.
 			</c:when>
 			<c:otherwise>
-				정직한 알바 시급 관리 서비스! 서비스는 로그인후 이용 가능 합니다
-			</c:otherwise>
+				정직한 알바 시급 관리 서비스! 서비스는 로그인 후 이용 가능 합니다.
+			</c:otherwise>		
+		</c:choose>
 		</div>
 	</div>
 </body>
