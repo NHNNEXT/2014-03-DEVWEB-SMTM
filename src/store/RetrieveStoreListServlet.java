@@ -39,7 +39,7 @@ public class RetrieveStoreListServlet extends HttpServlet {
 		String storeId = request.getParameter("storeId");
 		StoreBiz biz = new StoreBiz();
 		
-		ArrayList<Store> storeList = biz.retrieveBiz(storeId,usrSeq);
+		ArrayList<Store> storeList = biz.retrieve(storeId,usrSeq);
 		
 		if(storeList !=null){
 			request.setAttribute("storeList",storeList);

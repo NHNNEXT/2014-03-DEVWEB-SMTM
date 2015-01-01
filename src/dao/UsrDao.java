@@ -28,8 +28,7 @@ public class UsrDao {
 		return jdbcTemplate.executeQuery(sql, pss, rm);
 	}
 	
-	public int registerDao(final Usr usr) {
-		
+	public int register(final Usr usr) {
 		PreparedStatementSetter pss = new PreparedStatementSetter(){
 			public void setParameters(PreparedStatement pstmt)
 					throws SQLException {

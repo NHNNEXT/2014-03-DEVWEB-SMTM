@@ -27,7 +27,7 @@ public class SaveStoreServlet extends HttpServlet {
 		Employment empt = new Employment(storeSeq, userSeq);
 		
 		StoreBiz storeBiz = new StoreBiz();
-		int updatedRows = storeBiz.saveBiz(empt);
+		int updatedRows = storeBiz.save(empt);
 		
 		if(updatedRows > 0) {
 			

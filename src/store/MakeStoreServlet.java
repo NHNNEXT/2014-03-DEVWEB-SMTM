@@ -63,7 +63,7 @@ public class MakeStoreServlet extends HttpServlet {
 		}
 		
 		StoreBiz storeBiz = new StoreBiz();
-		int updatedRows = storeBiz.registerBiz(store);
+		int updatedRows = storeBiz.register(store);
 		
 		if(updatedRows > 0) {
 			

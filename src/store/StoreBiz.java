@@ -7,24 +7,25 @@ import entity.Employment;
 import entity.Store;
 
 public class StoreBiz {
-	public int registerBiz(Store store) {
+	public int register(Store store) {
 		
 		StoreDao dao = new StoreDao();
-		int updatedRows = dao.registerDao(store);
+		int updatedRows = dao.register(store);
 		return updatedRows;
 	}
-	public ArrayList<Store> retrieveBiz(String storeId, String usrSeq) {
+	
+	public ArrayList<Store> retrieve(String storeId, String usrSeq) {
 		StoreDao dao = new StoreDao();
-		ArrayList<Store> storeList = dao.retrieveDao(storeId, usrSeq);
+		ArrayList<Store> storeList = dao.retrieve(storeId, usrSeq);
 		return storeList;
 	}
 
-	public int saveBiz(Employment empt) {
+	public int save(Employment empt) {
 		StoreDao dao = new StoreDao();
 		int updatedRows=0;
-		//if(dao.checkDuplicationEmptDao(empt)==false){
-			updatedRows = dao.saveDao(empt);
-		//}
+		if(dao.retriveEmpt(empt)==null){
+			updatedRows = dao.save(empt);
+		}
 		return updatedRows;
 	}
 }

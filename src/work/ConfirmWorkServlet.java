@@ -35,7 +35,7 @@ public class ConfirmWorkServlet extends HttpServlet {
 		Work work = workList.get(idx).getWork();		
 	
 		ConfirmWorkBiz biz = new ConfirmWorkBiz();
-		int updatedRows = biz.confirmWorkBiz(work);
+		int updatedRows = biz.confirmWork(work);
 		
 		if (updatedRows > 0){
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/index.jsp");

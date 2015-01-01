@@ -29,7 +29,7 @@ public class SelectStoreServlet extends HttpServlet {
 		}
 		
 		SelectStoreBiz biz = new SelectStoreBiz();
-		ArrayList<Store> storeList = biz.selectStoreBiz(usr);
+		ArrayList<Store> storeList = biz.selectStore(usr);
 
 		request.setAttribute("storeList", storeList);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/selectStore.jsp");

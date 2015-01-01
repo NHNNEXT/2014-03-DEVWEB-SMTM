@@ -14,7 +14,7 @@ import entity.Store;
 
 public class StoreDao {
 	
-	public int registerDao(final Store store) {
+	public int register(final Store store) {
 		final String currentPos = new Object() {}.getClass().getEnclosingMethod().getName();
 		PreparedStatementSetter pss = new PreparedStatementSetter(){
 			public void setParameters(PreparedStatement pstmt) throws SQLException {
@@ -30,7 +30,7 @@ public class StoreDao {
 		return template.executeUpdate(sql, pss);
 	}
 	
-	public int saveDao(final Employment empt) {
+	public int save(final Employment empt) {
 		PreparedStatementSetter pss = new PreparedStatementSetter(){
 			public void setParameters(PreparedStatement pstmt) throws SQLException {
 				pstmt.setString(1,empt.getStoreSeq());
@@ -44,7 +44,7 @@ public class StoreDao {
 		return template.executeUpdate(sql, pss);
 	}
 
-	public ArrayList<Store> retrieveDao(final String storeId, final String usrSeq) {
+	public ArrayList<Store> retrieve(final String storeId, final String usrSeq) {
 		PreparedStatementSetter pss = new PreparedStatementSetter(){
 			public void setParameters(PreparedStatement pstmt) throws SQLException {
 				pstmt.setInt(1, Integer.parseInt(usrSeq));
@@ -68,24 +68,22 @@ public class StoreDao {
 		return template.executeQueryList(sql, pss, rm);
 	}
 
-//	public boolean checkDuplicationEmptDao(final Employment empt) {
-//		PreparedStatementSetter pss = new PreparedStatementSetter(){
-//			public void setParameters(PreparedStatement pstmt) throws SQLException {
-//				pstmt.setString(1,empt.getStoreSeq());
-//				pstmt.setString(2,empt.getUsrSeq());
-//			}	
-//		};
-//		
-//		RowMapper<Store> rm = new RowMapper<Store>(){
-//			public Store mapRows(ResultSet rs) throws SQLException {
-//				return new Store(rs.getString("STO_SEQ"), rs.getString("STO_ONR_ID"), rs.getString("STO_NM"), 
-//								rs.getString("STO_ADDR"), rs.getString("STO_PHONE1"));
-//			}
-//		};
-//		
-//		boolean duplicationEmpt= false;
-//		JdbcTemplate template = new JdbcTemplate();
-//		String sql = "SELECT COUNT(*) FROM TB_EMPT WHERE EMPT_STO_SEQ=? AND EMPT_ALBA_SEQ=?";	
-//		return template.excuteQuery(sql, pss);
-//	}
+	public Employment retriveEmpt(final Employment empt) {
+		PreparedStatementSetter pss = new PreparedStatementSetter(){
+			public void setParameters(PreparedStatement pstmt) throws SQLException {
+				pstmt.setString(1,empt.getStoreSeq());
+				pstmt.setString(2,empt.getUsrSeq());
+			}	
+		};
+		
+		RowMapper<Employment> rm = new RowMapper<Employment>(){
+			public Employment mapRows(ResultSet rs) throws SQLException {
+				return new Employment(rs.getString("EMPT_STO_SEQ"), rs.getString("EMPT_ALBA_SEQ"));
+			}
+		};
+		
+		JdbcTemplate template = new JdbcTemplate();
+		String sql = "SELECT * FROM TB_EMPT WHERE EMPT_STO_SEQ=? AND EMPT_ALBA_SEQ=?";	
+		return template.executeQuery(sql, pss, rm);
+	}
 }

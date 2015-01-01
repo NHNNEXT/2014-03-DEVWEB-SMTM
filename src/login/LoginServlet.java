@@ -39,7 +39,7 @@ public class LoginServlet extends HttpServlet {
 		
 		try {
 			LoginBiz biz = new LoginBiz();
-			Usr usr = biz.loginBiz(loginId, loginPw);			
+			Usr usr = biz.login(loginId, loginPw);			
 			HttpSession session = request.getSession();
 			session.setAttribute(SESSION_LOGIN_USR, usr);
 			response.sendRedirect("/jsp/");

@@ -16,7 +16,7 @@ public class RegisterBiz {
 			throw new SameUsrIdExistException("Id가 이미 존재합니다.");
 		}
 		
-		updatedRows = dao.registerDao(usr);
+		updatedRows = dao.register(usr);
 		if(updatedRows != 1) {
 			throw new RegisterUsrException("Usr 등록에 문제가 발생했습니다");
 		}

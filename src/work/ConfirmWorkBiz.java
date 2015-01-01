@@ -5,7 +5,7 @@ import entity.Work;
 
 public class ConfirmWorkBiz {
 
-	public int confirmWorkBiz(Work work) {
+	public int confirmWork(Work work) {
 		WorkDao dao = new WorkDao();
 		int updatedRows;
 		String stus = work.getStus();

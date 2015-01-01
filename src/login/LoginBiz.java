@@ -6,7 +6,7 @@ import exception.PasswordMismatchException;
 import exception.UsrNotFoundException;
 
 public class LoginBiz {
-	public Usr loginBiz(String loginId, String loginPw) throws UsrNotFoundException, PasswordMismatchException {
+	public Usr login(String loginId, String loginPw) throws UsrNotFoundException, PasswordMismatchException {
 		UsrDao dao = new UsrDao();
 		Usr usr = dao.findUsrById(loginId);
 		
