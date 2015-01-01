@@ -29,7 +29,7 @@ public class LeaveWorkServlet extends HttpServlet {
 		
 		String storeSeq = request.getParameter("storeSeq");
 		WorkDao dao = new WorkDao();
-		int updatedRows = dao.leaveWorkDao(usr, storeSeq);
+		int updatedRows = dao.leaveWork(usr, storeSeq);
 		
 		if (updatedRows > 0){
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/index.jsp");

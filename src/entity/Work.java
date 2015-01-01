@@ -15,10 +15,18 @@ public class Work {
 	private String finish;
 	private String startConfirm;
 	private String finishConfirm;
+	private String name;
 
 	public Work(String seq, String stoSeq, String albaSeq, String stus,
-			String start, String finish) {
-		this(seq, stoSeq, albaSeq, stus, start, finish, null, null);
+			String start, String finish, String name) {
+		super();
+		this.seq = seq;
+		this.stoSeq = stoSeq;
+		this.albaSeq = albaSeq;
+		this.stus = stus;
+		this.start = start;
+		this.finish = finish;
+		this.name = name;
 	}
 	
 	public Work(String seq, String stoSeq, String albaSeq, String stus,
@@ -56,9 +64,11 @@ public class Work {
 	public String getStartConfirm() {
 		return startConfirm;
 	}
-
 	public String getFinishConfirm() {
 		return finishConfirm;
+	}
+	public String getName() {
+		return name;
 	}
 
 	@Override

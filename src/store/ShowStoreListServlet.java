@@ -1,4 +1,4 @@
-package work;
+package store;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import javax.servlet.http.HttpSession;
 
 import support.SessionUtils;
 import login.LoginServlet;
-import dao.WorkDao;
+import dao.StoreDao;
 import entity.Store;
 import entity.Usr;
 
@@ -29,7 +29,7 @@ public class ShowStoreListServlet extends HttpServlet {
 			return;
 		}
 		
-		WorkDao dao = new WorkDao();
+		StoreDao dao = new StoreDao();
 		ArrayList<Store> storeList = dao.selectStoreForManager(usr);
 
 		request.setAttribute("storeList", storeList);

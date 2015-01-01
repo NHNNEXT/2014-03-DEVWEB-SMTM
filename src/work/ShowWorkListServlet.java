@@ -33,13 +33,13 @@ public class ShowWorkListServlet extends HttpServlet {
 		ArrayList<Work> workList = null;
 		
 		if(request.getParameter("storeSeq")==null){
-			workList = dao.showWorkDao(usr);
+			workList = dao.showWork(usr);
 		}
 		else{
 			String storeSeq = request.getParameter("storeSeq");
 			//String storeName = request.getParameter("storeName");
 			
-			workList = dao.showWorkOfStoreDao(storeSeq);
+			workList = dao.showWorkOfStore(storeSeq);
 		}
 		request.setAttribute("workList", workList);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/showAlbaWork.jsp");

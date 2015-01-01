@@ -11,6 +11,7 @@ import jdbc.PreparedStatementSetter;
 import jdbc.RowMapper;
 import entity.Employment;
 import entity.Store;
+import entity.Usr;
 
 public class StoreDao {
 	public int register(final Store store) {
@@ -85,5 +86,48 @@ public class StoreDao {
 		JdbcTemplate template = new JdbcTemplate();
 		String sql = "SELECT * FROM TB_EMPT WHERE EMPT_STO_SEQ=? AND EMPT_ALBA_SEQ=?";	
 		return template.executeQuery(sql, pss, rm);
+	}
+	
+	public ArrayList<Store> selectStoreForAlba(final Usr usr) {
+		PreparedStatementSetter pss = new PreparedStatementSetter(){
+			public void setParameters(PreparedStatement pstmt) throws SQLException {
+				pstmt.setString(1, usr.getSeq());
+			}	
+		};
+		
+		RowMapper<Store> rm = new RowMapper<Store>(){
+			public Store mapRows(ResultSet rs) throws SQLException {
+				return new Store(rs.getString("STO_SEQ"), rs.getString("STO_ONR_ID"), rs.getString("STO_NM"), rs.getString("STO_ADDR"), rs.getString("STO_PHONE1"));
+			}
+		};
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		String sql = "SELECT S.STO_SEQ, S.STO_ONR_ID, S.STO_NM, S.STO_ADDR, S.STO_PHONE1 "
+				+ "FROM TB_EMPT E "
+				+ "JOIN TB_STO S "
+				+ "ON E.EMPT_STO_SEQ = S.STO_SEQ WHERE E.EMPT_ALBA_SEQ = ?";	
+
+		return jdbcTemplate.executeQueryList(sql, pss, rm);
+	}
+	
+	public ArrayList<Store> selectStoreForManager(final Usr usr) {
+		PreparedStatementSetter pss = new PreparedStatementSetter(){
+			public void setParameters(PreparedStatement pstmt) throws SQLException {
+				pstmt.setString(1, usr.getId());
+			}	
+		};
+		
+		RowMapper<Store> rm = new RowMapper<Store>(){
+			public Store mapRows(ResultSet rs) throws SQLException {
+				return new Store(rs.getString("STO_SEQ"), rs.getString("STO_ONR_ID"), rs.getString("STO_NM"), rs.getString("STO_ADDR"), rs.getString("STO_PHONE1"));
+			}
+		};
+		
+		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		String sql = "SELECT STO_SEQ, STO_ONR_ID, STO_NM, STO_ADDR, STO_PHONE1 "
+				+ "FROM TB_STO "
+				+ "WHERE STO_ONR_ID = ?";	
+
+		return jdbcTemplate.executeQueryList(sql, pss, rm);
 	}
 }

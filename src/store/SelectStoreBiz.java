@@ -1,14 +1,14 @@
-package work;
+package store;
 
 import java.util.ArrayList;
 
-import dao.WorkDao;
+import dao.StoreDao;
 import entity.Store;
 import entity.Usr;
 
 public class SelectStoreBiz {
 	public ArrayList<Store> selectStore(Usr usr) {
-		WorkDao dao = new WorkDao();
+		StoreDao dao = new StoreDao();
 		ArrayList<Store> storeList = null;
 		
 		if(usr.getType().equals("2001"))

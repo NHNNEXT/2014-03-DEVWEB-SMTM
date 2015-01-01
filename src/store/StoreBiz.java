@@ -7,8 +7,7 @@ import entity.Employment;
 import entity.Store;
 
 public class StoreBiz {
-	public int register(Store store) {
-		
+	public int register(Store store) {	
 		StoreDao dao = new StoreDao();
 		int updatedRows = dao.register(store);
 		return updatedRows;

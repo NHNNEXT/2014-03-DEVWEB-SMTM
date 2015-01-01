@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.WorkDao;
-import entity.WorkAndUsrName;
+import entity.Work;
 
 @WebServlet("/SelectWorkServlet")
 public class SelectWorkServlet extends HttpServlet {
@@ -25,7 +25,7 @@ public class SelectWorkServlet extends HttpServlet {
 		WorkDao dao = new WorkDao();
 
 		HttpSession session = request.getSession();
-		ArrayList<WorkAndUsrName> workList = dao.selectWorkDao(storeSeq);
+		ArrayList<Work> workList = dao.selectWork(storeSeq);
 		request.setAttribute("storeName", storeName);
 		session.setAttribute("workList", workList);
 

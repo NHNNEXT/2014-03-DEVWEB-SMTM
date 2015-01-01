@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import login.LoginServlet;
 import support.SessionUtils;
 import entity.Work;
-import entity.WorkAndUsrName;
 
 /**
  * Servlet implementation class ConfirmWorkServlet
@@ -30,9 +29,9 @@ public class ConfirmWorkServlet extends HttpServlet {
 			return;
 		}
 		
-		ArrayList<WorkAndUsrName> workList = (ArrayList<WorkAndUsrName>)session.getAttribute("workList");
+		ArrayList<Work> workList = (ArrayList<Work>) session.getAttribute("workList");
 		int idx = Integer.parseInt(request.getParameter("workIdx"));
-		Work work = workList.get(idx).getWork();		
+		Work work = workList.get(idx);		
 	
 		ConfirmWorkBiz biz = new ConfirmWorkBiz();
 		int updatedRows = biz.confirmWork(work);

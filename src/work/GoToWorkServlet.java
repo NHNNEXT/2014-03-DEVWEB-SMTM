@@ -30,7 +30,7 @@ public class GoToWorkServlet extends HttpServlet {
 		
 		String storeSeq = request.getParameter("storeSeq");
 		WorkDao dao = new WorkDao();
-		int updatedWorkSeq = dao.goToWorkDao(usr, storeSeq);
+		int updatedWorkSeq = dao.goToWork(usr, storeSeq);
 		
 		if (updatedWorkSeq > 0){
 			request.setAttribute("updatedWorkSeq", updatedWorkSeq);
