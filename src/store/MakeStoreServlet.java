@@ -18,7 +18,7 @@ import support.SessionUtils;
 import login.LoginServlet;
 import entity.Store;
 import entity.Usr;
-
+import exception.InvalidAccessException;
 
 @WebServlet("/MakeStoreServlet")
 public class MakeStoreServlet extends HttpServlet {
@@ -28,10 +28,8 @@ public class MakeStoreServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if (!SessionUtils.isUsrLogin(session, LoginServlet.SESSION_LOGIN_USR)) {
-			response.sendRedirect("/jsp");
-			return;
-		}
+		if (SessionUtils.isEmpty(session, LoginServlet.SESSION_LOGIN_USR))
+			throw new InvalidAccessException();
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/makeStore.jsp");
 		rd.forward(request, response);
@@ -39,7 +37,9 @@ public class MakeStoreServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session= request.getSession();
-		Usr usr = (Usr)session.getAttribute(LoginServlet.SESSION_LOGIN_USR);
+		Usr usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
+		if (usr == null)
+			throw new InvalidAccessException();
 		
 		String registerUsrId = usr.getId();
 		String registerName = request.getParameter("registerName");
@@ -50,11 +50,11 @@ public class MakeStoreServlet extends HttpServlet {
 		String registerPhone1 = registerPhone1_0+"-"+registerPhone1_1+"-"+registerPhone1_2;
 		
 		Store store = new Store(registerUsrId, registerName, registerAddr, registerPhone1);
+		
 		Validator validator = MyValidatorFactory.createValidator();
 		Set<ConstraintViolation<Usr>> constraintViolations = validator.validate(usr);
 		if(constraintViolations.size() > 0) {
 			String errorMessage = MyValidatorFactory.getErrorMessage(constraintViolations);
-
 			request.setAttribute("inputStore", store);
 			request.setAttribute("errorMessage", errorMessage);
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/makeStore.jsp");

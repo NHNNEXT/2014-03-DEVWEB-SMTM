@@ -11,11 +11,11 @@ public class LoginBiz {
 		Usr usr = dao.findUsrById(loginId);
 		
 		if(usr == null) {
-			throw new UsrNotFoundException("Id가 존재하지 않습니다.");
+			throw new UsrNotFoundException();
 		}
 		
 		if(!usr.checkPassword(loginPw)) {
-			throw new PasswordMismatchException("비밀번호가 틀립니다.");
+			throw new PasswordMismatchException();
 		}
 		
 		return usr;

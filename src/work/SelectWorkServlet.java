@@ -22,6 +22,11 @@ public class SelectWorkServlet extends HttpServlet {
 		String storeSeq = request.getParameter("storeSeq");
 		String storeName = request.getParameter("storeName");
 		
+		if (storeSeq == null || storeName == null) {
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/");
+			rd.forward(request, response);
+		}
+		
 		WorkDao dao = new WorkDao();
 
 		HttpSession session = request.getSession();

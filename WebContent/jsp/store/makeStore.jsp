@@ -13,6 +13,9 @@
 		</div>
 		<div class="section">
 			<h1>점포 생성</h1>
+						<c:if test="${not empty errorMessage}">
+			<p>${errorMessage}</p>
+			</c:if>
 			
 			<form class="form-horizontal" action="/MakeStoreServlet" method="POST">
 				<div class="line"></div>

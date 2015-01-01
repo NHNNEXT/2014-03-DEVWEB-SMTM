@@ -12,6 +12,7 @@ public class Store {
 	private String name;
 	@NotNull @Size(min = 4, max = 45)
 	private String addr;
+	@NotNull @Size(min = 4, max = 13)
 	private String phone1;
 
 	public Store(String name) {

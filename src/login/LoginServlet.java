@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import support.SessionUtils;
 import entity.Usr;
+import exception.InvalidAccessException;
 import exception.PasswordMismatchException;
 import exception.UsrNotFoundException;
 
@@ -24,10 +25,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if (SessionUtils.isUsrLogin(session, SESSION_LOGIN_USR)) {
-			response.sendRedirect("/jsp");
-			return;
-		}
+		if (!SessionUtils.isEmpty(session, SESSION_LOGIN_USR))
+			throw new InvalidAccessException();
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/login/login.jsp");		
 		rd.forward(request, response);
@@ -44,9 +43,9 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute(SESSION_LOGIN_USR, usr);
 			response.sendRedirect("/jsp/");
 		} catch (UsrNotFoundException e) {
-			forwardJSP(request, response, e.getMessage());
+			forwardJSP(request, response, e.getErrorMessage());
 		} catch (PasswordMismatchException e) {
-			forwardJSP(request, response, e.getMessage());
+			forwardJSP(request, response, e.getErrorMessage());
 		}
 	}
 

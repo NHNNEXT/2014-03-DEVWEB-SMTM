@@ -1,4 +1,3 @@
-
 package support;
 
 import java.io.IOException;
@@ -11,13 +10,13 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 
-@WebFilter("*")
+@WebFilter("/*")
 public class CharacterEncodingFilter implements Filter {
 	private static final String DEFAULT_ENCODING = "UTF-8";
 
-	public void destroy() {
+	public void init(FilterConfig arg0) throws ServletException {
 	}
-
+	
 	public void doFilter(ServletRequest request, ServletResponse response,
 			FilterChain chain) throws IOException, ServletException {
 		request.setCharacterEncoding(DEFAULT_ENCODING);
@@ -25,8 +24,7 @@ public class CharacterEncodingFilter implements Filter {
 		chain.doFilter(request, response);
 	}
 
-	public void init(FilterConfig arg0) throws ServletException {
+	public void destroy() {
 	}
-
 
 }

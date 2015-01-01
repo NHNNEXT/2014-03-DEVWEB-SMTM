@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import support.SessionUtils;
 import login.LoginServlet;
 import entity.Employment;
 import entity.Usr;
+import exception.InvalidAccessException;
 
 @WebServlet("/SaveStoreServlet")
 public class SaveStoreServlet extends HttpServlet {
@@ -20,7 +22,10 @@ public class SaveStoreServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session= request.getSession();
-		Usr usr = (Usr)session.getAttribute(LoginServlet.SESSION_LOGIN_USR);
+		Usr usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
+		if (usr == null)
+			throw new InvalidAccessException();
+		
 		String userSeq = usr.getSeq();
 		String storeSeq = request.getParameter("storeSeq");
 		
@@ -29,12 +34,10 @@ public class SaveStoreServlet extends HttpServlet {
 		StoreBiz storeBiz = new StoreBiz();
 		int updatedRows = storeBiz.save(empt);
 		
-		if(updatedRows > 0) {
-			
+		if(updatedRows > 0) {	
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/makeSuccess.jsp");
 			rd.forward(request, response);
 		} else {
-			
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/error.jsp");
 			rd.forward(request, response);
 		}

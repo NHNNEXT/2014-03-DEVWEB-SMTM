@@ -13,13 +13,13 @@ public class RegisterBiz {
 		
 		Usr findUsr = dao.findUsrById(usr.getId());
 		if(findUsr != null) {
-			throw new SameUsrIdExistException("Id가 이미 존재합니다.");
+			throw new SameUsrIdExistException();
 		}
 		
 		updatedRows = dao.register(usr);
 		if(updatedRows != 1) {
-			throw new RegisterUsrException("Usr 등록에 문제가 발생했습니다");
-		}
+			throw new RegisterUsrException();
+		}	
 	}
 	
 }

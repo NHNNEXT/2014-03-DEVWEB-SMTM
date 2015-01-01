@@ -16,6 +16,7 @@ import login.LoginServlet;
 import dao.WorkDao;
 import entity.Usr;
 import entity.Work;
+import exception.InvalidAccessException;
 
 @WebServlet("/ShowWorkListServlet")
 public class ShowWorkListServlet extends HttpServlet {
@@ -24,10 +25,8 @@ public class ShowWorkListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Usr usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
-		if (usr == null) {
-			response.sendRedirect("/jsp");
-			return;
-		}
+		if (usr == null)
+			throw new InvalidAccessException();
 		
 		WorkDao dao = new WorkDao();
 		ArrayList<Work> workList = null;

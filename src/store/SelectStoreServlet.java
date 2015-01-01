@@ -15,6 +15,7 @@ import support.SessionUtils;
 import login.LoginServlet;
 import entity.Store;
 import entity.Usr;
+import exception.InvalidAccessException;
 
 @WebServlet("/SelectStoreServlet")
 public class SelectStoreServlet extends HttpServlet {
@@ -23,11 +24,9 @@ public class SelectStoreServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		Usr usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
-		if (usr == null) {
-			response.sendRedirect("/jsp");
-			return;
-		}
-		
+		if (usr == null)
+			throw new InvalidAccessException();
+
 		SelectStoreBiz biz = new SelectStoreBiz();
 		ArrayList<Store> storeList = biz.selectStore(usr);
 

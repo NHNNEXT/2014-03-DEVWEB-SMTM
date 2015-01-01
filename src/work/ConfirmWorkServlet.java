@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import login.LoginServlet;
 import support.SessionUtils;
 import entity.Work;
+import exception.InvalidAccessException;
 
 /**
  * Servlet implementation class ConfirmWorkServlet
@@ -24,10 +25,8 @@ public class ConfirmWorkServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if (!SessionUtils.isUsrLogin(session, LoginServlet.SESSION_LOGIN_USR)) {
-			response.sendRedirect("/jsp");
-			return;
-		}
+		if (SessionUtils.isEmpty(session, LoginServlet.SESSION_LOGIN_USR))
+			throw new InvalidAccessException();
 		
 		ArrayList<Work> workList = (ArrayList<Work>) session.getAttribute("workList");
 		int idx = Integer.parseInt(request.getParameter("workIdx"));

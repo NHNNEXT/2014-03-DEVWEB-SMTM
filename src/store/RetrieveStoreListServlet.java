@@ -15,7 +15,7 @@ import support.SessionUtils;
 import login.LoginServlet;
 import entity.Store;
 import entity.Usr;
-
+import exception.InvalidAccessException;
 
 @WebServlet("/RetrieveStoreListServlet")
 public class RetrieveStoreListServlet extends HttpServlet {
@@ -23,10 +23,8 @@ public class RetrieveStoreListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if (!SessionUtils.isUsrLogin(session, LoginServlet.SESSION_LOGIN_USR)) {
-			response.sendRedirect("/jsp");
-			return;
-		}
+		if (SessionUtils.isEmpty(session, LoginServlet.SESSION_LOGIN_USR))
+			throw new InvalidAccessException();
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/findStore.jsp");
 		rd.forward(request,response);
@@ -34,12 +32,15 @@ public class RetrieveStoreListServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session= request.getSession();
-		Usr usr = (Usr)session.getAttribute(LoginServlet.SESSION_LOGIN_USR);
+		Usr usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
+		if (usr == null)
+			throw new InvalidAccessException();
+		
 		String usrSeq = usr.getSeq();
 		String storeId = request.getParameter("storeId");
 		StoreBiz biz = new StoreBiz();
 		
-		ArrayList<Store> storeList = biz.retrieve(storeId,usrSeq);
+		ArrayList<Store> storeList = biz.retrieve(storeId, usrSeq);
 		
 		if(storeList !=null){
 			request.setAttribute("storeList",storeList);
@@ -52,3 +53,4 @@ public class RetrieveStoreListServlet extends HttpServlet {
 	}
 
 }
+

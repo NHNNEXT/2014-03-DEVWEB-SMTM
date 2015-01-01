@@ -12,7 +12,15 @@
 		<div class="header">
 			<%@ include file="/include/top.jspf"%>
 		</div>
-		<div class="section">정직한 알바 시급 관리 서비스! 서비스는 로그인후 이용 가능 합니다</div>
+		<div class="section">
+			<c:when test="${not empty errorMessage}">
+				에러 메시지 : ${errorMessage} <br>
+				자세한 사항은 010-1234-5678로 문의해주시기 바랍니다.		
+			</c:when>
+			<c:otherwise>
+				정직한 알바 시급 관리 서비스! 서비스는 로그인후 이용 가능 합니다
+			</c:otherwise>
+		</div>
 	</div>
 </body>
 </html>

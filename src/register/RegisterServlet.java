@@ -45,8 +45,8 @@ public class RegisterServlet extends HttpServlet {
 		Validator validator = MyValidatorFactory.createValidator();
 		Set<ConstraintViolation<Usr>> constraintViolations = validator.validate(usr);
 		if(constraintViolations.size() > 0) {
-			request.setAttribute("inputUsr", usr);
 			String errorMessage = MyValidatorFactory.getErrorMessage(constraintViolations);
+			request.setAttribute("inputUsr", usr);
 			forwardJSP(request, response, errorMessage);
 			return;
 		}
@@ -57,9 +57,9 @@ public class RegisterServlet extends HttpServlet {
 			response.sendRedirect("/jsp/register/registerSuccess.jsp");
 			
 		} catch (SameUsrIdExistException e) {
-			forwardJSP(request, response, e.getMessage());
+			forwardJSP(request, response, e.getErrorMessage());
 		} catch (RegisterUsrException e) {
-			forwardJSP(request, response, e.getMessage());
+			forwardJSP(request, response, e.getErrorMessage());
 		}
 	}
 

@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import exception.DataAccessException;
+import exception.DbAccessException;
 
 public class JdbcTemplate {
 	public int executeUpdate(String sql, PreparedStatementSetter pss) {
@@ -20,13 +20,13 @@ public class JdbcTemplate {
 			pss.setParameters(pstmt);
 			updatedRows = pstmt.executeUpdate();
 		} catch (SQLException e) {
-			throw new DataAccessException(e);
+			throw new DbAccessException(e);
 		} finally {
 			try {
 				if(pstmt != null) { pstmt.close(); }			
 				if(conn != null) { conn.close(); }	
 			} catch (SQLException e) {
-				throw new DataAccessException(e);
+				throw new DbAccessException(e);
 			}
 		}
 		return updatedRows;
@@ -56,14 +56,14 @@ public class JdbcTemplate {
 				list.add(rm.mapRows(rs));
 			}
 		} catch(SQLException e) {
-			throw new DataAccessException(e);
+			throw new DbAccessException(e);
 		} finally {
 			try {
 				if(rs != null) { rs.close(); }
 				if(pstmt != null) { pstmt.close(); }			
 				if(conn != null) { conn.close(); }	
 			} catch (SQLException e) {
-				throw new DataAccessException(e);
+				throw new DbAccessException(e);
 			}
 		}
 		return list;
