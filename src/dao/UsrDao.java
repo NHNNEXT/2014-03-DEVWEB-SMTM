@@ -29,6 +29,7 @@ public class UsrDao {
 	}
 	
 	public int register(final Usr usr) {
+		String currentMethod = new Object() {}.getClass().getEnclosingMethod().getName();
 		PreparedStatementSetter pss = new PreparedStatementSetter(){
 			public void setParameters(PreparedStatement pstmt)
 					throws SQLException {
@@ -39,7 +40,7 @@ public class UsrDao {
 				pstmt.setString(5,usr.getPhone1());
 				pstmt.setString(6,usr.getGender());
 				pstmt.setString(7,usr.getBirth());
-				pstmt.setString(8,new Object() {}.getClass().getEnclosingMethod().getName());
+				pstmt.setString(8, currentMethod);
 			}	
 		};
 		JdbcTemplate template = new JdbcTemplate();

@@ -13,16 +13,15 @@ import entity.Employment;
 import entity.Store;
 
 public class StoreDao {
-	
 	public int register(final Store store) {
-		final String currentPos = new Object() {}.getClass().getEnclosingMethod().getName();
+		String currentMethod = new Object() {}.getClass().getEnclosingMethod().getName();
 		PreparedStatementSetter pss = new PreparedStatementSetter(){
 			public void setParameters(PreparedStatement pstmt) throws SQLException {
 				pstmt.setString(1,store.getUsr());
 				pstmt.setString(2,store.getName());
 				pstmt.setString(3,store.getAddr());
 				pstmt.setString(4,store.getPhone1());
-				pstmt.setString(5,currentPos);
+				pstmt.setString(5,currentMethod);
 			}
 		};
 		JdbcTemplate template = new JdbcTemplate();
@@ -31,11 +30,12 @@ public class StoreDao {
 	}
 	
 	public int save(final Employment empt) {
+		String currentMethod = new Object() {}.getClass().getEnclosingMethod().getName();
 		PreparedStatementSetter pss = new PreparedStatementSetter(){
 			public void setParameters(PreparedStatement pstmt) throws SQLException {
 				pstmt.setString(1,empt.getStoreSeq());
 				pstmt.setString(2,empt.getUsrSeq());
-				pstmt.setString(3,new Object() {}.getClass().getEnclosingMethod().getName());
+				pstmt.setString(3,currentMethod);
 			}	
 		};
 		JdbcTemplate template = new JdbcTemplate();		

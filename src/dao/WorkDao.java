@@ -15,30 +15,34 @@ import entity.WorkAndUsrName;
 
 public class WorkDao {
 	public int goToWorkDao(final Usr usr, final String storeSeq) {
+		String currentMethod = new Object() {}.getClass().getEnclosingMethod().getName();
 		PreparedStatementSetter pss = new PreparedStatementSetter(){
 			public void setParameters(PreparedStatement pstmt)
 					throws SQLException {
 				pstmt.setInt(1, Integer.parseInt(storeSeq));
 				pstmt.setString(2, usr.getSeq());
+				pstmt.setString(3, currentMethod);
 			}
 		};
 		
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "INSERT INTO TB_WORK(WRK_STO_SEQ, WRK_ALBA_SEQ, WRK_START) VALUES(?,?,NOW())";	
+		String sql = "INSERT INTO TB_WORK(WRK_STO_SEQ, WRK_ALBA_SEQ, WRK_START, CREATE_USR) VALUES(?,?,NOW(),?)";	
 		return jdbcTemplate.executeUpdate(sql, pss);
 	}
 	
 	public int leaveWorkDao(final Usr usr, final String storeSeq) {
+		String currentMethod = new Object() {}.getClass().getEnclosingMethod().getName();
 		PreparedStatementSetter pss = new PreparedStatementSetter(){
 			public void setParameters(PreparedStatement pstmt)
 					throws SQLException {
-				pstmt.setInt(1, Integer.parseInt(storeSeq));
-				pstmt.setString(2, usr.getSeq());
+				pstmt.setString(1, currentMethod);
+				pstmt.setInt(2, Integer.parseInt(storeSeq));
+				pstmt.setString(3, usr.getSeq());
 			}
 		};
 		
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "UPDATE TB_WORK SET WRK_STUS=1002, WRK_FINISH=NOW() WHERE WRK_STUS=1001 AND WRK_STO_SEQ=? AND WRK_ALBA_SEQ=?";	
+		String sql = "UPDATE TB_WORK SET WRK_STUS=1002, WRK_FINISH=NOW(), UPDATE_USR=? WHERE WRK_STUS=1001 AND WRK_STO_SEQ=? AND WRK_ALBA_SEQ=?";	
 		return jdbcTemplate.executeUpdate(sql, pss);
 	}
 	
@@ -165,38 +169,44 @@ public class WorkDao {
 	}
 
 	public int confirmGoToWork(Work work) {
+		String currentMethod = new Object() {}.getClass().getEnclosingMethod().getName();
 		PreparedStatementSetter pss = new PreparedStatementSetter(){
 		public void setParameters(PreparedStatement pstmt)
 				throws SQLException {
-				pstmt.setString(1, work.getSeq());
+				pstmt.setString(1, currentMethod);
+				pstmt.setString(2, work.getSeq());
 			}	
 		};
 		JdbcTemplate template = new JdbcTemplate();
-		String sql = "UPDATE TB_WORK SET WRK_START_CONFIRM=NOW(), WRK_STUS=1003 WHERE WRK_SEQ=?";
+		String sql = "UPDATE TB_WORK SET WRK_START_CONFIRM=NOW(), WRK_STUS=1003, UPDATE_USR=? WHERE WRK_SEQ=?";
 		return template.executeUpdate(sql, pss);
 	}
 
 	public int confirmBoth(Work work) {
+		String currentMethod = new Object() {}.getClass().getEnclosingMethod().getName();
 		PreparedStatementSetter pss = new PreparedStatementSetter(){
 			public void setParameters(PreparedStatement pstmt)
 					throws SQLException {
-				pstmt.setString(1, work.getSeq());
+				pstmt.setString(1, currentMethod);
+				pstmt.setString(2, work.getSeq());
 				}	
 			};
 		JdbcTemplate template = new JdbcTemplate();
-		String sql = "UPDATE TB_WORK SET WRK_START_CONFIRM=NOW(), WRK_FINISH_CONFIRM=NOW(), WRK_STUS=1004 WHERE WRK_SEQ=?";	
+		String sql = "UPDATE TB_WORK SET WRK_START_CONFIRM=NOW(), WRK_FINISH_CONFIRM=NOW(), WRK_STUS=1004, UPDATE_USR=? WHERE WRK_SEQ=?";	
 		return template.executeUpdate(sql, pss);
 	}
 
 	public int confirmLeaveWork(Work work) {
+		String currentMethod = new Object() {}.getClass().getEnclosingMethod().getName();
 		PreparedStatementSetter pss = new PreparedStatementSetter(){
 			public void setParameters(PreparedStatement pstmt)
 					throws SQLException {
-					pstmt.setString(1, work.getSeq());
+				pstmt.setString(1, currentMethod);
+				pstmt.setString(2, work.getSeq());
 				}	
 			};
 		JdbcTemplate template = new JdbcTemplate();
-		String sql = "UPDATE TB_WORK SET WRK_FINISH_CONFIRM=NOW(), WRK_STUS=1004 WHERE WRK_SEQ=?";	
+		String sql = "UPDATE TB_WORK SET WRK_FINISH_CONFIRM=NOW(), WRK_STUS=1004, UPDATE_USR=? WHERE WRK_SEQ=?";	
 		return template.executeUpdate(sql, pss);
 	}
 }
