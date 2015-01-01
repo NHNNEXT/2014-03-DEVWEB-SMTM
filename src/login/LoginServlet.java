@@ -10,18 +10,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import support.SessionUtils;
 import entity.Usr;
 import exception.PasswordMismatchException;
 import exception.UsrNotFoundException;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
+	public static final String SESSION_LOGIN_USR = "loginUsr";
 	private static final long serialVersionUID = 1L;
 	
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/login/login.jsp");
+		HttpSession session = request.getSession();
+		if (SessionUtils.isUsrLogin(session, SESSION_LOGIN_USR)) {
+			response.sendRedirect("/jsp");
+			return;
+		}
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/login/login.jsp");		
 		rd.forward(request, response);
 	}
 	
@@ -33,7 +41,7 @@ public class LoginServlet extends HttpServlet {
 			LoginBiz biz = new LoginBiz();
 			Usr usr = biz.loginBiz(loginId, loginPw);			
 			HttpSession session = request.getSession();
-			session.setAttribute("loginUsr", usr);
+			session.setAttribute(SESSION_LOGIN_USR, usr);
 			response.sendRedirect("/jsp/");
 		} catch (UsrNotFoundException e) {
 			forwardJSP(request, response, e.getMessage());

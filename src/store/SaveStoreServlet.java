@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import login.LoginServlet;
 import entity.Employment;
 import entity.Usr;
 
@@ -19,7 +20,7 @@ public class SaveStoreServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session= request.getSession();
-		Usr usr = (Usr)session.getAttribute("loginUsr");
+		Usr usr = (Usr)session.getAttribute(LoginServlet.SESSION_LOGIN_USR);
 		String userSeq = usr.getSeq();
 		String storeSeq = request.getParameter("storeSeq");
 		

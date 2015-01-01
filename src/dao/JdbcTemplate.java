@@ -6,9 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class JdbcTemplate {
+import exception.DataAccessException;
 
-	public int excuteUpdate(String sql, PreparedStatementSetter pss){
+public class JdbcTemplate {
+	public int excuteUpdate(String sql, PreparedStatementSetter pss) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int updatedRows = 0;
@@ -17,13 +18,16 @@ public class JdbcTemplate {
 			conn = ConnectManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pss.setParameters(pstmt);
-//			System.out.println("pstmt: "+pstmt); 
 			updatedRows = pstmt.executeUpdate();
-		} catch(SQLException e) {
-			System.out.println(e.toString());
+		} catch (SQLException e) {
+			throw new DataAccessException(e);
 		} finally {
-			if(pstmt != null) try { pstmt.close(); } catch (SQLException e) {}				
-			if(conn != null) try { conn.close(); } catch (SQLException e) {}				
+			try {
+				if(pstmt != null) { pstmt.close(); }			
+				if(conn != null) { conn.close(); }	
+			} catch (SQLException e) {
+				throw new DataAccessException(e);
+			}
 		}
 		return updatedRows;
 	}
@@ -52,10 +56,15 @@ public class JdbcTemplate {
 				list.add(rm.mapRows(rs));
 			}
 		} catch(SQLException e) {
-			System.out.println(e.toString());
+			throw new DataAccessException(e);
 		} finally {
-			if(pstmt != null) try { pstmt.close(); } catch (SQLException e) {}				
-			if(conn != null) try { conn.close(); } catch (SQLException e) {}				
+			try {
+				if(rs != null) { rs.close(); }
+				if(pstmt != null) { pstmt.close(); }			
+				if(conn != null) { conn.close(); }	
+			} catch (SQLException e) {
+				throw new DataAccessException(e);
+			}
 		}
 		return list;
 	}

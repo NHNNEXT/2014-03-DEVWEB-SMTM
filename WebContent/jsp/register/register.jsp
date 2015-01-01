@@ -26,20 +26,20 @@
 					<label class="col-sm-2 control-label">아이디</label>
 					<div class="col-sm-6">
 						<input type="text" class="form-control"
-							placeholder="4~45자의 문자를 입력해 주세요" name="registerId">
+							placeholder="4~45자의 문자를 입력해 주세요" name="registerId" value="${inputUsr.id}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class=" col-sm-2 control-label">비밀번호</label>
 					<div class="col-sm-6">
-						<input type="password" class="form-control" name="registerPw">
+						<input type="password" class="form-control" name="registerPw" value="${inputUsr.pw}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">이름</label>
 					<div class="col-sm-6">
 						<input type="text" class="form-control"
-							placeholder="4~45자의 문자를 입력해 주세요" name="registerName">
+							placeholder="4~45자의 문자를 입력해 주세요" name="registerName" value="${inputUsr.name}">
 					</div>
 				</div>
 				<div class="form-group">
@@ -75,7 +75,7 @@
 				<div class="form-group">
 					<label class=" col-sm-2 control-label">생일</label>
 					<div class="col-sm-6">
-						<input type="date" class="form-control" name="registerBirth">
+						<input type="date" class="form-control" name="registerBirth"  value="${inputUsr.birth}">
 					</div>
 				</div>
 

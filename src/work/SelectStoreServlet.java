@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import support.SessionUtils;
+import login.LoginServlet;
 import entity.Store;
 import entity.Usr;
 
@@ -19,8 +21,12 @@ public class SelectStoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
   
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session= request.getSession();
-		Usr usr = (Usr)session.getAttribute("loginUsr");
+		HttpSession session = request.getSession();
+		Usr usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
+		if (usr == null) {
+			response.sendRedirect("/jsp");
+			return;
+		}
 		
 		SelectStoreBiz biz = new SelectStoreBiz();
 		ArrayList<Store> storeList = biz.selectStoreBiz(usr);

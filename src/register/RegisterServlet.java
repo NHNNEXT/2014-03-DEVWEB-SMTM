@@ -1,7 +1,6 @@
 package register;
 
 import java.io.IOException;
-import java.util.Iterator;
 import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
@@ -13,16 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
-import org.omg.CORBA.Environment;
-
 import support.MyValidatorFactory;
 import entity.Usr;
 import exception.RegisterUsrException;
 import exception.SameUsrIdExistException;
 
-/**
- * Servlet implementation class RegisterServlet
- */
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -51,8 +45,8 @@ public class RegisterServlet extends HttpServlet {
 		Validator validator = MyValidatorFactory.createValidator();
 		Set<ConstraintViolation<Usr>> constraintViolations = validator.validate(usr);
 		if(constraintViolations.size() > 0) {
-			request.setAttribute("usr", usr);
-			String errorMessage = getErrorMessage(constraintViolations);
+			request.setAttribute("inputUsr", usr);
+			String errorMessage = MyValidatorFactory.getErrorMessage(constraintViolations);
 			forwardJSP(request, response, errorMessage);
 			return;
 		}
@@ -67,19 +61,6 @@ public class RegisterServlet extends HttpServlet {
 		} catch (RegisterUsrException e) {
 			forwardJSP(request, response, e.getMessage());
 		}
-	}
-	
-		
-	private String getErrorMessage(
-			Set<ConstraintViolation<Usr>> constraintViolations) {
-		String errorMessage = "";
-		
-		Iterator<ConstraintViolation<Usr>> violations = constraintViolations.iterator();
-		while(violations.hasNext()) {
-			ConstraintViolation<Usr> each = violations.next();
-			errorMessage += each.getPropertyPath() + "(입력 : " + each.getInvalidValue() +")" + " - " + each.getMessage() + "<br />";
-		}
-		return errorMessage;
 	}
 
 	private void forwardJSP(HttpServletRequest request,

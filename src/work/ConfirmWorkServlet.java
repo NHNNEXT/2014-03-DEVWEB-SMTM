@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import entity.Usr;
+import login.LoginServlet;
+import support.SessionUtils;
 import entity.Work;
 import entity.WorkAndUsrName;
 
@@ -24,10 +25,14 @@ public class ConfirmWorkServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
+		if (!SessionUtils.isUsrLogin(session, LoginServlet.SESSION_LOGIN_USR)) {
+			response.sendRedirect("/jsp");
+			return;
+		}
+		
 		ArrayList<WorkAndUsrName> workList = (ArrayList<WorkAndUsrName>)session.getAttribute("workList");
 		int idx = Integer.parseInt(request.getParameter("workIdx"));
 		Work work = workList.get(idx).getWork();		
-//		System.out.println(work);
 	
 		ConfirmWorkBiz biz = new ConfirmWorkBiz();
 		int updatedRows = biz.confirmWorkBiz(work);
@@ -39,13 +44,6 @@ public class ConfirmWorkServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/error.jsp");
 			rd.forward(request, response);
 		}
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 	}
 
 }
