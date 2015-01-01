@@ -12,13 +12,14 @@ import entity.Store;
 public class StoreDao {
 	
 	public int registerDao(final Store store) {
+		final String currentPos = new Object() {}.getClass().getEnclosingMethod().getName();
 		PreparedStatementSetter pss = new PreparedStatementSetter(){
 			public void setParameters(PreparedStatement pstmt) throws SQLException {
 				pstmt.setString(1,store.getUsr());
 				pstmt.setString(2,store.getName());
 				pstmt.setString(3,store.getAddr());
 				pstmt.setString(4,store.getPhone1());
-				pstmt.setString(5,new Object() {}.getClass().getEnclosingMethod().getName());
+				pstmt.setString(5,currentPos);
 			}
 		};
 		JdbcTemplate template = new JdbcTemplate();

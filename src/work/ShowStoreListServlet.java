@@ -28,6 +28,7 @@ public class ShowStoreListServlet extends HttpServlet {
 		ArrayList<Store> storeList = dao.selectStoreForManager(usr);
 
 		request.setAttribute("storeList", storeList);
+		
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/showStoreList.jsp");
 		rd.forward(request, response);	
 	}
