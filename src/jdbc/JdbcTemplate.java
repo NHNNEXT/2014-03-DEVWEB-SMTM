@@ -9,6 +9,12 @@ import java.util.ArrayList;
 import exception.DbAccessException;
 
 public class JdbcTemplate {
+
+	
+	public int executeUpdate(String sql, Object... parameters){
+		return executeUpdate(sql, createPreparedStatementSetter(parameters));	
+	}
+
 	public int executeUpdate(String sql, PreparedStatementSetter pss) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -32,15 +38,23 @@ public class JdbcTemplate {
 		return updatedRows;
 	}
 	
-	public <T> T executeQuery(String sql, PreparedStatementSetter pss, RowMapper<T> rm) {
-		ArrayList<T> list = executeQueryList(sql, pss, rm);
+	public <T> T executeQuery(String sql, RowMapper<T> rm, Object... parameters){
+		return executeQuery(sql, rm, createPreparedStatementSetter(parameters));
+	}
+	
+	public <T> T executeQuery(String sql, RowMapper<T> rm, PreparedStatementSetter pss) {
+		ArrayList<T> list = executeQueryList(sql, rm, pss);
 		if (list.isEmpty()) {
 			return null;
 		}
 		return list.get(0);
 	}
 	
-	public <T> ArrayList<T> executeQueryList(String sql, PreparedStatementSetter pss, RowMapper<T> rm) {
+	public <T> ArrayList<T> executeQueryList(String sql, RowMapper<T> rm, Object... parameters) {
+		return executeQueryList(sql, rm, createPreparedStatementSetter(parameters));
+	}
+	
+	public <T> ArrayList<T> executeQueryList(String sql, RowMapper<T> rm, PreparedStatementSetter pss) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
@@ -67,5 +81,17 @@ public class JdbcTemplate {
 			}
 		}
 		return list;
+	}
+	
+	
+	private PreparedStatementSetter createPreparedStatementSetter(Object... parameters) {
+		return new PreparedStatementSetter() {
+			@Override
+			public void setParameters(PreparedStatement pstmt) throws SQLException {
+				for (int i = 0; i < parameters.length; i++) {
+					pstmt.setObject(i + 1, parameters[i]);
+				}
+			}
+		};
 	}
 }

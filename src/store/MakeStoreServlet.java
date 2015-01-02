@@ -83,7 +83,7 @@ public class MakeStoreServlet extends HttpServlet {
 			HttpServletResponse response, String message)
 			throws ServletException, IOException {
 		request.setAttribute("errorMessage", message);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/register/register.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/makeStore.jsp");
 		rd.forward(request,response);
 	}
 
