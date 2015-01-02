@@ -12,12 +12,12 @@ public class StoreBiz {
 	public void register(Store store) throws SameStoreExistException, DaoRequestFailException {	
 		StoreDao dao = new StoreDao();
 		
-		Store findStore = dao.findStore(store.getName(), store.getAddr());
+		Store findStore = dao.retriveStoreForMake(store.getName(), store.getAddr());
 		if(findStore != null) {
 			throw new SameStoreExistException();
 		}
 
-		int updatedRows = dao.register(store);
+		int updatedRows = dao.insertStore(store);
 		if (updatedRows != 1) {
 			throw new DaoRequestFailException();
 		}
@@ -26,7 +26,7 @@ public class StoreBiz {
 	public ArrayList<Store> retrieve(String storeId, String usrSeq) throws DaoRequestFailException {
 		StoreDao dao = new StoreDao();
 		
-		ArrayList<Store> storeList = dao.retrieve(storeId, usrSeq);
+		ArrayList<Store> storeList = dao.retrieveStoreForEmpt(storeId, usrSeq);
 		if(storeList.isEmpty())
 			throw new DaoRequestFailException();
 		
@@ -35,11 +35,7 @@ public class StoreBiz {
 
 	public int save(Employment empt) throws DaoRequestFailException {
 		StoreDao dao = new StoreDao();
-		int updatedRows = 0;
-		
-		if(dao.retriveEmpt(empt)==null){
-			updatedRows = dao.save(empt);
-		}
+		int updatedRows = dao.insertEmpt(empt);
 		
 		if (updatedRows != 1) {
 			throw new DaoRequestFailException();

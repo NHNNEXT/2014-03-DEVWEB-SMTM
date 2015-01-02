@@ -25,7 +25,6 @@ public class WorkDao {
 	}
 		
 	public ArrayList<Work> selectWork(final String storeSeq) {
-		
 		RowMapper<Work> rm = new RowMapper<Work>(){
 			public Work mapRows(ResultSet rs) throws SQLException {
 				return new Work(rs.getString("WRK_SEQ"), rs.getString("WRK_STO_SEQ"), rs.getString("WRK_ALBA_SEQ"), rs.getString("WRK_STUS"), rs.getString("WRK_START"), rs.getString("WRK_FINISH"), rs.getString("USR_NM"));
@@ -36,8 +35,6 @@ public class WorkDao {
 		String sql = "SELECT W.WRK_SEQ, W.WRK_STO_SEQ, W.WRK_ALBA_SEQ, W.WRK_STUS, W.WRK_START, W.WRK_FINISH, U.USR_NM FROM TB_WORK W "
 				+ "JOIN TB_USR U "
 				+ "ON W.WRK_ALBA_SEQ = U.USR_SEQ WHERE (W.WRK_STO_SEQ = ? AND (W.WRK_STUS = 1001 OR W.WRK_STUS = 1002 OR W.WRK_STUS = 1003))";
-		
-
 		return jdbcTemplate.executeQueryList(sql, rm, storeSeq);
 	}
 	
@@ -80,21 +77,21 @@ public class WorkDao {
 		return jdbcTemplate.executeQuery(sql, rm, Integer.parseInt(seq));
 	}
 
-	public int confirmGoToWork(Work work) {
+	public int confirmGoToWork(final Work work) {
 		String currentMethod = new Object() {}.getClass().getEnclosingMethod().getName();
 		JdbcTemplate template = new JdbcTemplate();
 		String sql = "UPDATE TB_WORK SET WRK_START_CONFIRM=NOW(), WRK_STUS=1003, UPDATE_USR=? WHERE WRK_SEQ=?";
 		return template.executeUpdate(sql, currentMethod, work.getSeq());
 	}
 
-	public int confirmBoth(Work work) {
+	public int confirmBoth(final Work work) {
 		String currentMethod = new Object() {}.getClass().getEnclosingMethod().getName();
 		JdbcTemplate template = new JdbcTemplate();
 		String sql = "UPDATE TB_WORK SET WRK_START_CONFIRM=NOW(), WRK_FINISH_CONFIRM=NOW(), WRK_STUS=1004, UPDATE_USR=? WHERE WRK_SEQ=?";	
 		return template.executeUpdate(sql, currentMethod, work.getSeq());
 	}
 
-	public int confirmLeaveWork(Work work) {
+	public int confirmLeaveWork(final Work work) {
 		String currentMethod = new Object() {}.getClass().getEnclosingMethod().getName();
 		JdbcTemplate template = new JdbcTemplate();
 		String sql = "UPDATE TB_WORK SET WRK_FINISH_CONFIRM=NOW(), WRK_STUS=1004, UPDATE_USR=? WHERE WRK_SEQ=?";	
