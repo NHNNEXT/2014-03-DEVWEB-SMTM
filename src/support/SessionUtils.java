@@ -1,5 +1,7 @@
 package support;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpSession;
 
 public class SessionUtils {
@@ -15,6 +17,7 @@ public class SessionUtils {
 		Object object = session.getAttribute(key);
 		if (object == null)
 			return null;
+		
 		return (T)object;
 	}
 }

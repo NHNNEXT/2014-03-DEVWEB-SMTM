@@ -1,16 +1,16 @@
 package exception;
 
-public class RegisterUsrException extends Exception {
+public class SameStoreExistException extends Exception {
 	private static final long serialVersionUID = 1L;
-	private final String DEFAULT_ERROR_MESSAGE = "Usr 등록에 문제가 발생했습니다";
+	private final String DEFAULT_ERROR_MESSAGE = "이름과 주소가 모두 동일한 store가 이미 존재합니다.";
 	private String errorMessage;
 
-	public RegisterUsrException() {
+	public SameStoreExistException() {
 		super();
 		this.errorMessage = DEFAULT_ERROR_MESSAGE;
 	}
 	
-	public RegisterUsrException(String string) {
+	public SameStoreExistException(String string) {
 		super(string);
 		this.errorMessage = string;
 	}

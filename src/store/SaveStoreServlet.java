@@ -10,10 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import support.SessionUtils;
 import login.LoginServlet;
+import support.SessionUtils;
 import entity.Employment;
 import entity.Usr;
+import exception.DaoRequestFailException;
 import exception.InvalidAccessException;
 
 @WebServlet("/SaveStoreServlet")
@@ -31,17 +32,15 @@ public class SaveStoreServlet extends HttpServlet {
 		
 		Employment empt = new Employment(storeSeq, userSeq);
 		
-		StoreBiz storeBiz = new StoreBiz();
-		int updatedRows = storeBiz.save(empt);
-		
-		if(updatedRows > 0) {	
-			RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/makeSuccess.jsp");
-			rd.forward(request, response);
-		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("/jsp/error.jsp");
-			rd.forward(request, response);
+		try {
+			StoreBiz storeBiz = new StoreBiz();
+			storeBiz.save(empt);
+			response.sendRedirect("/jsp/store/success.jsp");
+		} catch (DaoRequestFailException e) {
+			request.setAttribute("errorMessage", e.getErrorMessage());
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/findStore.jsp");
+			rd.forward(request,response);
 		}
-	
 	}
 
 }

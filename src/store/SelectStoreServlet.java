@@ -15,6 +15,7 @@ import support.SessionUtils;
 import login.LoginServlet;
 import entity.Store;
 import entity.Usr;
+import exception.DaoRequestFailException;
 import exception.InvalidAccessException;
 
 @WebServlet("/SelectStoreServlet")
@@ -27,12 +28,17 @@ public class SelectStoreServlet extends HttpServlet {
 		if (usr == null)
 			throw new InvalidAccessException();
 
-		SelectStoreBiz biz = new SelectStoreBiz();
-		ArrayList<Store> storeList = biz.selectStore(usr);
+		try {
+			SelectStoreBiz biz = new SelectStoreBiz();
+			ArrayList<Store> storeList = biz.selectStore(usr);
+			
+			request.setAttribute("storeList", storeList);
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/selectStore.jsp");
+			rd.forward(request, response);	
+		} catch (DaoRequestFailException e) {
 
-		request.setAttribute("storeList", storeList);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/selectStore.jsp");
-		rd.forward(request, response);	
+		}
+
 	}
 
 }

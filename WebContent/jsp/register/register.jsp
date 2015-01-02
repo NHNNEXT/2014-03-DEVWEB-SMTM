@@ -19,7 +19,6 @@
 			<p>${errorMessage}</p>
 			</c:if>
 			
-
 			<form class="form-horizontal" action="/RegisterServlet" method="POST">
 				<div class="line"></div>
 				<div class="form-group">

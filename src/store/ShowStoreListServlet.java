@@ -31,6 +31,9 @@ public class ShowStoreListServlet extends HttpServlet {
 		StoreDao dao = new StoreDao();
 		ArrayList<Store> storeList = dao.selectStoreForManager(usr);
 
+		if (storeList.isEmpty()) {
+			
+		}
 		request.setAttribute("storeList", storeList);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/showStoreList.jsp");

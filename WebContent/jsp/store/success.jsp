@@ -6,6 +6,7 @@
 <html>
 <head>
 <%@ include file="/include/header.jspf"%>
+<META http-equiv="refresh" content="5;url=/jsp/index.jsp">
 </head>
 <body>
 
@@ -14,11 +15,7 @@
 			<%@ include file="/include/top.jspf"%>
 		</div>
 		<div class="section">
-			<div>
-				<p>성공</p>
-			</div>
-			<a href="/jsp/index.jsp">홈화면 으로</a> 
-			<a href="/LogoutServlet">로그아웃 하기 </a>
+			<p>요청 성공하였습니다. 5초 뒤, 홈 화면으로 이동합니다.</p>		
 		</div>
 	</div>
 </body>

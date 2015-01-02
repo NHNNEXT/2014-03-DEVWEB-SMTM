@@ -16,9 +16,6 @@ import support.SessionUtils;
 import entity.Work;
 import exception.InvalidAccessException;
 
-/**
- * Servlet implementation class ConfirmWorkServlet
- */
 @WebServlet("/ConfirmWorkServlet")
 public class ConfirmWorkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

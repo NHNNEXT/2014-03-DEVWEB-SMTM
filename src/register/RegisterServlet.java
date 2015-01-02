@@ -14,7 +14,7 @@ import javax.validation.Validator;
 
 import support.MyValidatorFactory;
 import entity.Usr;
-import exception.RegisterUsrException;
+import exception.DaoRequestFailException;
 import exception.SameUsrIdExistException;
 
 @WebServlet("/RegisterServlet")
@@ -55,10 +55,9 @@ public class RegisterServlet extends HttpServlet {
 			RegisterBiz registerBiz = new RegisterBiz();
 			registerBiz.registerBiz(usr);
 			response.sendRedirect("/jsp/register/registerSuccess.jsp");
-			
 		} catch (SameUsrIdExistException e) {
 			forwardJSP(request, response, e.getErrorMessage());
-		} catch (RegisterUsrException e) {
+		} catch (DaoRequestFailException e) {
 			forwardJSP(request, response, e.getErrorMessage());
 		}
 	}

@@ -11,10 +11,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import support.SessionUtils;
 import login.LoginServlet;
+import support.SessionUtils;
 import entity.Store;
 import entity.Usr;
+import exception.DaoRequestFailException;
 import exception.InvalidAccessException;
 
 @WebServlet("/RetrieveStoreListServlet")
@@ -40,16 +41,17 @@ public class RetrieveStoreListServlet extends HttpServlet {
 		String storeId = request.getParameter("storeId");
 		StoreBiz biz = new StoreBiz();
 		
-		ArrayList<Store> storeList = biz.retrieve(storeId, usrSeq);
-		
-		if(storeList !=null){
+		ArrayList<Store> storeList;
+		try {
+			storeList = biz.retrieve(storeId, usrSeq);
 			request.setAttribute("storeList",storeList);
-			
-		} else {
-			//alert 띄워주기
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/findStore.jsp");
+			rd.forward(request, response);
+		} catch (DaoRequestFailException e) {
+			request.setAttribute("errorMessage", e.getErrorMessage());
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/findStore.jsp");
+			rd.forward(request, response);
 		}
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/findStore.jsp");
-		rd.forward(request,response);
 	}
 
 }

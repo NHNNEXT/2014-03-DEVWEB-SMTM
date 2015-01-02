@@ -7,19 +7,25 @@ import org.hibernate.validator.constraints.NotBlank;
 
 public class Usr {
 	private String seq;
-	@NotNull
-	@Size(min = 4, max = 45)
+	
+	@NotNull @Size(min = 4, max = 45)
 	private String id;
-	@NotNull
-	@Size(min = 4, max = 45)
+	
+	@NotNull @Size(min = 4, max = 45)
 	private String pw;
-	@NotNull
-	@Size(max = 45)
+	
+	@NotNull @Size(max = 45)
 	private String name;
+	
 	@NotNull
 	private String type;
+	
+	@NotNull @Size(min = 4, max = 45)
 	private String phone1;
+	
+	@NotNull
 	private String gender;
+	
 	@NotBlank
 	private String birth;
 	

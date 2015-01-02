@@ -41,7 +41,7 @@ public class StoreDao {
 		};
 		JdbcTemplate template = new JdbcTemplate();		
 		
-		String sql = "INSERT INTO TB_EMPT(EMPT_STO_SEQ, EMPT_ALBA_SEQ,CREATE_USR) VALUES(?,?,?)";	
+		String sql = "INSERT INTO TB_EMPT(EMPT_STO_SEQ, EMPT_ALBA_SEQ, CREATE_USR) VALUES(?,?,?)";	
 		return template.executeUpdate(sql, pss);
 	}
 
@@ -129,5 +129,26 @@ public class StoreDao {
 				+ "WHERE STO_ONR_ID = ?";	
 
 		return jdbcTemplate.executeQueryList(sql, pss, rm);
+	}
+
+	public Store findStore(String name, String addr) {
+		PreparedStatementSetter pss = new PreparedStatementSetter(){
+			public void setParameters(PreparedStatement pstmt) throws SQLException {
+				pstmt.setString(1, name);
+				pstmt.setString(2, addr);	
+			}	
+		};
+		
+		RowMapper<Store> rm = new RowMapper<Store>(){
+			public Store mapRows(ResultSet rs) throws SQLException {
+				return new Store(rs.getString("STO_SEQ"), rs.getString("STO_ONR_ID"), rs.getString("STO_NM"), 
+								rs.getString("STO_ADDR"), rs.getString("STO_PHONE1"));
+			}
+		};
+		
+		JdbcTemplate template = new JdbcTemplate();
+		String sql = "SELECT * FROM TB_STO "
+				+"WHERE STO_NM = ? AND STO_ADDR = ?";
+		return template.executeQuery(sql, pss, rm);
 	}
 }
