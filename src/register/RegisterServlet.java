@@ -53,7 +53,7 @@ public class RegisterServlet extends HttpServlet {
 		
 		try {
 			RegisterBiz registerBiz = new RegisterBiz();
-			registerBiz.registerBiz(usr);
+			registerBiz.register(usr);
 			response.sendRedirect("/jsp/register/registerSuccess.jsp");
 		} catch (SameUsrIdExistException e) {
 			forwardJSP(request, response, e.getErrorMessage());

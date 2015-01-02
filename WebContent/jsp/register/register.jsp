@@ -86,6 +86,9 @@
 				</div>
 			</form>
 		</div>
+		<div class="footer">
+			<%@ include file="/include/footer.jspf"%>
+		</div>
 	</div>
 </body>
 </html>

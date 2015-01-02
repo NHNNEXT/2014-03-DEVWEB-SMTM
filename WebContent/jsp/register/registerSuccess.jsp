@@ -15,6 +15,9 @@
 		<div class="section">
 			<p>회원가입에 성공하였습니다. 5초 뒤, 홈 화면으로 이동합니다.</p>
 		</div>
+		<div class="footer">
+			<%@ include file="/include/footer.jspf"%>
+		</div>
 	</div>
 </body>
 </html>

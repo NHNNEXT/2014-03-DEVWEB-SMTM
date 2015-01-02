@@ -40,34 +40,37 @@
 						<div class="button">
 							<c:choose>
 								<c:when test="${loginUsr.type == '2001'}">
-									<td><a
+									<a
 										href="<c:url value="/GoToWorkServlet"><c:param name="storeSeq" value="${store.seq}" />
 				</c:url>">
-											<button>출근</button>
-									</a></td>
+											<button class="btn btn-default">출근</button>
+									</a>
 
-									<td><a
+									<a
 										href="<c:url value="/LeaveWorkServlet">
 				<c:param name="storeSeq" value="${store.seq}" />
 				</c:url>">
-											<button>퇴근</button>
-									</a></td>
+											<button class="btn btn-default">퇴근</button>
+									</a>
 
 								</c:when>
 								<c:otherwise>
-									<td><a
+									<a
 										href="<c:url value="/SelectWorkServlet">
 				<c:param name="storeSeq" value="${store.seq}" />
 				<c:param name="storeName" value="${store.name}" />
 				</c:url>">
-											<button>선택</button>
-									</a></td>
+											<button class="btn btn-default">선택</button>
+									</a>
 								</c:otherwise>
 							</c:choose>
 						</div>
 					</div>
 				</c:forEach>
 			</div>
+		</div>
+		<div class="footer">
+			<%@ include file="/include/footer.jspf"%>
 		</div>
 	</div>
 </body>

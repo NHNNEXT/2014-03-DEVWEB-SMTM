@@ -6,7 +6,7 @@ import exception.DaoRequestFailException;
 import exception.SameUsrIdExistException;
 
 public class RegisterBiz {
-	public void registerBiz(Usr usr) throws SameUsrIdExistException, DaoRequestFailException {		
+	public void register(Usr usr) throws SameUsrIdExistException, DaoRequestFailException {		
 		UsrDao dao = new UsrDao();
 		
 		Usr findUsr = dao.findUsrById(usr.getId());
