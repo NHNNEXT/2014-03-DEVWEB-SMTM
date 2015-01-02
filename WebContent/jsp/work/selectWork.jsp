@@ -28,9 +28,9 @@
 				<c:forEach items="${workList}" var="work" varStatus="status">
 					<tr>
 						<td></td>
-						<td>${work.usrName}</td>
-						<td>${work.work.start}</td>
-						<td>${work.work.finish}</td>
+						<td>${work.name}</td>
+						<td>${work.start}</td>
+						<td>${work.finish}</td>
 						<td><a
 							href="<c:url value="/ConfirmWorkServlet">
   		<c:param name="workIdx" value="${status.index}"/>
