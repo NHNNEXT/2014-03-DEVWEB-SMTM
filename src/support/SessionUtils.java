@@ -17,7 +17,6 @@ public class SessionUtils {
 		Object object = session.getAttribute(key);
 		if (object == null)
 			return null;
-		
 		return (T)object;
 	}
 }
