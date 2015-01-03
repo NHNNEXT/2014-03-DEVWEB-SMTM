@@ -43,6 +43,7 @@
 						</c:url>">
 							<button class="btn btn-default">선택</button>
 					</a>
+					<hr>
 				</div>
 			</c:forEach>
 		</div>

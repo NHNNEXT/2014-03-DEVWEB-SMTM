@@ -16,6 +16,7 @@ public class Work {
 	private String startConfirm;
 	private String finishConfirm;
 	private String name;
+	private int worktime;
 
 	public Work(String seq, String stoSeq, String albaSeq, String stus,
 			String start, String finish, String name) {
