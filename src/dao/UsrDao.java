@@ -8,7 +8,7 @@ import jdbc.RowMapper;
 import entity.Usr;
 
 public class UsrDao {
-	public Usr findUsrById(final String usrId) {
+	public Usr selectUsrById(final String usrId) {
 		RowMapper<Usr> rm = resultSetOfUsr();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "SELECT USR_SEQ ,USR_ID, USR_NM, USR_PW, USR_TYPE, USR_PHONE1, USR_GENDER, USR_BIRTH FROM TB_USR WHERE USR_ID=?";	

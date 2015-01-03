@@ -8,7 +8,7 @@ import exception.UsrNotFoundException;
 public class LoginBiz {
 	public Usr login(String loginId, String loginPw) throws UsrNotFoundException, PasswordMismatchException {
 		UsrDao dao = new UsrDao();
-		Usr usr = dao.findUsrById(loginId);
+		Usr usr = dao.selectUsrById(loginId);
 		
 		if(usr == null) {
 			throw new UsrNotFoundException();

@@ -9,7 +9,7 @@ public class RegisterBiz {
 	public void registerBiz(Usr usr) throws SameUsrIdExistException, DaoRequestFailException {		
 		UsrDao dao = new UsrDao();
 		
-		Usr findUsr = dao.findUsrById(usr.getId());
+		Usr findUsr = dao.selectUsrById(usr.getId());
 		if(findUsr != null) {
 			throw new SameUsrIdExistException();
 		}
