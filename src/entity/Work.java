@@ -1,5 +1,10 @@
 package entity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 import javax.validation.constraints.NotNull;
 
 public class Work {
@@ -17,9 +22,8 @@ public class Work {
 	private String startConfirm;
 	private String finishConfirm;
 	private String name;
-	private int worktime;
 
-	//name it can be storeName or userName; 
+	// name it can be storeName or userName;
 	public Work(String seq, String stoSeq, String albaSeq, String stus,
 			String start, String finish, String startConfirm,
 			String finishConfirm, String name) {
@@ -34,6 +38,7 @@ public class Work {
 		this.finishConfirm = finishConfirm;
 		this.name = name;
 	}
+
 	public Work(String seq, String stoSeq, String albaSeq, String stus,
 			String start, String finish, String startConfirm,
 			String finishConfirm) {
@@ -84,5 +89,14 @@ public class Work {
 				+ albaSeq + ", stus=" + stus + ", start=" + start + ", finish="
 				+ finish + ", startConfirm=" + startConfirm
 				+ ", finishConfirm=" + finishConfirm + "]";
+	}
+
+	public float getTime() throws ParseException {
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date finishTime = format.parse(finish);
+		Date startTime = format.parse(start);
+		float time = (finishTime.getTime() - startTime.getTime())/1000;
+		return time;
+
 	}
 }

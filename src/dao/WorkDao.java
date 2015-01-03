@@ -3,6 +3,7 @@ package dao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 import jdbc.JdbcTemplate;
 import jdbc.RowMapper;
@@ -102,6 +103,37 @@ public class WorkDao {
 		}.getClass().getEnclosingMethod().getName();
 		JdbcTemplate template = new JdbcTemplate();
 		return template.executeUpdate(sql, currentMethod, work.getSeq());
+	}
+
+	public List<Work> selectWorkForAlba(Usr usr) {
+		String key="STO_NM";
+		RowMapper<Work> rm = resultSetOfWorkAndStore(key);
+		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		String sql = "SELECT W.*, S.STO_NM FROM TB_WORK W JOIN TB_STO S ON W.WRK_STO_SEQ = S.STO_SEQ WHERE W.WRK_ALBA_SEQ = ?";
+		return jdbcTemplate.executeQueryList(sql, rm, usr.getSeq());
+	}
+
+
+	public List<Work> selectWorkForManager(String storeSeq) {
+		String key="USR_NM";
+		RowMapper<Work> rm = resultSetOfWorkAndStore(key);
+		JdbcTemplate jdbcTemplate = new JdbcTemplate();
+		String sql = "SELECT W.*, U.USR_NM FROM TB_WORK W JOIN TB_USR U ON W.WRK_ALBA_SEQ = U.USR_SEQ WHERE W.WRK_STO_SEQ = 10";
+		return jdbcTemplate.executeQueryList(sql, rm, storeSeq);
+	}
+	
+	private RowMapper<Work> resultSetOfWorkAndStore(String key) {
+		return new RowMapper<Work>() {
+			public Work mapRows(ResultSet rs) throws SQLException {
+				return new Work(rs.getString("WRK_SEQ"),
+						rs.getString("WRK_STO_SEQ"),
+						rs.getString("WRK_ALBA_SEQ"), rs.getString("WRK_STUS"),
+						rs.getString("WRK_START"), rs.getString("WRK_FINISH"),
+						rs.getString("WRK_START_CONFIRM"),
+						rs.getString("WRK_FINISH_CONFIRM"),
+						rs.getString(key));
+			}
+		};
 	}
 
 }

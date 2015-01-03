@@ -23,7 +23,7 @@
 					<td></td>
 				</tr>
 
-				<c:forEach items="${workList}" var="work" varStatus="status">
+<%-- 				<c:forEach items="${workList}" var="work" varStatus="status">
 					<tr>
 						<td></td>
 						<td>${work.start}</td>
@@ -31,7 +31,7 @@
 						<td>${work.startConfirm}</td>
 						<td>${work.finishConfirm}</td>
 					</tr>
-				</c:forEach>
+				</c:forEach> --%>
 			</table>
 		</div>
 	</div>

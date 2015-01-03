@@ -1,7 +1,11 @@
 package work;
 
 import java.io.IOException;
+import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -28,19 +32,28 @@ public class ShowWorkListServlet extends HttpServlet {
 		if (usr == null)
 			throw new InvalidAccessException();
 		
-		WorkDao dao = new WorkDao();
-		ArrayList<Work> workList = null;
+		ShowWorkListBiz biz = new ShowWorkListBiz();
+	    Map<String, List<Work>> workMap= null;
+		Map<String, Long> confirmedMoneyMap=null;
+		Map<String, Long> totalMoneyMap=null;
 		
 		if(request.getParameter("storeSeq")==null){
-			workList = dao.showWork(usr);
+			workMap = biz.selectWorkForAlba(usr);
 		}
 		else{
 			String storeSeq = request.getParameter("storeSeq");
-			//String storeName = request.getParameter("storeName");
-			
-			workList = dao.showWorkOfStore(storeSeq);
+			workMap = biz.selectWorkForManager(storeSeq);
 		}
-		request.setAttribute("workList", workList);
+		try {
+			confirmedMoneyMap = biz.calculateConfirmedMoney();
+			totalMoneyMap = biz.calculateTotalMoney();
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		
+		request.setAttribute("workList", workMap);
+		request.setAttribute("confirmedMoneyMap", confirmedMoneyMap);
+		request.setAttribute("totalMoneyMap", totalMoneyMap);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/showAlbaWork.jsp");
 		rd.forward(request, response);	
 	}
