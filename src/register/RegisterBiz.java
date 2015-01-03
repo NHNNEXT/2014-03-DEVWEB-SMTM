@@ -14,7 +14,7 @@ public class RegisterBiz {
 			throw new SameUsrIdExistException();
 		}
 		
-		int updatedRows = dao.register(usr);
+		int updatedRows = dao.insertUsr(usr);
 		if(updatedRows != 1) {
 			throw new DaoRequestFailException();
 		}

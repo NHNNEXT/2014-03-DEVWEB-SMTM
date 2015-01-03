@@ -14,7 +14,7 @@ public class UsrDao {
 		String sql = "SELECT USR_SEQ ,USR_ID, USR_NM, USR_PW, USR_TYPE, USR_PHONE1, USR_GENDER, USR_BIRTH FROM TB_USR WHERE USR_ID=?";	
 		return jdbcTemplate.executeQuery(sql, rm, usrId);
 	}
-	public int register(final Usr usr) {
+	public int insertUsr(final Usr usr) {
 		String currentMethod = new Object() {}.getClass().getEnclosingMethod().getName();
 		JdbcTemplate template = new JdbcTemplate();
 		String sql = "INSERT INTO TB_USR(USR_ID, USR_NM, USR_PW, USR_TYPE, USR_PHONE1, USR_GENDER, USR_BIRTH, CREATE_USR) VALUES(?,?,?,?,?,?,?,?)";	
