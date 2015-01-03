@@ -118,7 +118,7 @@ public class WorkDao {
 		String key="USR_NM";
 		RowMapper<Work> rm = resultSetOfWorkAndStore(key);
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "SELECT W.*, U.USR_NM FROM TB_WORK W JOIN TB_USR U ON W.WRK_ALBA_SEQ = U.USR_SEQ WHERE W.WRK_STO_SEQ = 10";
+		String sql = "SELECT W.*, U.USR_NM FROM TB_WORK W JOIN TB_USR U ON W.WRK_ALBA_SEQ = U.USR_SEQ WHERE W.WRK_STO_SEQ = ?";
 		return jdbcTemplate.executeQueryList(sql, rm, storeSeq);
 	}
 	

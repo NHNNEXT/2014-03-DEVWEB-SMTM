@@ -93,6 +93,9 @@ public class Work {
 
 	public float getTime() throws ParseException {
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		if (finish==null){
+			return 0;
+		}
 		Date finishTime = format.parse(finish);
 		Date startTime = format.parse(start);
 		float time = (finishTime.getTime() - startTime.getTime())/1000;

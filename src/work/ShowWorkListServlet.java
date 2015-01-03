@@ -51,7 +51,7 @@ public class ShowWorkListServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		request.setAttribute("workList", workMap);
+		request.setAttribute("workMap", workMap);
 		request.setAttribute("confirmedMoneyMap", confirmedMoneyMap);
 		request.setAttribute("totalMoneyMap", totalMoneyMap);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/showAlbaWork.jsp");

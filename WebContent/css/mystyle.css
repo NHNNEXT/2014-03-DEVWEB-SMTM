@@ -278,3 +278,7 @@ hr {
     left: 0;
   }
 }
+
+.btn .btn-default {
+  float: right;
+}
