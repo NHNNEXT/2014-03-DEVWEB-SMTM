@@ -13,59 +13,56 @@ import entity.User;
 
 public class StoreDao {
 	public int insertStore(final Store store) {
-		String currentMethod = new Object() {}.getClass().getEnclosingMethod().getName();
 		JdbcTemplate template = new JdbcTemplate();
-		String sql = "INSERT INTO TB_STO(STO_ONR_ID, STO_NM, STO_ADDR, STO_PHONE1,CREATE_USR) VALUES(?,?,?,?,?)";
-		return template.executeUpdate(sql, store.getUser(), store.getName(), store.getAddr(), store.getPhone(), currentMethod);
+		String sql = "INSERT INTO STORE(STO_USER_SEQ, STO_NAME, STO_ADDR, STO_PHONE) VALUES(?,?,?,?)";
+		return template.executeUpdate(sql, store.getUserSeq(), store.getName(), store.getAddr(), store.getPhone());
 	}
 	
 	public int insertEmpt(final Employment empt) {
-		String currentMethod = new Object() {}.getClass().getEnclosingMethod().getName();
 		JdbcTemplate template = new JdbcTemplate();
-		String sql = "INSERT INTO TB_EMPT(EMPT_STO_SEQ, EMPT_ALBA_SEQ, CREATE_USR) VALUES(?,?,?)";	
-		return template.executeUpdate(sql, empt.getStoreSeq(), empt.getUsrSeq(), currentMethod);
+		String sql = "INSERT INTO EMPLOYMENT(EMPT_STO_SEQ, EMPT_USER_SEQ) VALUES(?,?)";	
+		return template.executeUpdate(sql, empt.getStoreSeq(), empt.getUserSeq());
 	}
 	
 	public Store retriveStoreForMake(final String name,final String addr) {
 		RowMapper<Store> rm = resultSetOfStore();
 		JdbcTemplate template = new JdbcTemplate();
-		String sql = "SELECT * FROM TB_STO "
-				+"WHERE STO_NM = ? AND STO_ADDR = ?";
+		String sql = "SELECT * FROM STORE WHERE STO_NAME = ? AND STO_ADDR = ?";
 		return template.executeQuery(sql, rm, name, addr);
 	}
 	
-	public ArrayList<Store> retrieveStoreForEmpt(final String storeId, final String usrSeq) {
+	public ArrayList<Store> retrieveStoreForEmpt(final String storeSeq, final String userSeq) {
 		RowMapper<Store> rm = resultSetOfStore();
 		JdbcTemplate template = new JdbcTemplate();
-		String sql = "SELECT * FROM TB_STO "
+		String sql = "SELECT * FROM STORE "
 				+"WHERE STO_SEQ NOT IN "
-				+"(SELECT EMPT_STO_SEQ FROM TB_EMPT WHERE EMPT_ALBA_SEQ = ?) "
-				+"AND STO_NM LIKE ?";
-		return template.executeQueryList(sql, rm, Integer.parseInt(usrSeq), "%"+storeId+"%");
+				+"(SELECT EMPT_STO_SEQ FROM EMPLOYMENT WHERE EMPT_USER_SEQ = ?) "
+				+"AND STO_NAME LIKE ?";
+		return template.executeQueryList(sql, rm, Integer.parseInt(userSeq), "%"+storeSeq+"%");
 	}
 	
-	public ArrayList<Store> selectStoreForAlba(final User usr) {
+	public ArrayList<Store> selectStoreForAlba(final User user) {
 		RowMapper<Store> rm = resultSetOfStore();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "SELECT S.STO_SEQ, S.STO_ONR_ID, S.STO_NM, S.STO_ADDR, S.STO_PHONE1 "
-				+ "FROM TB_EMPT E "
-				+ "JOIN TB_STO S "
-				+ "ON E.EMPT_STO_SEQ = S.STO_SEQ WHERE E.EMPT_ALBA_SEQ = ?";	
-		return jdbcTemplate.executeQueryList(sql, rm, usr.getSeq());
+		String sql = "SELECT S.STO_SEQ, S.STO_USER_SEQ, S.STO_NAME, S.STO_ADDR, S.STO_PHONE "
+				+ "FROM EMPLOYMENT E "
+				+ "JOIN STORE S "
+				+ "ON E.EMPT_STO_SEQ = S.STO_SEQ WHERE E.EMPT_USER_SEQ = ?";	
+		return jdbcTemplate.executeQueryList(sql, rm, user.getSeq());
 	}
 	
-	public ArrayList<Store> selectStoreForManager(final User usr) {
+	public ArrayList<Store> selectStoreForManager(final User user) {
 		RowMapper<Store> rm = resultSetOfStore();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "SELECT STO_SEQ, STO_ONR_ID, STO_NM, STO_ADDR, STO_PHONE1 "
-				+ "FROM TB_STO WHERE STO_ONR_ID = ?";	
-		return jdbcTemplate.executeQueryList(sql, rm, usr.getId());
+		String sql = "SELECT STO_SEQ, STO_USER_SEQ, STO_NAME, STO_ADDR, STO_PHONE "
+				+ "FROM STORE WHERE STO_USER_SEQ = ?";	
+		return jdbcTemplate.executeQueryList(sql, rm, user.getSeq());
 	}
 
 	private RowMapper<Store> resultSetOfStore() {
 		return new RowMapper<Store>(){
 			public Store mapRows(ResultSet rs) throws SQLException {
-				return new Store(rs.getString("STO_SEQ"), rs.getString("STO_ONR_ID"), rs.getString("STO_NM"), rs.getString("STO_ADDR"), rs.getString("STO_PHONE1"));
+				return new Store(rs.getString("STO_SEQ"), rs.getString("STO_USER_SEQ"), rs.getString("STO_NAME"), rs.getString("STO_ADDR"), rs.getString("STO_PHONE"));
 			}
 		};
 	}

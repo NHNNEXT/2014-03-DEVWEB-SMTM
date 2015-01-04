@@ -6,20 +6,20 @@ public class Employment {
 	@NotNull
 	private String storeSeq;
 	@NotNull
-	private String UsrSeq;
+	private String UserSeq;
 	
-	public Employment(String storeSeq, String usrSeq) {
+	public Employment(String storeSeq, String userSeq) {
 		super();
 		this.storeSeq = storeSeq;
-		UsrSeq = usrSeq;
+		UserSeq = userSeq;
 	}
 
 	public String getStoreSeq() {
 		return storeSeq;
 	}
 
-	public String getUsrSeq() {
-		return UsrSeq;
+	public String getUserSeq() {
+		return UserSeq;
 	}
 	
 }

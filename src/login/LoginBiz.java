@@ -1,13 +1,13 @@
 package login;
 
-import dao.UsrDao;
+import dao.UserDao;
 import entity.User;
 import exception.PasswordMismatchException;
 import exception.UsrNotFoundException;
 
 public class LoginBiz {
 	public User login(String loginId, String loginPw) throws UsrNotFoundException, PasswordMismatchException {
-		UsrDao dao = new UsrDao();
+		UserDao dao = new UserDao();
 		User usr = dao.selectUsrById(loginId);
 		
 		if(usr == null) {

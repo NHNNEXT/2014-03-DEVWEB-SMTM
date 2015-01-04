@@ -11,126 +11,121 @@ import entity.User;
 import entity.Work;
 
 public class WorkDao {
-	public int insertGoToWork(final User usr, final String storeSeq) {
+	public int insertGoToWork(final User user, final String storeSeq) {
 		String currentMethod = new Object() {
 		}.getClass().getEnclosingMethod().getName();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "INSERT INTO TB_WORK(WRK_STO_SEQ, WRK_ALBA_SEQ, WRK_START, CREATE_USR) VALUES(?,?,NOW(),?)";
+		String sql = "INSERT INTO WORK(WORK_STO_SEQ, WORK_USER_SEQ, WORK_START) VALUES(?,?,NOW())";
 		return jdbcTemplate.executeUpdate(sql, Integer.parseInt(storeSeq),
-				usr.getSeq(), currentMethod);
+				user.getSeq(), currentMethod);
 	}
 
-	public int insertLeaveWork(final User usr, final String storeSeq) {
-		String currentMethod = new Object() {
-		}.getClass().getEnclosingMethod().getName();
+	public int insertLeaveWork(final User user, final String storeSeq) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "UPDATE TB_WORK SET WRK_STUS=1002, WRK_FINISH=NOW(), UPDATE_USR=? WHERE WRK_STUS=1001 AND WRK_STO_SEQ=? AND WRK_ALBA_SEQ=?";
-		return jdbcTemplate.executeUpdate(sql, currentMethod,
-				Integer.parseInt(storeSeq), usr.getSeq());
+		String sql = "UPDATE WORK SET WORK_STATUS=1002, WORK_FINISH=NOW() WHERE WORK_STATUS=1001 AND WORK_STO_SEQ=? AND WORK_USER_SEQ=?";
+		return jdbcTemplate.executeUpdate(sql, Integer.parseInt(storeSeq), user.getSeq());
 	}
 
 	public ArrayList<Work> selectWork(final String storeSeq) {
 		RowMapper<Work> rm = resultSetOfWorkAndName();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "SELECT W.*, U.USR_NM FROM TB_WORK W "
-				+ "JOIN TB_USR U "
-				+ "ON W.WRK_ALBA_SEQ = U.USR_SEQ WHERE (W.WRK_STO_SEQ = ? AND (W.WRK_STUS = 1001 OR W.WRK_STUS = 1002 OR W.WRK_STUS = 1003))";
+		String sql = "SELECT W.*, U.USER_NAME FROM WORK W "
+				+ "JOIN USER U "
+				+ "ON W.WORK_USER_SEQ = U.USER_SEQ WHERE (W.WORK_STO_SEQ = ? AND (W.WORK_STATUS = 1001 OR W.WORK_STATUS = 1002 OR W.WORK_STATUS = 1003))";
 		return jdbcTemplate.executeQueryList(sql, rm, storeSeq);
 	}
 
 	private RowMapper<Work> resultSetOfWorkAndName() {
 		return new RowMapper<Work>() {
 			public Work mapRows(ResultSet rs) throws SQLException {
-				return new Work(rs.getString("WRK_SEQ"),
-						rs.getString("WRK_STO_SEQ"),
-						rs.getString("WRK_ALBA_SEQ"), rs.getString("WRK_STUS"),
-						rs.getString("WRK_START"), rs.getString("WRK_FINISH"),
-						rs.getString("WRK_START_CONFIRM"),
-						rs.getString("WRK_FINISH_CONFIRM"),
-						rs.getString("USR_NM"));
+				return new Work(rs.getString("WORK_SEQ"),
+						rs.getString("WORK_STO_SEQ"),
+						rs.getString("WORK_USER_SEQ"), rs.getString("WORK_STATUS"),
+						rs.getString("WORK_START"), rs.getString("WORK_FINISH"),
+						rs.getString("WORK_START_CONFIRM"),
+						rs.getString("WORK_FINISH_CONFIRM"),
+						rs.getString("USER_NAME"));
 			}
 		};
 	}
 
-	public ArrayList<Work> showWork(final User usr) {
+	public ArrayList<Work> showWork(final User user) {
 		RowMapper<Work> rm = resultSetOfWork();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "SELECT * FROM TB_WORK WHERE WRK_ALBA_SEQ = ? AND WRK_STUS = 1004";
-		return jdbcTemplate.executeQueryList(sql, rm, usr.getSeq());
+		String sql = "SELECT * FROM WORK WHERE WORK_USER_SEQ = ? AND WORK_STATUS = 1004";
+		return jdbcTemplate.executeQueryList(sql, rm, user.getSeq());
 	}
 
 	public ArrayList<Work> showWorkOfStore(final String storeSeq) {
 		RowMapper<Work> rm = resultSetOfWork();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "SELECT * FROM TB_WORK WHERE WRK_STO_SEQ = ? AND WRK_STUS = 1004";
+		String sql = "SELECT * FROM WORK WHERE WORK_USER_SEQ = ? AND WORK_STATUS = 1004";
 		return jdbcTemplate.executeQueryList(sql, rm, storeSeq);
 	}
 
 	public Work getConfirmWorkData(final String seq) {
 		RowMapper<Work> rm = resultSetOfWork();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "SELECT WRK_SEQ, WRK_STO_SEQ, WRK_ALBA_SEQ, WRK_STUS, WRK_START, WRK_FINISH, WRK_START_CONFIRM, WRK_FINISH_CONFIRM FROM TB_WORK"
-				+ "WHERE WRK_SEQ = ?";
+		String sql = "SELECT WORK_SEQ, WORK_STO_SEQ, WORK_USER_SEQ, WORK_STATUS, WORK_START, WORK_FINISH, WORK_START_CONFIRM, WORK_FINISH_CONFIRM FROM WORK"
+				+ "WHERE WORK_SEQ = ?";
 		return jdbcTemplate.executeQuery(sql, rm, Integer.parseInt(seq));
 	}
 
 	private RowMapper<Work> resultSetOfWork() {
 		return new RowMapper<Work>() {
 			public Work mapRows(ResultSet rs) throws SQLException {
-				return new Work(rs.getString("WRK_SEQ"),
-						rs.getString("WRK_STO_SEQ"),
-						rs.getString("WRK_ALBA_SEQ"), rs.getString("WRK_STUS"),
-						rs.getString("WRK_START"), rs.getString("WRK_FINISH"),
-						rs.getString("WRK_START_CONFIRM"),
-						rs.getString("WRK_FINISH_CONFIRM"));
+				return new Work(rs.getString("WORK_SEQ"),
+						rs.getString("WORK_STO_SEQ"),
+						rs.getString("WORK_USER_SEQ"), rs.getString("WORK_STATUS"),
+						rs.getString("WORK_START"), rs.getString("WORK_FINISH"),
+						rs.getString("WORK_START_CONFIRM"),
+						rs.getString("WORK_FINISH_CONFIRM"));
 			}
 		};
 	}
 	public int confirmGoToWork(final Work work) {
-		String sql = "UPDATE TB_WORK SET WRK_START_CONFIRM=NOW(), WRK_STUS=1003, UPDATE_USR=? WHERE WRK_SEQ=?";
+		String sql = "UPDATE WORK SET WORK_START_CONFIRM=NOW(), WORK_STATUS=1003 WHERE WORK_SEQ=?";
 		return confirmWork(work, sql);
 	}
 	public int confirmLeaveWork(final Work work) {
-		String sql = "UPDATE TB_WORK SET WRK_FINISH_CONFIRM=NOW(), WRK_STUS=1004, UPDATE_USR=? WHERE WRK_SEQ=?";
+		String sql = "UPDATE WORK SET WORK_FINISH_CONFIRM=NOW(), WORK_STUS=1004 WHERE WORK_SEQ=?";
 		return confirmWork(work, sql);
 	}
 	public int confirmBoth(final Work work) {
-		String sql = "UPDATE TB_WORK SET WRK_START_CONFIRM=NOW(), WRK_FINISH_CONFIRM=NOW(), WRK_STUS=1004, UPDATE_USR=? WHERE WRK_SEQ=?";	
+		String sql = "UPDATE WORK SET WORK_START_CONFIRM=NOW(), WORK_FINISH_CONFIRM=NOW(), WORK_STUS=1004 WHERE WORK_SEQ=?";	
 		return confirmWork(work, sql);
 	}
 	public int confirmWork(final Work work, String sql){
-		String currentMethod = new Object() {
-		}.getClass().getEnclosingMethod().getName();
 		JdbcTemplate template = new JdbcTemplate();
-		return template.executeUpdate(sql, currentMethod, work.getSeq());
+		return template.executeUpdate(sql, work.getSeq());
 	}
 
-	public List<Work> selectWorkForAlba(User usr) {
-		String key="STO_NM";
+	public List<Work> selectWorkForAlba(User user) {
+		String key="STO_NAME";
 		RowMapper<Work> rm = resultSetOfWorkAndStore(key);
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "SELECT W.*, S.STO_NM FROM TB_WORK W JOIN TB_STO S ON W.WRK_STO_SEQ = S.STO_SEQ WHERE W.WRK_ALBA_SEQ = ?";
-		return jdbcTemplate.executeQueryList(sql, rm, usr.getSeq());
+		String sql = "SELECT W.*, S.STO_NAME FROM WORK W JOIN STORE S ON W.WORK_STO_SEQ = S.STO_SEQ WHERE W.WORK_USER_SEQ = ?";
+		return jdbcTemplate.executeQueryList(sql, rm, user.getSeq());
 	}
 
 
 	public List<Work> selectWorkForManager(String storeSeq) {
-		String key="USR_NM";
+		String key="USER_NAME";
 		RowMapper<Work> rm = resultSetOfWorkAndStore(key);
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "SELECT W.*, U.USR_NM FROM TB_WORK W JOIN TB_USR U ON W.WRK_ALBA_SEQ = U.USR_SEQ WHERE W.WRK_STO_SEQ = ?";
+		String sql = "SELECT W.*, U.USER_NAME FROM WORK W JOIN USER U ON W.WORK_USER_SEQ = U.USER_SEQ WHERE W.WORK_STO_SEQ = ?";
 		return jdbcTemplate.executeQueryList(sql, rm, storeSeq);
 	}
 	
 	private RowMapper<Work> resultSetOfWorkAndStore(String key) {
 		return new RowMapper<Work>() {
 			public Work mapRows(ResultSet rs) throws SQLException {
-				return new Work(rs.getString("WRK_SEQ"),
-						rs.getString("WRK_STO_SEQ"),
-						rs.getString("WRK_ALBA_SEQ"), rs.getString("WRK_STUS"),
-						rs.getString("WRK_START"), rs.getString("WRK_FINISH"),
-						rs.getString("WRK_START_CONFIRM"),
-						rs.getString("WRK_FINISH_CONFIRM"),
+				return new Work(rs.getString("WORK_SEQ"),
+						rs.getString("WORK_STO_SEQ"),
+						rs.getString("WORK_USER_SEQ"), rs.getString("WORK_STATUS"),
+						rs.getString("WORK_START"), rs.getString("WORK_FINISH"),
+						rs.getString("WORK_START_CONFIRM"),
+						rs.getString("WORK_FINISH_CONFIRM"),
 						rs.getString(key));
 			}
 		};
