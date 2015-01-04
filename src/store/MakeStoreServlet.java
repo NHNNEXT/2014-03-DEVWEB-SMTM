@@ -17,7 +17,7 @@ import login.LoginServlet;
 import support.MyValidatorFactory;
 import support.SessionUtils;
 import entity.Store;
-import entity.Usr;
+import entity.User;
 import exception.DaoRequestFailException;
 import exception.InvalidAccessException;
 import exception.SameStoreExistException;
@@ -41,7 +41,7 @@ public class MakeStoreServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Usr usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
+		User usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
 		if (usr == null)
 			throw new InvalidAccessException();
 

@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import dao.WorkDao;
-import entity.Usr;
+import entity.User;
 import entity.Work;
 
 public class ShowWorkListBiz {
@@ -16,7 +16,7 @@ public class ShowWorkListBiz {
 	Map<String, Long> totalMoneyMap = new HashMap<String, Long>();
 	int wage = 5580;
 
-	public Map<String, List<Work>> selectWorkForAlba(Usr usr) {
+	public Map<String, List<Work>> selectWorkForAlba(User usr) {
 		WorkDao dao = new WorkDao();
 		List<Work> worklist = dao.selectWorkForAlba(usr);
 		for (Work work : worklist) {
@@ -56,7 +56,7 @@ public class ShowWorkListBiz {
 	private Long valueOfConfirmedMoney(List<Work> list) throws ParseException {
 		long result = 0;
 		for (Work work : list) {
-			if (work.getStus().equals("1004"))
+			if (work.getStatus().equals("1004"))
 				result += Math.round(work.getTime() / 3600) * wage;
 		}
 		return result;

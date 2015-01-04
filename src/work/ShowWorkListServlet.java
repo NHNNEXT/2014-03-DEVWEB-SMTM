@@ -18,7 +18,7 @@ import javax.servlet.http.HttpSession;
 import support.SessionUtils;
 import login.LoginServlet;
 import dao.WorkDao;
-import entity.Usr;
+import entity.User;
 import entity.Work;
 import exception.InvalidAccessException;
 
@@ -28,7 +28,7 @@ public class ShowWorkListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		Usr usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
+		User usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
 		if (usr == null)
 			throw new InvalidAccessException();
 		

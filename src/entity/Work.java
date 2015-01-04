@@ -8,15 +8,14 @@ import java.util.Date;
 import javax.validation.constraints.NotNull;
 
 public class Work {
-
 	@NotNull
 	private String seq;
 	@NotNull
 	private String stoSeq;
 	@NotNull
-	private String albaSeq;
+	private String userSeq;
 	@NotNull
-	private String stus;
+	private String status;
 	private String start;
 	private String finish;
 	private String startConfirm;
@@ -24,14 +23,14 @@ public class Work {
 	private String name;
 
 	// name it can be storeName or userName;
-	public Work(String seq, String stoSeq, String albaSeq, String stus,
+	public Work(String seq, String stoSeq, String userSeq, String status,
 			String start, String finish, String startConfirm,
 			String finishConfirm, String name) {
 		super();
 		this.seq = seq;
 		this.stoSeq = stoSeq;
-		this.albaSeq = albaSeq;
-		this.stus = stus;
+		this.userSeq = userSeq;
+		this.status = status;
 		this.start = start;
 		this.finish = finish;
 		this.startConfirm = startConfirm;
@@ -39,10 +38,10 @@ public class Work {
 		this.name = name;
 	}
 
-	public Work(String seq, String stoSeq, String albaSeq, String stus,
+	public Work(String seq, String stoSeq, String userSeq, String status,
 			String start, String finish, String startConfirm,
 			String finishConfirm) {
-		this(seq, stoSeq, albaSeq, stus, start, finish, startConfirm,
+		this(seq, stoSeq, userSeq, status, start, finish, startConfirm,
 				finishConfirm, null);
 
 	}
@@ -55,12 +54,12 @@ public class Work {
 		return stoSeq;
 	}
 
-	public String getAlbaSeq() {
-		return albaSeq;
+	public String getUserSeq() {
+		return userSeq;
 	}
 
-	public String getStus() {
-		return stus;
+	public String getStatus() {
+		return status;
 	}
 
 	public String getStart() {
@@ -86,7 +85,7 @@ public class Work {
 	@Override
 	public String toString() {
 		return "Work [seq=" + seq + ", stoSeq=" + stoSeq + ", albaSeq="
-				+ albaSeq + ", stus=" + stus + ", start=" + start + ", finish="
+				+ userSeq + ", stus=" + status + ", start=" + start + ", finish="
 				+ finish + ", startConfirm=" + startConfirm
 				+ ", finishConfirm=" + finishConfirm + "]";
 	}

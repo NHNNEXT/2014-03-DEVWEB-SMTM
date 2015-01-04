@@ -7,11 +7,11 @@ import java.util.List;
 
 import jdbc.JdbcTemplate;
 import jdbc.RowMapper;
-import entity.Usr;
+import entity.User;
 import entity.Work;
 
 public class WorkDao {
-	public int insertGoToWork(final Usr usr, final String storeSeq) {
+	public int insertGoToWork(final User usr, final String storeSeq) {
 		String currentMethod = new Object() {
 		}.getClass().getEnclosingMethod().getName();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
@@ -20,7 +20,7 @@ public class WorkDao {
 				usr.getSeq(), currentMethod);
 	}
 
-	public int insertLeaveWork(final Usr usr, final String storeSeq) {
+	public int insertLeaveWork(final User usr, final String storeSeq) {
 		String currentMethod = new Object() {
 		}.getClass().getEnclosingMethod().getName();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
@@ -52,7 +52,7 @@ public class WorkDao {
 		};
 	}
 
-	public ArrayList<Work> showWork(final Usr usr) {
+	public ArrayList<Work> showWork(final User usr) {
 		RowMapper<Work> rm = resultSetOfWork();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "SELECT * FROM TB_WORK WHERE WRK_ALBA_SEQ = ? AND WRK_STUS = 1004";
@@ -105,7 +105,7 @@ public class WorkDao {
 		return template.executeUpdate(sql, currentMethod, work.getSeq());
 	}
 
-	public List<Work> selectWorkForAlba(Usr usr) {
+	public List<Work> selectWorkForAlba(User usr) {
 		String key="STO_NM";
 		RowMapper<Work> rm = resultSetOfWorkAndStore(key);
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
