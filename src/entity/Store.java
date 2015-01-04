@@ -7,8 +7,6 @@ public class Store {
 	private String seq;
 	@NotNull
 	private String userSeq;
-	@NotNull
-	@Size(min = 4, max = 45)
 	private String userName;
 	@NotNull
 	@Size(min = 4, max = 45)
@@ -69,8 +67,9 @@ public class Store {
 
 	@Override
 	public String toString() {
-		return "Store [usr=" + userSeq + ", name=" + name + ", addr=" + addr
-				+ ", phone1=" + phone + "]";
+		return "Store [seq=" + seq + ", userSeq=" + userSeq + ", userName="
+				+ userName + ", name=" + name + ", addr=" + addr + ", phone="
+				+ phone + "]";
 	}
 
 }

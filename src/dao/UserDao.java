@@ -11,7 +11,7 @@ public class UserDao {
 	public User selectUsrById(final String usrId) {
 		RowMapper<User> rm = resultSetOfUsr();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "SELECT * FROM USER WHERE USER_SEQ=?";	
+		String sql = "SELECT * FROM USER WHERE USER_ID=?";	
 		return jdbcTemplate.executeQuery(sql, rm, usrId);
 	}
 	public int insertUsr(final User user) {
