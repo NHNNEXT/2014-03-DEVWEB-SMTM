@@ -25,9 +25,11 @@ public class ExceptionFilter implements Filter {
 		try {
 			chain.doFilter(request, response);
 		} catch (DbAccessException e) {
+			e.printStackTrace();
 			forwardJSP(request, response, e.getErrorMessage());
 
 		} catch (InvalidAccessException e) {
+			e.printStackTrace();
 			forwardJSP(request, response, e.getErrorMessage());
 		}
 	}
