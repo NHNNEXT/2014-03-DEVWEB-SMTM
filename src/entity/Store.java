@@ -7,20 +7,31 @@ public class Store {
 	private String seq;
 	@NotNull
 	private String userSeq;
-	@NotNull @Size(min = 4, max = 45)
+	@NotNull
+	@Size(min = 4, max = 45)
 	private String userName;
-	@NotNull @Size(min = 4, max = 45)
+	@NotNull
+	@Size(min = 4, max = 45)
 	private String name;
-	@NotNull @Size(min = 4, max = 128)
+	@NotNull
+	@Size(min = 4, max = 128)
 	private String addr;
-	@NotNull @Size(min = 4, max = 16)
+	@NotNull
+	@Size(min = 4, max = 16)
 	private String phone;
 
-	public Store(String userSeq, String name, String addr, String phone, String userName) {
+	public Store(String userSeq, String name, String addr,
+			String phone) {
+		this(null, userSeq, name, addr, phone, null);
+	}
+	
+	public Store(String userSeq, String name, String addr, String phone,
+			String userName) {
 		this(null, userSeq, name, addr, phone, userName);
 	}
 
-	public Store(String seq, String userSeq, String name, String addr, String phone, String userName) {
+	public Store(String seq, String userSeq, String name, String addr,
+			String phone, String userName) {
 		super();
 		this.seq = seq;
 		this.userSeq = userSeq;
@@ -29,6 +40,8 @@ public class Store {
 		this.phone = phone;
 		this.userName = userName;
 	}
+
+
 
 	public String getSeq() {
 		return seq;

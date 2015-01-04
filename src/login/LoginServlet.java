@@ -38,9 +38,9 @@ public class LoginServlet extends HttpServlet {
 		
 		try {
 			LoginBiz biz = new LoginBiz();
-			User usr = biz.login(loginId, loginPw);			
+			User user = biz.login(loginId, loginPw);			
 			HttpSession session = request.getSession();
-			session.setAttribute(SESSION_LOGIN_USR, usr);
+			session.setAttribute(SESSION_LOGIN_USR, user);
 			response.sendRedirect("/jsp/");
 		} catch (UsrNotFoundException e) {
 			forwardJSP(request, response, e.getErrorMessage());

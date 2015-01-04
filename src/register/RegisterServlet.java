@@ -33,27 +33,29 @@ public class RegisterServlet extends HttpServlet {
 		String registerPw = request.getParameter("registerPw");
 		String registerName = request.getParameter("registerName");
 		String registerType = request.getParameter("registerType");
-		String registerPhone1_0 = request.getParameter("registerPhone1_0");
-		String registerPhone1_1 = request.getParameter("registerPhone1_1");
-		String registerPhone1_2 = request.getParameter("registerPhone1_2");
-		String registerPhone1 = registerPhone1_0+"-"+registerPhone1_1+"-"+registerPhone1_2;
+		String registerPhone0 = request.getParameter("registerPhone0");
+		String registerPhone1 = request.getParameter("registerPhone1");
+		String registerPhone2 = request.getParameter("registerPhone2");
+		String registerPhone = registerPhone0+"-"+registerPhone1+"-"+registerPhone2;
 		String registerGender = request.getParameter("registerGender");
-		String registerBirth = request.getParameter("registerBirth");		
+		String registerBirth = request.getParameter("registerBirth");
 		
-		User usr = new User(registerId, registerPw, registerName, registerType, registerPhone1, registerGender, registerBirth);
+		
+		User user = new User(registerId, registerPw, registerName, registerType, registerPhone, registerGender, registerBirth);
 		
 		Validator validator = MyValidatorFactory.createValidator();
-		Set<ConstraintViolation<User>> constraintViolations = validator.validate(usr);
+		Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
 		if(constraintViolations.size() > 0) {
 			String errorMessage = MyValidatorFactory.getErrorMessage(constraintViolations);
-			request.setAttribute("inputUsr", usr);
+			request.setAttribute("inputUsr", user);
 			forwardJSP(request, response, errorMessage);
 			return;
 		}
 		
+		
 		try {
 			RegisterBiz registerBiz = new RegisterBiz();
-			registerBiz.register(usr);
+			registerBiz.register(user);
 			response.sendRedirect("/jsp/register/registerSuccess.jsp");
 		} catch (SameUsrIdExistException e) {
 			forwardJSP(request, response, e.getErrorMessage());
