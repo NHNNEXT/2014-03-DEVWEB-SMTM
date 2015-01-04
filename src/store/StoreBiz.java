@@ -23,10 +23,10 @@ public class StoreBiz {
 		}
 	}
 	
-	public ArrayList<Store> retrieve(String storeId, String usrSeq) throws DaoRequestFailException {
+	public ArrayList<Store> retrieve(String storeName, String usrSeq) throws DaoRequestFailException {
 		StoreDao dao = new StoreDao();
 		
-		ArrayList<Store> storeList = dao.retrieveStoreForEmpt(storeId, usrSeq);
+		ArrayList<Store> storeList = dao.retrieveStoreForEmpt(storeName, usrSeq);
 		if(storeList.isEmpty())
 			throw new DaoRequestFailException();
 		

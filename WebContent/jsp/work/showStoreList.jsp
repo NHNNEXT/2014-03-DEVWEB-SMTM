@@ -21,7 +21,7 @@
 								<span>${store.name}</span>
 							</h3>
 						</div>
-						<div class="storeOwner">${store.usrName}</div>
+						<div class="storeOwner">${store.userName}</div>
 						<div class="storeAddr">${store.addr}</div>
 						<div class="storePhone">${store.phone}</div>
 						<a

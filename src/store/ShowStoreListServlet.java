@@ -30,7 +30,7 @@ public class ShowStoreListServlet extends HttpServlet {
 		
 		StoreDao dao = new StoreDao();
 		ArrayList<Store> storeList = dao.selectStoreForManager(usr);
-
+		System.out.println(storeList);
 		if (storeList.isEmpty()) {
 			
 		}

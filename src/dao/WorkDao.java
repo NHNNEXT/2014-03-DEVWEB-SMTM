@@ -12,12 +12,9 @@ import entity.Work;
 
 public class WorkDao {
 	public int insertGoToWork(final User user, final String storeSeq) {
-		String currentMethod = new Object() {
-		}.getClass().getEnclosingMethod().getName();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "INSERT INTO WORK(WORK_STO_SEQ, WORK_USER_SEQ, WORK_START) VALUES(?,?,NOW())";
-		return jdbcTemplate.executeUpdate(sql, Integer.parseInt(storeSeq),
-				user.getSeq(), currentMethod);
+		return jdbcTemplate.executeUpdate(sql, Integer.parseInt(storeSeq), user.getSeq());
 	}
 
 	public int insertLeaveWork(final User user, final String storeSeq) {
@@ -88,11 +85,11 @@ public class WorkDao {
 		return confirmWork(work, sql);
 	}
 	public int confirmLeaveWork(final Work work) {
-		String sql = "UPDATE WORK SET WORK_FINISH_CONFIRM=NOW(), WORK_STUS=1004 WHERE WORK_SEQ=?";
+		String sql = "UPDATE WORK SET WORK_FINISH_CONFIRM=NOW(), WORK_STATUS=1004 WHERE WORK_SEQ=?";
 		return confirmWork(work, sql);
 	}
 	public int confirmBoth(final Work work) {
-		String sql = "UPDATE WORK SET WORK_START_CONFIRM=NOW(), WORK_FINISH_CONFIRM=NOW(), WORK_STUS=1004 WHERE WORK_SEQ=?";	
+		String sql = "UPDATE WORK SET WORK_START_CONFIRM=NOW(), WORK_FINISH_CONFIRM=NOW(), WORK_STATUS=1004 WHERE WORK_SEQ=?";	
 		return confirmWork(work, sql);
 	}
 	public int confirmWork(final Work work, String sql){

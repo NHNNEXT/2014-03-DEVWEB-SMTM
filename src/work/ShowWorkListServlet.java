@@ -50,7 +50,7 @@ public class ShowWorkListServlet extends HttpServlet {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+		System.out.println(workMap);
 		request.setAttribute("workMap", workMap);
 		request.setAttribute("confirmedMoneyMap", confirmedMoneyMap);
 		request.setAttribute("totalMoneyMap", totalMoneyMap);

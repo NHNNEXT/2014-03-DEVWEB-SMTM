@@ -8,11 +8,11 @@ import jdbc.RowMapper;
 import entity.User;
 
 public class UserDao {
-	public User selectUsrById(final String usrId) {
+	public User selectUsrById(final String userId) {
 		RowMapper<User> rm = resultSetOfUsr();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "SELECT * FROM USER WHERE USER_SEQ=?";	
-		return jdbcTemplate.executeQuery(sql, rm, usrId);
+		String sql = "SELECT * FROM USER WHERE USER_ID=?";	
+		return jdbcTemplate.executeQuery(sql, rm, userId);
 	}
 	public int insertUsr(final User user) {
 		JdbcTemplate template = new JdbcTemplate();
