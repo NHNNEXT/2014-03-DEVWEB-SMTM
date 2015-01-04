@@ -15,7 +15,7 @@
 			<form class="search form-inline" action="/RetrieveStoreListServlet"
 				method="POST">
 				<div class="input-group">
-					<input class="form-control" type="text" name="storeId"
+					<input class="form-control" type="text" name="storeName"
 						placeholder="가게 이름"> <span class="input-group-btn">
 						<input class="btn btn-default" type="submit"
 						name="findStoreSubmit" value="검색">
@@ -37,9 +37,9 @@
 										id="inlineRadio3" value="${store.seq}">
 								</h3>
 							</div>
-							<div class="storeOwner">${store.usr}</div>
+							<div class="storeOwner">${store.usrName}</div>
 							<div class="storeAddr">${store.addr}</div>
-							<div class="storePhone">${store.phone1}</div>
+							<div class="storePhone">${store.phone}</div>
 							<hr>
 						</div>
 					</c:forEach>
