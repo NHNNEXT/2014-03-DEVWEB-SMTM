@@ -16,7 +16,7 @@ public class UserDao {
 	}
 	public int insertUsr(final User user) {
 		JdbcTemplate template = new JdbcTemplate();
-		String sql = "INSERT INTO USER(USER_ID, USER_NAME, USER_PW, USR_TYPE, USER_PHONE, USER_GENDER, USER_BIRTH) VALUES(?,?,?,?,?,?,?)";	
+		String sql = "INSERT INTO USER(USER_ID, USER_NAME, USER_PW, USER_TYPE, USER_PHONE, USER_GENDER, USER_BIRTH) VALUES(?,?,?,?,?,?,?)";	
 		return template.executeUpdate(sql, user.getId(), user.getName(), user.getPw(),
 				Integer.parseInt(user.getType()), user.getPhone(), user.getGender(), user.getBirth());
 	}
