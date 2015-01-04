@@ -42,7 +42,7 @@
 									<th><fmt:formatDate value="${start}" pattern="yyyy-MM-dd"/></th>
 									<th><fmt:formatDate value="${start}" pattern="HH:mm"/></th>
 									<c:choose>
-										<c:when test="${not empty work.finish}">
+										<c:when test="${work.status=='1002' || work.status=='1004'}">
 										<fmt:parseDate value="${work.finish}" var="finish" pattern="yyyy-MM-dd HH:mm:ss"/>
 										<th><fmt:formatDate value="${finish}" pattern="HH:mm"/></th>
 										</c:when>
@@ -57,7 +57,7 @@
 									</c:choose>
 									<c:choose>
 										<c:when test="${not empty work.finishConfirm}">
-										<fmt:parseDate var="finishConfirm" value="${work.finishConfirm}" pattern="yyyy-MM-dd HH:mm:ss"/>
+										<fmt:parseDate var="finishConfirm" value="${work.finishConfirm}" pattern="yyyy-MM-dd HH:mm:ss.0"/>
 										<th><fmt:formatDate value="${finishConfirm}" pattern="yy-MM-dd HH:mm"/></th>
 										</c:when>
 										<c:otherwise><th></th></c:otherwise>
@@ -67,8 +67,8 @@
 							</tbody>
 						</table>
 						<div class="wage">
-							<span class="highlight-color">승인 된 시급 : ${confirmedMoneyMap[workList.key]}</span>	
-							<span class="highlight-color">전체 일한 시급 : ${totalMoneyMap[workList.key]}</span>
+							<span class="highlight-color">승인 된 시급 : ${confirmedMoneyMap[workList.key]} 원</span><br>
+							<span class="highlight-color">전체 일한 시급 : ${totalMoneyMap[workList.key]} 원</span>
 						</div>
 						<hr>
 					</div>
