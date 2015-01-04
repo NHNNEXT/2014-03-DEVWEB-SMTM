@@ -14,7 +14,7 @@ import support.SessionUtils;
 import entity.User;
 import exception.InvalidAccessException;
 import exception.PasswordMismatchException;
-import exception.UsrNotFoundException;
+import exception.UserNotFoundException;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
 			HttpSession session = request.getSession();
 			session.setAttribute(SESSION_LOGIN_USR, usr);
 			response.sendRedirect("/jsp/");
-		} catch (UsrNotFoundException e) {
+		} catch (UserNotFoundException e) {
 			forwardJSP(request, response, e.getErrorMessage());
 		} catch (PasswordMismatchException e) {
 			forwardJSP(request, response, e.getErrorMessage());

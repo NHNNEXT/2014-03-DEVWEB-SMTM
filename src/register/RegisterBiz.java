@@ -3,15 +3,15 @@ package register;
 import dao.UserDao;
 import entity.User;
 import exception.DaoRequestFailException;
-import exception.SameUsrIdExistException;
+import exception.SameUserIdExistException;
 
 public class RegisterBiz {
-	public void register(User user) throws SameUsrIdExistException, DaoRequestFailException {		
+	public void register(User user) throws SameUserIdExistException, DaoRequestFailException {		
 		UserDao dao = new UserDao();
 		
 		User findUsr = dao.selectUsrById(user.getId());
 		if(findUsr != null) {
-			throw new SameUsrIdExistException();
+			throw new SameUserIdExistException();
 		}
 		
 		int updatedRows = dao.insertUsr(user);
