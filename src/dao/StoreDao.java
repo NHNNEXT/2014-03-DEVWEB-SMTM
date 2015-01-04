@@ -28,7 +28,7 @@ public class StoreDao {
 	public Store retriveStoreForMake(final String name, final String addr) {
 		RowMapper<Store> rm = resultSetOfStore();
 		JdbcTemplate template = new JdbcTemplate();
-		String sql = "SELECT * FROM STORE WHERE STO_NAME = ? AND STO_ADDR = ?";
+		String sql = "SELECT S.*, U.USER_NAME FROM STORE S JOIN USER U ON U.USER_SEQ = S.STO_USER_SEQ WHERE S.STO_NAME = ? AND S.STO_ADDR = ?";
 		return template.executeQuery(sql, rm, name, addr);
 	}
 
