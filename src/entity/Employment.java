@@ -5,9 +5,10 @@ import javax.validation.constraints.NotNull;
 public class Employment {
 	@NotNull
 	private String storeSeq;
+	
 	@NotNull
 	private String UserSeq;
-	
+
 	public Employment(String storeSeq, String userSeq) {
 		super();
 		this.storeSeq = storeSeq;
@@ -21,5 +22,5 @@ public class Employment {
 	public String getUserSeq() {
 		return UserSeq;
 	}
-	
+
 }

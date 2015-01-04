@@ -16,11 +16,10 @@ import dao.WorkDao;
 import entity.User;
 import exception.InvalidAccessException;
 
-
 @WebServlet("/GoToWorkServlet")
 public class GoToWorkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
- 
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
@@ -30,8 +29,8 @@ public class GoToWorkServlet extends HttpServlet {
 		String storeSeq = request.getParameter("storeSeq");
 		WorkDao dao = new WorkDao();
 		int updatedWorkSeq = dao.insertGoToWork(usr, storeSeq);
-		
-		if (updatedWorkSeq > 0){
+
+		if (updatedWorkSeq > 0) {
 			request.setAttribute("updatedWorkSeq", updatedWorkSeq);
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/index.jsp");
 			rd.forward(request, response);
@@ -40,5 +39,5 @@ public class GoToWorkServlet extends HttpServlet {
 			rd.forward(request, response);
 		}
 	}
-	
+
 }

@@ -25,19 +25,19 @@ public class ShowStoreListServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
-		if (usr == null) 
+		if (usr == null)
 			throw new InvalidAccessException();
-		
+
 		StoreDao dao = new StoreDao();
 		ArrayList<Store> storeList = dao.selectStoreForManager(usr);
 		System.out.println(storeList);
 		if (storeList.isEmpty()) {
-			
+
 		}
 		request.setAttribute("storeList", storeList);
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/showStoreList.jsp");
-		rd.forward(request, response);	
+		rd.forward(request, response);
 	}
 
 }

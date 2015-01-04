@@ -10,11 +10,11 @@ public class SessionUtils {
 		}
 		return false;
 	}
-	
+
 	public static <T> T getValue(HttpSession session, String key) {
 		Object object = session.getAttribute(key);
 		if (object == null)
 			return null;
-		return (T)object;
+		return (T) object;
 	}
 }

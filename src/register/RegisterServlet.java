@@ -20,15 +20,15 @@ import exception.SameUserIdExistException;
 @WebServlet("/RegisterServlet")
 public class RegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	
+
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/register/register.jsp");
 		rd.forward(request, response);
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
 		String registerId = request.getParameter("registerId");
 		String registerPw = request.getParameter("registerPw");
 		String registerName = request.getParameter("registerName");
@@ -36,23 +36,22 @@ public class RegisterServlet extends HttpServlet {
 		String registerPhone0 = request.getParameter("registerPhone0");
 		String registerPhone1 = request.getParameter("registerPhone1");
 		String registerPhone2 = request.getParameter("registerPhone2");
-		String registerPhone = registerPhone0+"-"+registerPhone1+"-"+registerPhone2;
+		String registerPhone = registerPhone0 + "-" + registerPhone1 + "-" + registerPhone2;
 		String registerGender = request.getParameter("registerGender");
 		String registerBirth = request.getParameter("registerBirth");
-		
-		
-		User user = new User(registerId, registerPw, registerName, registerType, registerPhone, registerGender, registerBirth);
-		
+
+		User user = new User(registerId, registerPw, registerName, registerType, registerPhone, registerGender,
+				registerBirth);
+
 		Validator validator = MyValidatorFactory.createValidator();
 		Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
-		if(constraintViolations.size() > 0) {
+		if (constraintViolations.size() > 0) {
 			String errorMessage = MyValidatorFactory.getErrorMessage(constraintViolations);
 			request.setAttribute("inputUsr", user);
 			forwardJSP(request, response, errorMessage);
 			return;
 		}
-		
-		
+
 		try {
 			RegisterBiz registerBiz = new RegisterBiz();
 			registerBiz.register(user);
@@ -64,12 +63,11 @@ public class RegisterServlet extends HttpServlet {
 		}
 	}
 
-	private void forwardJSP(HttpServletRequest request,
-			HttpServletResponse response, String message)
+	private void forwardJSP(HttpServletRequest request, HttpServletResponse response, String message)
 			throws ServletException, IOException {
 		request.setAttribute("errorMessage", message);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/register/register.jsp");
-		rd.forward(request,response);
+		rd.forward(request, response);
 	}
 
 }

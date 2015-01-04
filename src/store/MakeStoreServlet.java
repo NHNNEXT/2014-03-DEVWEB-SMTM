@@ -27,25 +27,23 @@ public class MakeStoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doGet(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		if (SessionUtils.isEmpty(session, LoginServlet.SESSION_LOGIN_USR))
 			throw new InvalidAccessException();
 
-		RequestDispatcher rd = request
-				.getRequestDispatcher("/jsp/store/makeStore.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/makeStore.jsp");
 		rd.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request,
-			HttpServletResponse response) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
 		HttpSession session = request.getSession();
 		User user = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
 		if (user == null)
 			throw new InvalidAccessException();
 		String registerUserSeq = user.getSeq();
-		
+
 		String registerName = request.getParameter("registerName");
 		String registerAddr = request.getParameter("registerAddr");
 		String registerPhone0 = request.getParameter("registerPhone0");
@@ -58,12 +56,10 @@ public class MakeStoreServlet extends HttpServlet {
 		Validator validator = MyValidatorFactory.createValidator();
 		Set<ConstraintViolation<Store>> constraintViolations = validator.validate(store);
 		if (constraintViolations.size() > 0) {
-			String errorMessage = MyValidatorFactory
-					.getErrorMessage(constraintViolations);
+			String errorMessage = MyValidatorFactory.getErrorMessage(constraintViolations);
 			request.setAttribute("inputStore", store);
 			request.setAttribute("errorMessage", errorMessage);
-			RequestDispatcher rd = request
-					.getRequestDispatcher("/jsp/store/makeStore.jsp");
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/makeStore.jsp");
 			rd.forward(request, response);
 			return;
 		}
@@ -78,13 +74,12 @@ public class MakeStoreServlet extends HttpServlet {
 			forwardJSP(request, response, e.getErrorMessage());
 		}
 	}
-	
-	private void forwardJSP(HttpServletRequest request,
-			HttpServletResponse response, String message)
+
+	private void forwardJSP(HttpServletRequest request, HttpServletResponse response, String message)
 			throws ServletException, IOException {
 		request.setAttribute("errorMessage", message);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/makeStore.jsp");
-		rd.forward(request,response);
+		rd.forward(request, response);
 	}
 
 }

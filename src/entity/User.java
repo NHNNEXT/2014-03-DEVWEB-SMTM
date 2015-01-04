@@ -7,28 +7,36 @@ import org.hibernate.validator.constraints.NotBlank;
 
 public class User {
 	private String seq;
-	
-	@NotNull @Size(min = 4, max = 24)
+
+	@NotNull
+	@Size(min = 4, max = 24)
 	private String id;
-	@NotNull @Size(min = 4, max = 24)
+	
+	@NotNull
+	@Size(min = 4, max = 24)
 	private String pw;
-	@NotNull @Size(min = 1, max = 45)
+	
+	@NotNull
+	@Size(min = 1, max = 45)
 	private String name;
+	
 	@NotNull
 	private String type;
-	@NotNull @Size(min = 4, max = 16)
+	
+	@NotNull
+	@Size(min = 4, max = 16)
 	private String phone;
+	
 	private String gender;
+	
 	@NotBlank
 	private String birth;
-	
-	public User(String id, String pw, String name, String type, String phone,
-			String gender, String birth) {
+
+	public User(String id, String pw, String name, String type, String phone, String gender, String birth) {
 		this(null, id, pw, name, type, phone, gender, birth);
 	}
-	
-	public User(String seq, String id, String pw, String name, String type,
-			String phone, String gender, String birth) {
+
+	public User(String seq, String id, String pw, String name, String type, String phone, String gender, String birth) {
 		super();
 		this.seq = seq;
 		this.id = id;
@@ -75,12 +83,11 @@ public class User {
 	public boolean checkPassword(String loginPw) {
 		return this.pw.equals(loginPw);
 	}
-	
+
 	@Override
 	public String toString() {
-		return "Usr [seq=" + seq + ", id=" + id + ", pw=" + pw + ", name="
-				+ name + ", type=" + type + ", phone1=" + phone + ", gender="
-				+ gender + ", birth=" + birth + "]";
+		return "Usr [seq=" + seq + ", id=" + id + ", pw=" + pw + ", name=" + name + ", type=" + type + ", phone1="
+				+ phone + ", gender=" + gender + ", birth=" + birth + "]";
 	}
 
 }

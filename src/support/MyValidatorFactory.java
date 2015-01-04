@@ -13,15 +13,15 @@ public class MyValidatorFactory {
 		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
 		return factory.getValidator();
 	}
-	
-	public static <T> String getErrorMessage(
-			Set<ConstraintViolation<T>> constraintViolations) {
+
+	public static <T> String getErrorMessage(Set<ConstraintViolation<T>> constraintViolations) {
 		String errorMessage = "";
-		
+
 		Iterator<ConstraintViolation<T>> violations = constraintViolations.iterator();
-		while(violations.hasNext()) {
+		while (violations.hasNext()) {
 			ConstraintViolation<T> each = violations.next();
-			errorMessage += each.getPropertyPath() + "(입력 : " + each.getInvalidValue() +")" + " - " + each.getMessage() + "<br />";
+			errorMessage += each.getPropertyPath() + "(입력 : " + each.getInvalidValue() + ")" + " - "
+					+ each.getMessage() + "<br />";
 		}
 		return errorMessage;
 	}

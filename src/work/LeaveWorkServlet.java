@@ -19,7 +19,7 @@ import exception.InvalidAccessException;
 @WebServlet("/LeaveWorkServlet")
 public class LeaveWorkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
@@ -29,8 +29,8 @@ public class LeaveWorkServlet extends HttpServlet {
 		String storeSeq = request.getParameter("storeSeq");
 		WorkDao dao = new WorkDao();
 		int updatedRows = dao.insertLeaveWork(usr, storeSeq);
-		
-		if (updatedRows > 0){
+
+		if (updatedRows > 0) {
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/index.jsp");
 			rd.forward(request, response);
 		} else {

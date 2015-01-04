@@ -26,25 +26,26 @@ public class RetrieveStoreListServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		if (SessionUtils.isEmpty(session, LoginServlet.SESSION_LOGIN_USR))
 			throw new InvalidAccessException();
-		
+
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/findStore.jsp");
-		rd.forward(request,response);
+		rd.forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session= request.getSession();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
+		HttpSession session = request.getSession();
 		User usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
 		if (usr == null)
 			throw new InvalidAccessException();
-		
+
 		String usrSeq = usr.getSeq();
 		String storeName = request.getParameter("storeName");
 		StoreBiz biz = new StoreBiz();
-		
+
 		ArrayList<Store> storeList;
 		try {
 			storeList = biz.retrieve(storeName, usrSeq);
-			request.setAttribute("storeList",storeList);
+			request.setAttribute("storeList", storeList);
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/findStore.jsp");
 			rd.forward(request, response);
 		} catch (DaoRequestFailException e) {
@@ -55,4 +56,3 @@ public class RetrieveStoreListServlet extends HttpServlet {
 	}
 
 }
-

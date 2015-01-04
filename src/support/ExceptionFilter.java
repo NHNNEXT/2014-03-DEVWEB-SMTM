@@ -19,9 +19,9 @@ public class ExceptionFilter implements Filter {
 
 	public void init(FilterConfig fConfig) throws ServletException {
 	}
-	
-	public void doFilter(ServletRequest request, ServletResponse response,
-			FilterChain chain) throws IOException, ServletException {
+
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException,
+			ServletException {
 		try {
 			chain.doFilter(request, response);
 		} catch (DbAccessException e) {
@@ -36,12 +36,11 @@ public class ExceptionFilter implements Filter {
 
 	public void destroy() {
 	}
-	
-	private void forwardJSP(ServletRequest request,
-			ServletResponse response, String message)
-			throws ServletException, IOException {
+
+	private void forwardJSP(ServletRequest request, ServletResponse response, String message) throws ServletException,
+			IOException {
 		request.setAttribute("errorMessage", message);
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/");
-		rd.forward(request,response);
+		rd.forward(request, response);
 	}
 }

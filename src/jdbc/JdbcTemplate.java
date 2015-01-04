@@ -10,17 +10,16 @@ import exception.DbAccessException;
 
 public class JdbcTemplate {
 
-	
-	public int executeUpdate(String sql, Object... parameters){
-		return executeUpdate(sql, createPreparedStatementSetter(parameters));	
+	public int executeUpdate(String sql, Object... parameters) {
+		return executeUpdate(sql, createPreparedStatementSetter(parameters));
 	}
 
 	public int executeUpdate(String sql, PreparedStatementSetter pss) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		int updatedRows = 0;
-		
-		try {	
+
+		try {
 			conn = ConnectManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pss.setParameters(pstmt);
@@ -29,19 +28,23 @@ public class JdbcTemplate {
 			throw new DbAccessException(e);
 		} finally {
 			try {
-				if(pstmt != null) { pstmt.close(); }			
-				if(conn != null) { conn.close(); }	
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
 			} catch (SQLException e) {
 				throw new DbAccessException(e);
 			}
 		}
 		return updatedRows;
 	}
-	
-	public <T> T executeQuery(String sql, RowMapper<T> rm, Object... parameters){
+
+	public <T> T executeQuery(String sql, RowMapper<T> rm, Object... parameters) {
 		return executeQuery(sql, rm, createPreparedStatementSetter(parameters));
 	}
-	
+
 	public <T> T executeQuery(String sql, RowMapper<T> rm, PreparedStatementSetter pss) {
 		ArrayList<T> list = executeQueryList(sql, rm, pss);
 		if (list.isEmpty()) {
@@ -49,41 +52,46 @@ public class JdbcTemplate {
 		}
 		return list.get(0);
 	}
-	
+
 	public <T> ArrayList<T> executeQueryList(String sql, RowMapper<T> rm, Object... parameters) {
 		return executeQueryList(sql, rm, createPreparedStatementSetter(parameters));
 	}
-	
+
 	public <T> ArrayList<T> executeQueryList(String sql, RowMapper<T> rm, PreparedStatementSetter pss) {
 		Connection conn = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ArrayList<T> list = new ArrayList<T>();
-		
-		try {	
+
+		try {
 			conn = ConnectManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			pss.setParameters(pstmt);
 			rs = pstmt.executeQuery();
-			
-			while (rs.next()){
+
+			while (rs.next()) {
 				list.add(rm.mapRows(rs));
 			}
-		} catch(SQLException e) {
+		} catch (SQLException e) {
 			throw new DbAccessException(e);
 		} finally {
 			try {
-				if(rs != null) { rs.close(); }
-				if(pstmt != null) { pstmt.close(); }			
-				if(conn != null) { conn.close(); }	
+				if (rs != null) {
+					rs.close();
+				}
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
 			} catch (SQLException e) {
 				throw new DbAccessException(e);
 			}
 		}
 		return list;
 	}
-	
-	
+
 	private PreparedStatementSetter createPreparedStatementSetter(Object... parameters) {
 		return new PreparedStatementSetter() {
 			@Override
@@ -95,7 +103,4 @@ public class JdbcTemplate {
 		};
 	}
 
-
-	
-	
 }

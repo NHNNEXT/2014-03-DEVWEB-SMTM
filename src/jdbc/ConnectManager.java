@@ -8,11 +8,11 @@ public class ConnectManager {
 		String address = "jdbc:mysql://10.73.45.134/PROD";
 		String id = "erin314";
 		String pw = "1234";
-		
-		try{
+
+		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			return DriverManager.getConnection(address, id, pw);
-		} catch (Exception e){
+		} catch (Exception e) {
 			System.out.println(e.toString());
 			return null;
 		}

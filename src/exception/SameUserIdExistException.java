@@ -3,14 +3,14 @@ package exception;
 public class SameUserIdExistException extends ErrorMessageException {
 	private static final long serialVersionUID = 1L;
 	private final String DEFAULT_ERROR_MESSAGE = "Id가 이미 존재합니다.";
-			
+
 	public SameUserIdExistException() {
 		super();
 		errorMessage = DEFAULT_ERROR_MESSAGE;
 	}
 
-	public SameUserIdExistException(String message, Throwable cause,
-			boolean enableSuppression, boolean writableStackTrace) {
+	public SameUserIdExistException(String message, Throwable cause, boolean enableSuppression,
+			boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 		errorMessage = message;
 	}

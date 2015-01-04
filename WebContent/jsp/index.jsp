@@ -13,14 +13,16 @@
 			<%@ include file="/include/top.jspf"%>
 		</div>
 		<div class="section">
-		<c:choose>
-			<c:when test="${not empty errorMessage}">
+			<c:choose>
+				<c:when test="${not empty errorMessage}">
 				에러 메시지 : ${errorMessage} <br>
 				자세한 사항은 010-1234-5678로 문의해주시기 바랍니다.
 			</c:when>
-			<c:otherwise>
+				<c:otherwise>
 				정직한 알바 시급 관리 서비스! 서비스는 로그인 후 이용 가능 합니다.
-				<div id="bs-carousel-4" class="carousel carousel-two slide" data-ride="carousel" data-interval="5000" data-pause="hover" data-wrap="true">
+				<div id="bs-carousel-4" class="carousel carousel-two slide"
+						data-ride="carousel" data-interval="5000" data-pause="hover"
+						data-wrap="true">
 						<!-- Bootstrap indicators. If you don't need indicators, remove the below section -->
 						<ol class="carousel-indicators">
 							<li data-target="#bs-carousel-4" data-slide-to="0" class="active"></li>
@@ -54,15 +56,16 @@
 							</div>
 						</div>
 						<!-- Carousel controls (arrows). If you don't need controls, remove the below section -->
-						<a class="left carousel-control" href="#bs-carousel-4" role="button" data-slide="prev">
-							<span class="fa fa-chevron-left"></span>
-						</a>
-						<a class="right carousel-control" href="#bs-carousel-4" role="button" data-slide="next">
-							<span class="fa fa-chevron-right"></span>
+						<a class="left carousel-control" href="#bs-carousel-4"
+							role="button" data-slide="prev"> <span
+							class="fa fa-chevron-left"></span>
+						</a> <a class="right carousel-control" href="#bs-carousel-4"
+							role="button" data-slide="next"> <span
+							class="fa fa-chevron-right"></span>
 						</a>
 					</div>
-			</c:otherwise>		
-		</c:choose>
+				</c:otherwise>
+			</c:choose>
 		</div>
 		<div class="footer">
 			<%@ include file="/include/footer.jspf"%>

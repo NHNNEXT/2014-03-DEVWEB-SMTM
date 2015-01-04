@@ -16,29 +16,32 @@
 		<div class="section">
 			<h2>회원가입</h2>
 			<c:if test="${not empty errorMessage}">
-			<p>${errorMessage}</p>
+				<p>${errorMessage}</p>
 			</c:if>
-			
+
 			<form class="form-horizontal" action="/RegisterServlet" method="POST">
 				<div class="line"></div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">아이디</label>
 					<div class="col-sm-6">
 						<input type="text" class="form-control"
-							placeholder="4~24자의 문자를 입력해 주세요" name="registerId" value="${inputUsr.id}">
+							placeholder="4~24자의 문자를 입력해 주세요" name="registerId"
+							value="${inputUsr.id}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class=" col-sm-2 control-label">비밀번호</label>
 					<div class="col-sm-6">
-						<input type="password" class="form-control" name="registerPw" value="${inputUsr.pw}">
+						<input type="password" class="form-control" name="registerPw"
+							value="${inputUsr.pw}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">이름</label>
 					<div class="col-sm-6">
 						<input type="text" class="form-control"
-							placeholder="4~45자의 문자를 입력해 주세요" name="registerName" value="${inputUsr.name}">
+							placeholder="4~45자의 문자를 입력해 주세요" name="registerName"
+							value="${inputUsr.name}">
 					</div>
 				</div>
 				<div class="form-group">
@@ -74,7 +77,8 @@
 				<div class="form-group">
 					<label class=" col-sm-2 control-label">생일</label>
 					<div class="col-sm-6">
-						<input type="date" class="form-control" name="registerBirth"  value="${inputUsr.birth}">
+						<input type="date" class="form-control" name="registerBirth"
+							value="${inputUsr.birth}">
 					</div>
 				</div>
 

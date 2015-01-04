@@ -9,11 +9,11 @@ import exception.DaoRequestFailException;
 import exception.SameStoreExistException;
 
 public class StoreBiz {
-	public void register(Store store) throws SameStoreExistException, DaoRequestFailException {	
+	public void register(Store store) throws SameStoreExistException, DaoRequestFailException {
 		StoreDao dao = new StoreDao();
-		
+
 		Store findStore = dao.retriveStoreForMake(store.getName(), store.getAddr());
-		if(findStore != null) {
+		if (findStore != null) {
 			throw new SameStoreExistException();
 		}
 
@@ -22,25 +22,25 @@ public class StoreBiz {
 			throw new DaoRequestFailException();
 		}
 	}
-	
+
 	public ArrayList<Store> retrieve(String storeName, String usrSeq) throws DaoRequestFailException {
 		StoreDao dao = new StoreDao();
-		
+
 		ArrayList<Store> storeList = dao.retrieveStoreForEmpt(storeName, usrSeq);
-		if(storeList.isEmpty())
+		if (storeList.isEmpty())
 			throw new DaoRequestFailException();
-		
+
 		return storeList;
 	}
 
 	public int save(Employment empt) throws DaoRequestFailException {
 		StoreDao dao = new StoreDao();
 		int updatedRows = dao.insertEmpt(empt);
-		
+
 		if (updatedRows != 1) {
 			throw new DaoRequestFailException();
 		}
-		
+
 		return updatedRows;
 	}
 }

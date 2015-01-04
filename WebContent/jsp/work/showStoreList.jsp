@@ -29,7 +29,7 @@
 							<c:param name="storeSeq" value="${store.seq}" />
 							<c:param name="storeName" value="${store.name}" />
 							</c:url>">
-								<button class="btn btn-default">선택</button>
+							<button class="btn btn-default">선택</button>
 						</a>
 						<hr>
 					</div>

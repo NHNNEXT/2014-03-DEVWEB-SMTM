@@ -17,16 +17,16 @@ import entity.Work;
 @WebServlet("/SelectWorkServlet")
 public class SelectWorkServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String storeSeq = request.getParameter("storeSeq");
 		String storeName = request.getParameter("storeName");
-		
+
 		if (storeSeq == null || storeName == null) {
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/");
 			rd.forward(request, response);
 		}
-		
+
 		WorkDao dao = new WorkDao();
 
 		HttpSession session = request.getSession();

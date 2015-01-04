@@ -21,17 +21,16 @@ import exception.InvalidAccessException;
 public class SaveStoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session= request.getSession();
-		User usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
-		if (usr == null)
-			throw new InvalidAccessException();
-		
-		String userSeq = usr.getSeq();
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException,
+			IOException {
+		HttpSession session = request.getSession();
+		User user = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
 		String storeSeq = request.getParameter("storeSeq");
-		
+		if (user == null || storeSeq == null)
+			throw new InvalidAccessException();
+
+		String userSeq = user.getSeq();
 		Employment empt = new Employment(storeSeq, userSeq);
-		
 		try {
 			StoreBiz storeBiz = new StoreBiz();
 			storeBiz.save(empt);
@@ -39,7 +38,7 @@ public class SaveStoreServlet extends HttpServlet {
 		} catch (DaoRequestFailException e) {
 			request.setAttribute("errorMessage", e.getErrorMessage());
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/findStore.jsp");
-			rd.forward(request,response);
+			rd.forward(request, response);
 		}
 	}
 

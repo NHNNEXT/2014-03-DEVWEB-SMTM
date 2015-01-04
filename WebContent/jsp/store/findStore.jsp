@@ -25,9 +25,9 @@
 
 			<form class="storeList" action="/SaveStoreServlet" method="POST">
 				<c:if test="${not empty errorMessage}">
-				<p>${errorMessage}</p>
+					<p>${errorMessage}</p>
 				</c:if>
-				
+
 				<c:if test="${not empty storeList}">
 					<c:forEach items="${storeList}" var="store">
 						<div class="store">

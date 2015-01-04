@@ -4,14 +4,13 @@ public class ErrorMessageException extends Exception {
 	private static final long serialVersionUID = 1L;
 	protected String errorMessage;
 	protected String DEFAULT_ERROR_MESSAGE = "에러";
-	
+
 	public ErrorMessageException() {
 		super();
 		this.errorMessage = DEFAULT_ERROR_MESSAGE;
 	}
 
-	public ErrorMessageException(String message, Throwable cause,
-			boolean enableSuppression, boolean writableStackTrace) {
+	public ErrorMessageException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 		this.errorMessage = message;
 	}
@@ -30,7 +29,7 @@ public class ErrorMessageException extends Exception {
 		super(cause);
 		this.errorMessage = DEFAULT_ERROR_MESSAGE;
 	}
-	
+
 	public String getErrorMessage() {
 		return errorMessage;
 	}

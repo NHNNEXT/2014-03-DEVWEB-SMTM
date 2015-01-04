@@ -13,22 +13,25 @@
 		</div>
 		<div class="section">
 			<c:if test="${not empty errorMessage}">
-			<p>${errorMessage}</p>
+				<p>${errorMessage}</p>
 			</c:if>
-			
-			<form class="form-horizontal" action="/MakeStoreServlet" method="POST">
+
+			<form class="form-horizontal" action="/MakeStoreServlet"
+				method="POST">
 				<div class="line"></div>
 				<div class="form-group">
 					<label class="col-sm-2 control-label">점포이름</label>
 					<div class="col-sm-6">
 						<input type="text" class="form-control"
-							placeholder="4~45자의 문자를 입력해 주세요" name="registerName" value="${inputStore.name}">
+							placeholder="4~45자의 문자를 입력해 주세요" name="registerName"
+							value="${inputStore.name}">
 					</div>
 				</div>
 				<div class="form-group">
 					<label class=" col-sm-2 control-label">주소</label>
 					<div class="col-sm-6">
-						<input type="text" class="form-control" name="registerAddr" value="${inputStore.addr}">
+						<input type="text" class="form-control" name="registerAddr"
+							value="${inputStore.addr}">
 					</div>
 				</div>
 				<div class="form-group">

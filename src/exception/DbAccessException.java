@@ -10,8 +10,7 @@ public class DbAccessException extends RuntimeException {
 		this.errorMessage = DEFAULT_ERROR_MESSAGE;
 	}
 
-	public DbAccessException(String message, Throwable cause,
-			boolean enableSuppression, boolean writableStackTrace) {
+	public DbAccessException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
 		super(message, cause, enableSuppression, writableStackTrace);
 		this.errorMessage = message;
 	}

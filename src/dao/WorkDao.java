@@ -35,12 +35,9 @@ public class WorkDao {
 	private RowMapper<Work> resultSetOfWorkAndName() {
 		return new RowMapper<Work>() {
 			public Work mapRows(ResultSet rs) throws SQLException {
-				return new Work(rs.getString("WORK_SEQ"),
-						rs.getString("WORK_STO_SEQ"),
-						rs.getString("WORK_USER_SEQ"), rs.getString("WORK_STATUS"),
-						rs.getString("WORK_START"), rs.getString("WORK_FINISH"),
-						rs.getString("WORK_START_CONFIRM"),
-						rs.getString("WORK_FINISH_CONFIRM"),
+				return new Work(rs.getString("WORK_SEQ"), rs.getString("WORK_STO_SEQ"), rs.getString("WORK_USER_SEQ"),
+						rs.getString("WORK_STATUS"), rs.getString("WORK_START"), rs.getString("WORK_FINISH"),
+						rs.getString("WORK_START_CONFIRM"), rs.getString("WORK_FINISH_CONFIRM"),
 						rs.getString("USER_NAME"));
 			}
 		};
@@ -71,59 +68,55 @@ public class WorkDao {
 	private RowMapper<Work> resultSetOfWork() {
 		return new RowMapper<Work>() {
 			public Work mapRows(ResultSet rs) throws SQLException {
-				return new Work(rs.getString("WORK_SEQ"),
-						rs.getString("WORK_STO_SEQ"),
-						rs.getString("WORK_USER_SEQ"), rs.getString("WORK_STATUS"),
-						rs.getString("WORK_START"), rs.getString("WORK_FINISH"),
-						rs.getString("WORK_START_CONFIRM"),
-						rs.getString("WORK_FINISH_CONFIRM"));
+				return new Work(rs.getString("WORK_SEQ"), rs.getString("WORK_STO_SEQ"), rs.getString("WORK_USER_SEQ"),
+						rs.getString("WORK_STATUS"), rs.getString("WORK_START"), rs.getString("WORK_FINISH"),
+						rs.getString("WORK_START_CONFIRM"), rs.getString("WORK_FINISH_CONFIRM"));
 			}
 		};
 	}
+
 	public int confirmGoToWork(final Work work) {
 		String sql = "UPDATE WORK SET WORK_START_CONFIRM=NOW(), WORK_STATUS=1003 WHERE WORK_SEQ=?";
 		return confirmWork(work, sql);
 	}
+
 	public int confirmLeaveWork(final Work work) {
 		String sql = "UPDATE WORK SET WORK_FINISH_CONFIRM=NOW(), WORK_STATUS=1004 WHERE WORK_SEQ=?";
 		return confirmWork(work, sql);
 	}
+
 	public int confirmBoth(final Work work) {
-		String sql = "UPDATE WORK SET WORK_START_CONFIRM=NOW(), WORK_FINISH_CONFIRM=NOW(), WORK_STATUS=1004 WHERE WORK_SEQ=?";	
+		String sql = "UPDATE WORK SET WORK_START_CONFIRM=NOW(), WORK_FINISH_CONFIRM=NOW(), WORK_STATUS=1004 WHERE WORK_SEQ=?";
 		return confirmWork(work, sql);
 	}
-	public int confirmWork(final Work work, String sql){
+
+	public int confirmWork(final Work work, String sql) {
 		JdbcTemplate template = new JdbcTemplate();
 		return template.executeUpdate(sql, work.getSeq());
 	}
 
 	public List<Work> selectWorkForAlba(User user) {
-		String key="STO_NAME";
+		String key = "STO_NAME";
 		RowMapper<Work> rm = resultSetOfWorkAndStore(key);
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "SELECT W.*, S.STO_NAME FROM WORK W JOIN STORE S ON W.WORK_STO_SEQ = S.STO_SEQ WHERE W.WORK_USER_SEQ = ?";
 		return jdbcTemplate.executeQueryList(sql, rm, user.getSeq());
 	}
 
-
 	public List<Work> selectWorkForManager(String storeSeq) {
-		String key="USER_NAME";
+		String key = "USER_NAME";
 		RowMapper<Work> rm = resultSetOfWorkAndStore(key);
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "SELECT W.*, U.USER_NAME FROM WORK W JOIN USER U ON W.WORK_USER_SEQ = U.USER_SEQ WHERE W.WORK_STO_SEQ = ?";
 		return jdbcTemplate.executeQueryList(sql, rm, storeSeq);
 	}
-	
+
 	private RowMapper<Work> resultSetOfWorkAndStore(String key) {
 		return new RowMapper<Work>() {
 			public Work mapRows(ResultSet rs) throws SQLException {
-				return new Work(rs.getString("WORK_SEQ"),
-						rs.getString("WORK_STO_SEQ"),
-						rs.getString("WORK_USER_SEQ"), rs.getString("WORK_STATUS"),
-						rs.getString("WORK_START"), rs.getString("WORK_FINISH"),
-						rs.getString("WORK_START_CONFIRM"),
-						rs.getString("WORK_FINISH_CONFIRM"),
-						rs.getString(key));
+				return new Work(rs.getString("WORK_SEQ"), rs.getString("WORK_STO_SEQ"), rs.getString("WORK_USER_SEQ"),
+						rs.getString("WORK_STATUS"), rs.getString("WORK_START"), rs.getString("WORK_FINISH"),
+						rs.getString("WORK_START_CONFIRM"), rs.getString("WORK_FINISH_CONFIRM"), rs.getString(key));
 			}
 		};
 	}

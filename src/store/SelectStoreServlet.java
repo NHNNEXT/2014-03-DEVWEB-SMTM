@@ -21,7 +21,7 @@ import exception.InvalidAccessException;
 @WebServlet("/SelectStoreServlet")
 public class SelectStoreServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-  
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
@@ -31,10 +31,10 @@ public class SelectStoreServlet extends HttpServlet {
 		try {
 			SelectStoreBiz biz = new SelectStoreBiz();
 			ArrayList<Store> storeList = biz.selectStore(usr);
-			
+
 			request.setAttribute("storeList", storeList);
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/selectStore.jsp");
-			rd.forward(request, response);	
+			rd.forward(request, response);
 		} catch (DaoRequestFailException e) {
 
 		}

@@ -24,15 +24,15 @@ public class ConfirmWorkServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		if (SessionUtils.isEmpty(session, LoginServlet.SESSION_LOGIN_USR))
 			throw new InvalidAccessException();
-		
+
 		ArrayList<Work> workList = (ArrayList<Work>) session.getAttribute("workList");
 		int idx = Integer.parseInt(request.getParameter("workIdx"));
-		Work work = workList.get(idx);		
-	
+		Work work = workList.get(idx);
+
 		ConfirmWorkBiz biz = new ConfirmWorkBiz();
 		int updatedRows = biz.confirmWork(work);
-		
-		if (updatedRows > 0){
+
+		if (updatedRows > 0) {
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/index.jsp");
 			rd.forward(request, response);
 		} else {
