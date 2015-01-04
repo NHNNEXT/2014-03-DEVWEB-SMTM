@@ -27,30 +27,17 @@
 							<c:choose>
 								<c:when test="${loginUsr.type == '2001'}">
 									<a
-<<<<<<< HEAD
 										href="<c:url value="/GoToWorkServlet"><c:param name="storeSeq" value="${store.seq}" />
 				</c:url>">
 										<button class="btn btn-default">출근</button>
-=======
-										href="<c:url value="/LeaveWorkServlet"><c:param name="storeSeq" value="${store.seq}" />
-										</c:url>">
-											<button class="btn btn-default btn-right">퇴근</button>
->>>>>>> 0156af6041e09fe4dc0ff30a2f4438ffc2374e43
 									</a>
+
 									<a
-<<<<<<< HEAD
 										href="<c:url value="/LeaveWorkServlet">
 				<c:param name="storeSeq" value="${store.seq}" />
 				</c:url>">
 										<button class="btn btn-default">퇴근</button>
-=======
-										href="<c:url value="/GoToWorkServlet"><c:param name="storeSeq" value="${store.seq}" />
-										</c:url>">
-											<button class="btn btn-default btn-right">출근</button>
->>>>>>> 0156af6041e09fe4dc0ff30a2f4438ffc2374e43
 									</a>
-
-									
 
 								</c:when>
 								<c:otherwise>
@@ -59,11 +46,7 @@
 				<c:param name="storeSeq" value="${store.seq}" />
 				<c:param name="storeName" value="${store.name}" />
 				</c:url>">
-<<<<<<< HEAD
 										<button class="btn btn-default">선택</button>
-=======
-											<button class="btn btn-default btn-right">선택</button>
->>>>>>> 0156af6041e09fe4dc0ff30a2f4438ffc2374e43
 									</a>
 								</c:otherwise>
 							</c:choose>
