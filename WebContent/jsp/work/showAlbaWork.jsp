@@ -66,8 +66,10 @@
 								</c:forEach>
 							</tbody>
 						</table>
-						승인 된 시급 : ${confirmedMoneyMap[workList.key]}<br>
-						전체 일한 시급 : ${totalMoneyMap[workList.key]}
+						<div class="wage">
+							<span class="highlight-color">승인 된 시급 : ${confirmedMoneyMap[workList.key]}</span>	
+							<span class="highlight-color">전체 일한 시급 : ${totalMoneyMap[workList.key]}</span>
+						</div>
 						<hr>
 					</div>
 				</c:forEach>

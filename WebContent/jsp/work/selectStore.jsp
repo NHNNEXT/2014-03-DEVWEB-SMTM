@@ -12,20 +12,6 @@
 			<%@ include file="/include/top.jspf"%>
 		</div>
 		<div class="section">
-			<div>
-				<div>이름 : ${loginUsr.name}</div>
-				<div>
-					직책 :
-					<c:choose>
-						<c:when test="${loginUsr.type == '2001'}"> 
-							알바	
-						</c:when>
-						<c:otherwise>
-							점주
-						</c:otherwise>
-					</c:choose>
-				</div>
-			</div>
 			<div class="storeList">
 				<c:forEach items="${storeList}" var="store" varStatus="status">
 					<div class="store">

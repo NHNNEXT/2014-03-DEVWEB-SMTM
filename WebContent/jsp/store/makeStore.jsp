@@ -12,8 +12,7 @@
 			<%@ include file="/include/top.jspf"%>
 		</div>
 		<div class="section">
-			<h1>점포 생성</h1>
-						<c:if test="${not empty errorMessage}">
+			<c:if test="${not empty errorMessage}">
 			<p>${errorMessage}</p>
 			</c:if>
 			

@@ -16,7 +16,6 @@
 			<c:if test="${not empty errorMessage}">
 				<p>${errorMessage}</p>
 			</c:if>
-			<h2>로그인</h2>
 			<form class="form-horizontal" action="/LoginServlet" method="POST">
 				<div class="line"></div>
 				<div class="form-group">

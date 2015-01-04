@@ -5,7 +5,14 @@
 	<ul class="info">
 		<c:choose>
 			<c:when test="${not empty loginUsr}">
-				<li><span class="glyphicon glyphicon-user" aria-hidden="true"></span><a>${loginUsr.getName()} 님</a></li>
+				<li>
+					<span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+					<c:choose>
+						<c:when test="${loginUsr.type == '2001'}">알바생 </c:when>
+						<c:otherwise>점주 </c:otherwise>
+					</c:choose>
+					${loginUsr.getName()} 님
+				</li>
 				<li><a href="/LogoutServlet">로그아웃</a></li>
 			</c:when>
 			<c:otherwise>
