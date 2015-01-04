@@ -8,27 +8,26 @@ public class Store {
 	@NotNull
 	private String userSeq;
 	@NotNull @Size(min = 4, max = 45)
+	private String userName;
+	@NotNull @Size(min = 4, max = 45)
 	private String name;
 	@NotNull @Size(min = 4, max = 128)
 	private String addr;
 	@NotNull @Size(min = 4, max = 16)
 	private String phone;
 
-	public Store(String name) {
-		this(null, name, null, null);
+	public Store(String userSeq, String name, String addr, String phone, String userName) {
+		this(null, userSeq, name, addr, phone, userName);
 	}
 
-	public Store(String userSeq, String name, String addr, String phone) {
-		this(null, userSeq, name, addr, phone);
-	}
-
-	public Store(String seq, String userSeq, String name, String addr, String phone) {
+	public Store(String seq, String userSeq, String name, String addr, String phone, String userName) {
 		super();
 		this.seq = seq;
 		this.userSeq = userSeq;
 		this.name = name;
 		this.addr = addr;
 		this.phone = phone;
+		this.userName = userName;
 	}
 
 	public String getSeq() {
@@ -49,6 +48,10 @@ public class Store {
 
 	public String getPhone() {
 		return phone;
+	}
+
+	public String getUserName() {
+		return userName;
 	}
 
 	@Override

@@ -1,7 +1,5 @@
 package support;
 
-import java.util.ArrayList;
-
 import javax.servlet.http.HttpSession;
 
 public class SessionUtils {

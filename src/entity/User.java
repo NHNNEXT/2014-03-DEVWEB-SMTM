@@ -12,7 +12,7 @@ public class User {
 	private String id;
 	@NotNull @Size(min = 4, max = 24)
 	private String pw;
-	@NotNull @Size(max = 45)
+	@NotNull @Size(min = 4, max = 45)
 	private String name;
 	@NotNull
 	private String type;

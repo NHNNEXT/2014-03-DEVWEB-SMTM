@@ -41,11 +41,12 @@ public class MakeStoreServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request,
 			HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		User usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
-		if (usr == null)
+		User user = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
+		if (user == null)
 			throw new InvalidAccessException();
-
-		String registerUsrId = usr.getId();
+		String registerUsrId = user.getId();
+		String registerUserName = user.getName();		
+		
 		String registerName = request.getParameter("registerName");
 		String registerAddr = request.getParameter("registerAddr");
 		String registerPhone1_0 = request.getParameter("registerPhone1_0");
@@ -53,7 +54,7 @@ public class MakeStoreServlet extends HttpServlet {
 		String registerPhone1_2 = request.getParameter("registerPhone1_2");
 		String registerPhone1 = registerPhone1_0 + "-" + registerPhone1_1 + "-" + registerPhone1_2;
 
-		Store store = new Store(registerUsrId, registerName, registerAddr,registerPhone1);
+		Store store = new Store(registerUsrId, registerName, registerAddr, registerPhone1, registerUserName);
 
 		Validator validator = MyValidatorFactory.createValidator();
 		Set<ConstraintViolation<Store>> constraintViolations = validator.validate(store);
