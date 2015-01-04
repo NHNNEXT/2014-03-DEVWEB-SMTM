@@ -56,9 +56,9 @@
 					<label class=" col-sm-2 control-label">핸드폰 번호</label>
 					<div class="col-sm-6">
 						<input type="text" class="form-control phone"
-							name="registerPhone1_0" value="010"> - <input type="text"
-							class="form-control phone" name="registerPhone1_1"> - <input
-							type="text" class="form-control phone" name="registerPhone1_2">
+							name="registerPhone0" value="010"> - <input type="text"
+							class="form-control phone" name="registerPhone1"> - <input
+							type="text" class="form-control phone" name="registerPhone2">
 					</div>
 				</div>
 				<div class="form-group">

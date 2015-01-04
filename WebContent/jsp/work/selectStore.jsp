@@ -20,9 +20,9 @@
 								<span>${store.name}</span>
 							</h3>
 						</div>
-						<div class="storeOwner">${store.usr}</div>
+						<div class="storeOwner">${store.usrName}</div>
 						<div class="storeAddr">${store.addr}</div>
-						<div class="storePhone">${store.phone1}</div>
+						<div class="storePhone">${store.phone}</div>
 						<div class="button">
 							<c:choose>
 								<c:when test="${loginUsr.type == '2001'}">
