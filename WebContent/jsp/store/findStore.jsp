@@ -37,7 +37,7 @@
 										id="inlineRadio3" value="${store.seq}">
 								</h3>
 							</div>
-							<div class="storeOwner">${store.usrName}</div>
+							<div class="storeOwner">${store.userName}</div>
 							<div class="storeAddr">${store.addr}</div>
 							<div class="storePhone">${store.phone}</div>
 							<hr>

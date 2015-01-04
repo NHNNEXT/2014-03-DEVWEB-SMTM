@@ -36,10 +36,7 @@ public class StoreDao {
 			final String userSeq) {
 		RowMapper<Store> rm = resultSetOfStore();
 		JdbcTemplate template = new JdbcTemplate();
-		String sql = "SELECT * FROM STORE "
-				+ "WHERE STO_SEQ NOT IN "
-				+ "(SELECT EMPT_STO_SEQ FROM EMPLOYMENT WHERE EMPT_USER_SEQ = ?) "
-				+ "AND STO_NAME LIKE ?";
+		String sql = "SELECT S.*, U.USER_NAME FROM STORE S JOIN USER U ON U.USER_SEQ = S.STO_USER_SEQ WHERE S.STO_SEQ NOT IN (SELECT EMPT_STO_SEQ FROM EMPLOYMENT WHERE EMPT_USER_SEQ = ?) AND S.STO_NAME LIKE ?";
 		return template.executeQueryList(sql, rm, Integer.parseInt(userSeq),
 				"%" + storeId + "%");
 	}
@@ -47,10 +44,10 @@ public class StoreDao {
 	public ArrayList<Store> selectStoreForAlba(final User user) {
 		RowMapper<Store> rm = resultSetOfStore();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "SELECT S.STO_SEQ, S.STO_USER_SEQ, S.STO_NAME, S.STO_ADDR, S.STO_PHONE "
-				+ "FROM EMPLOYMENT E "
-				+ "JOIN STORE S "
-				+ "ON E.EMPT_STO_SEQ = S.STO_SEQ WHERE E.EMPT_USER_SEQ = ?";
+		String sql = "SELECT S.*, U.USER_NAME FROM EMPLOYMENT E "
+				+ "JOIN STORE S ON E.EMPT_STO_SEQ = S.STO_SEQ "
+				+ "JOIN USER U ON U.USER_SEQ = S.STO_USER_SEQ "
+				+ "WHERE E.EMPT_USER_SEQ = ?";
 		return jdbcTemplate.executeQueryList(sql, rm, user.getSeq());
 	}
 

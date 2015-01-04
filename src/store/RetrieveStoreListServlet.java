@@ -38,12 +38,12 @@ public class RetrieveStoreListServlet extends HttpServlet {
 			throw new InvalidAccessException();
 		
 		String usrSeq = usr.getSeq();
-		String storeId = request.getParameter("storeId");
+		String storeName = request.getParameter("storeName");
 		StoreBiz biz = new StoreBiz();
 		
 		ArrayList<Store> storeList;
 		try {
-			storeList = biz.retrieve(storeId, usrSeq);
+			storeList = biz.retrieve(storeName, usrSeq);
 			request.setAttribute("storeList",storeList);
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/findStore.jsp");
 			rd.forward(request, response);
