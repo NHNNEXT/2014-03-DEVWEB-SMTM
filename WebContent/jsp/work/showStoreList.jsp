@@ -21,9 +21,9 @@
 								<span>${store.name}</span>
 							</h3>
 						</div>
-						<div class="storeOwner">${store.usr}</div>
+						<div class="storeOwner">${store.usrName}</div>
 						<div class="storeAddr">${store.addr}</div>
-						<div class="storePhone">${store.phone1}</div>
+						<div class="storePhone">${store.phone}</div>
 						<a
 							href="<c:url value="/ShowWorkListServlet">
 							<c:param name="storeSeq" value="${store.seq}" />
