@@ -27,17 +27,17 @@
 							<c:choose>
 								<c:when test="${loginUsr.type == '2001'}">
 									<a
+										href="<c:url value="/LeaveWorkServlet"><c:param name="storeSeq" value="${store.seq}" />
+										</c:url>">
+											<button class="btn btn-default btn-right">퇴근</button>
+									</a>
+									<a
 										href="<c:url value="/GoToWorkServlet"><c:param name="storeSeq" value="${store.seq}" />
-				</c:url>">
+										</c:url>">
 											<button class="btn btn-default btn-right">출근</button>
 									</a>
 
-									<a
-										href="<c:url value="/LeaveWorkServlet">
-				<c:param name="storeSeq" value="${store.seq}" />
-				</c:url>">
-											<button class="btn btn-default btn-right">퇴근</button>
-									</a>
+									
 
 								</c:when>
 								<c:otherwise>
