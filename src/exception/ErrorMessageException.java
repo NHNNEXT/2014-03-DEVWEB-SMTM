@@ -2,7 +2,7 @@ package exception;
 
 public class ErrorMessageException extends Exception {
 	private static final long serialVersionUID = 1L;
-	private String errorMessage;
+	protected String errorMessage;
 	protected String DEFAULT_ERROR_MESSAGE = "에러";
 	
 	public ErrorMessageException() {
