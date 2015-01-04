@@ -29,14 +29,14 @@
 									<a
 										href="<c:url value="/GoToWorkServlet"><c:param name="storeSeq" value="${store.seq}" />
 				</c:url>">
-											<button class="btn btn-default">출근</button>
+											<button class="btn btn-default btn-right">출근</button>
 									</a>
 
 									<a
 										href="<c:url value="/LeaveWorkServlet">
 				<c:param name="storeSeq" value="${store.seq}" />
 				</c:url>">
-											<button class="btn btn-default">퇴근</button>
+											<button class="btn btn-default btn-right">퇴근</button>
 									</a>
 
 								</c:when>
@@ -46,7 +46,7 @@
 				<c:param name="storeSeq" value="${store.seq}" />
 				<c:param name="storeName" value="${store.name}" />
 				</c:url>">
-											<button class="btn btn-default">선택</button>
+											<button class="btn btn-default btn-right">선택</button>
 									</a>
 								</c:otherwise>
 							</c:choose>

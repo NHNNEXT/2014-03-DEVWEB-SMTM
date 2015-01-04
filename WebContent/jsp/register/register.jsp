@@ -14,7 +14,6 @@
 			<%@ include file="/include/top.jspf"%>
 		</div>
 		<div class="section">
-			<h2>회원가입</h2>
 			<c:if test="${not empty errorMessage}">
 			<p>${errorMessage}</p>
 			</c:if>
