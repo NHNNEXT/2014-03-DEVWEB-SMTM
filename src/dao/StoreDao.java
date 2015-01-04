@@ -9,14 +9,14 @@ import jdbc.JdbcTemplate;
 import jdbc.RowMapper;
 import entity.Employment;
 import entity.Store;
-import entity.Usr;
+import entity.User;
 
 public class StoreDao {
 	public int insertStore(final Store store) {
 		String currentMethod = new Object() {}.getClass().getEnclosingMethod().getName();
 		JdbcTemplate template = new JdbcTemplate();
 		String sql = "INSERT INTO TB_STO(STO_ONR_ID, STO_NM, STO_ADDR, STO_PHONE1,CREATE_USR) VALUES(?,?,?,?,?)";
-		return template.executeUpdate(sql, store.getUsr(), store.getName(), store.getAddr(), store.getPhone1(), currentMethod);
+		return template.executeUpdate(sql, store.getUser(), store.getName(), store.getAddr(), store.getPhone(), currentMethod);
 	}
 	
 	public int insertEmpt(final Employment empt) {
@@ -44,7 +44,7 @@ public class StoreDao {
 		return template.executeQueryList(sql, rm, Integer.parseInt(usrSeq), "%"+storeId+"%");
 	}
 	
-	public ArrayList<Store> selectStoreForAlba(final Usr usr) {
+	public ArrayList<Store> selectStoreForAlba(final User usr) {
 		RowMapper<Store> rm = resultSetOfStore();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "SELECT S.STO_SEQ, S.STO_ONR_ID, S.STO_NM, S.STO_ADDR, S.STO_PHONE1 "
@@ -54,7 +54,7 @@ public class StoreDao {
 		return jdbcTemplate.executeQueryList(sql, rm, usr.getSeq());
 	}
 	
-	public ArrayList<Store> selectStoreForManager(final Usr usr) {
+	public ArrayList<Store> selectStoreForManager(final User usr) {
 		RowMapper<Store> rm = resultSetOfStore();
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
 		String sql = "SELECT STO_SEQ, STO_ONR_ID, STO_NM, STO_ADDR, STO_PHONE1 "

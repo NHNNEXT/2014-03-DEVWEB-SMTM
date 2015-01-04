@@ -8,7 +8,7 @@ public class ConfirmWorkBiz {
 	public int confirmWork(Work work) {
 		WorkDao dao = new WorkDao();
 		int updatedRows;
-		String stus = work.getStus();
+		String stus = work.getStatus();
 		
 		if(stus.equals("1001"))
 			updatedRows = dao.confirmGoToWork(work);

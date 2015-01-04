@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import support.SessionUtils;
-import entity.Usr;
+import entity.User;
 import exception.InvalidAccessException;
 import exception.PasswordMismatchException;
 import exception.UsrNotFoundException;
@@ -38,7 +38,7 @@ public class LoginServlet extends HttpServlet {
 		
 		try {
 			LoginBiz biz = new LoginBiz();
-			Usr usr = biz.login(loginId, loginPw);			
+			User usr = biz.login(loginId, loginPw);			
 			HttpSession session = request.getSession();
 			session.setAttribute(SESSION_LOGIN_USR, usr);
 			response.sendRedirect("/jsp/");

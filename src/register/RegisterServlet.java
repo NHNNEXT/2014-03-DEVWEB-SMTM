@@ -13,7 +13,7 @@ import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
 import support.MyValidatorFactory;
-import entity.Usr;
+import entity.User;
 import exception.DaoRequestFailException;
 import exception.SameUsrIdExistException;
 
@@ -40,10 +40,10 @@ public class RegisterServlet extends HttpServlet {
 		String registerGender = request.getParameter("registerGender");
 		String registerBirth = request.getParameter("registerBirth");		
 		
-		Usr usr = new Usr(registerId, registerPw, registerName, registerType, registerPhone1, registerGender, registerBirth);
+		User usr = new User(registerId, registerPw, registerName, registerType, registerPhone1, registerGender, registerBirth);
 		
 		Validator validator = MyValidatorFactory.createValidator();
-		Set<ConstraintViolation<Usr>> constraintViolations = validator.validate(usr);
+		Set<ConstraintViolation<User>> constraintViolations = validator.validate(usr);
 		if(constraintViolations.size() > 0) {
 			String errorMessage = MyValidatorFactory.getErrorMessage(constraintViolations);
 			request.setAttribute("inputUsr", usr);

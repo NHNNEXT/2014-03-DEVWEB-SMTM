@@ -5,7 +5,6 @@ import javax.validation.constraints.NotNull;
 public class Employment {
 	@NotNull
 	private String storeSeq;
-	
 	@NotNull
 	private String UsrSeq;
 	

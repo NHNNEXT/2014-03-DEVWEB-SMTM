@@ -25,7 +25,7 @@
 					<label class="col-sm-2 control-label">아이디</label>
 					<div class="col-sm-6">
 						<input type="text" class="form-control"
-							placeholder="4~45자의 문자를 입력해 주세요" name="registerId" value="${inputUsr.id}">
+							placeholder="4~24자의 문자를 입력해 주세요" name="registerId" value="${inputUsr.id}">
 					</div>
 				</div>
 				<div class="form-group">

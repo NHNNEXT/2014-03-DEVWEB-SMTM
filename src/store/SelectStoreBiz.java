@@ -4,11 +4,11 @@ import java.util.ArrayList;
 
 import dao.StoreDao;
 import entity.Store;
-import entity.Usr;
+import entity.User;
 import exception.DaoRequestFailException;
 
 public class SelectStoreBiz {
-	public ArrayList<Store> selectStore(Usr usr) throws DaoRequestFailException {
+	public ArrayList<Store> selectStore(User usr) throws DaoRequestFailException {
 		StoreDao dao = new StoreDao();
 		ArrayList<Store> storeList = null;
 		
