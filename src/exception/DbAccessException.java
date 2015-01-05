@@ -8,18 +8,6 @@ public class DbAccessException extends RuntimeException {
 		super(DEFAULT_ERROR_MESSAGE);
 	}
 
-	public DbAccessException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
-
-	public DbAccessException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
-	public DbAccessException(String message) {
-		super(message);
-	}
-
 	public DbAccessException(Throwable cause) {
 		super(cause);
 	}

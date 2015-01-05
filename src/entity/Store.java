@@ -27,10 +27,6 @@ public class Store {
 		this(null, userSeq, name, addr, phone, null);
 	}
 
-	public Store(String userSeq, String name, String addr, String phone, String userName) {
-		this(null, userSeq, name, addr, phone, userName);
-	}
-
 	public Store(String seq, String userSeq, String name, String addr, String phone, String userName) {
 		super();
 		this.seq = seq;
