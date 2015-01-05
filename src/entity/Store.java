@@ -1,6 +1,7 @@
 package entity;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 public class Store {
@@ -8,19 +9,19 @@ public class Store {
 
 	@NotNull
 	private String userSeq;
-
+	
 	private String userName;
 
 	@NotNull
-	@Size(min = 4, max = 45)
 	private String name;
 
 	@NotNull
 	@Size(min = 4, max = 128)
+	@Pattern(regexp="^[a-zA-Z0-9가-힣]*$")	
 	private String addr;
 
 	@NotNull
-	@Size(min = 4, max = 16)
+	@Pattern(regexp="^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$")	
 	private String phone;
 
 	public Store(String userSeq, String name, String addr, String phone) {

@@ -1,6 +1,7 @@
 package entity;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
@@ -10,21 +11,24 @@ public class User {
 
 	@NotNull
 	@Size(min = 4, max = 24)
+	@Pattern(regexp="^[a-zA-Z0-9]*$")	
 	private String id;
 	
 	@NotNull
 	@Size(min = 4, max = 24)
+	@Pattern(regexp="^[a-zA-Z0-9!@#$%]*$")	
 	private String pw;
 	
 	@NotNull
 	@Size(min = 1, max = 45)
+	@Pattern(regexp="^[a-zA-Z0-9가-힣]*$")	
 	private String name;
 	
 	@NotNull
 	private String type;
 	
 	@NotNull
-	@Size(min = 4, max = 16)
+	@Pattern(regexp="^[0-9]{2,3}-[0-9]{3,4}-[0-9]{4}$")
 	private String phone;
 	
 	private String gender;
