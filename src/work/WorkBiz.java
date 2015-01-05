@@ -27,15 +27,12 @@ public class WorkBiz {
 
 	public int confirmWork(Work work) throws DaoRequestFailException {
 		WorkDao dao = new WorkDao();
-		String stus = work.getStatus();
 		int updatedRows;
 
-		if (stus.equals("1001"))
+		if (work.isGoToWorkRequest())
 			updatedRows = dao.confirmGoToWork(work);
-
-		else if (stus.equals("1002"))
+		else if (work.isLeaveWorkRequest() || work.getStartConfirm() == null)
 			updatedRows = dao.confirmBoth(work);
-
 		else
 			updatedRows = dao.confirmLeaveWork(work);
 

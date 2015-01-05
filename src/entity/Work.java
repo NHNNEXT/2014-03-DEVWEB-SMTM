@@ -7,6 +7,11 @@ import java.util.Date;
 import javax.validation.constraints.NotNull;
 
 public class Work {
+	public static final String STATUS_GO_TO_WORK = "1001";
+	public static final String STATUS_LEAVE_WORK = "1002";
+	public static final String STATUS_GO_TO_WORK_CONFIRM = "1003";
+	public static final String STATUS_LEAVE_WORK_CONFIRM = "1004";
+	
 	@NotNull
 	private String seq;
 	
@@ -84,6 +89,22 @@ public class Work {
 
 	public String getName() {
 		return name;
+	}
+	
+	public boolean isGoToWorkRequest() {
+		return (this.status == STATUS_GO_TO_WORK) ? true : false;
+	}
+
+	public boolean isLeaveWorkRequest() {
+		return (this.status == STATUS_LEAVE_WORK) ? true : false;
+	}
+	
+	public boolean isGoToWorkConfirmed() {
+		return (this.status == STATUS_GO_TO_WORK_CONFIRM) ? true : false;
+	}
+	
+	public boolean isLeaveWorkConfirmed() {
+		return (this.status == STATUS_LEAVE_WORK_CONFIRM) ? true : false;
 	}
 
 	@Override
