@@ -33,7 +33,8 @@ public class LeaveWorkServlet extends HttpServlet {
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/success.jsp");
 			rd.forward(request, response);
 		} catch (DaoRequestFailException e) {
-			request.setAttribute("errorMessage", e.getErrorMessage());
+			e.printStackTrace();
+			request.setAttribute("errorMessage", e.getMessage());
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/selectStore.jsp");
 			rd.forward(request, response);
 		}

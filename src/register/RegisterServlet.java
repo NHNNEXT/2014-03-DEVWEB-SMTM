@@ -49,9 +49,11 @@ public class RegisterServlet extends HttpServlet {
 			registerBiz.register(user);
 			response.sendRedirect("/jsp/register/registerSuccess.jsp");
 		} catch (SameUserIdExistException e) {
-			forwardJSP(request, response, e.getErrorMessage());
+			e.printStackTrace();
+			forwardJSP(request, response, e.getMessage());
 		} catch (DaoRequestFailException e) {
-			forwardJSP(request, response, e.getErrorMessage());
+			e.printStackTrace();
+			forwardJSP(request, response, e.getMessage());
 		}
 	}
 

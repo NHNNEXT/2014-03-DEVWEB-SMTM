@@ -37,8 +37,9 @@ public class ConfirmWorkServlet extends HttpServlet {
 			session.removeAttribute("workList");
 			response.sendRedirect("/jsp/success.jsp");
 		} catch (DaoRequestFailException e) {
+			e.printStackTrace();
 			session.removeAttribute("workList");
-			request.setAttribute("errorMessage", e.getErrorMessage());
+			request.setAttribute("errorMessage", e.getMessage());
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/");
 			rd.forward(request, response);
 		}

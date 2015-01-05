@@ -59,9 +59,11 @@ public class MakeStoreServlet extends HttpServlet {
 			storeBiz.register(store);
 			response.sendRedirect("/jsp/success.jsp");
 		} catch (SameStoreExistException e) {
-			forwardJSP(request, response, e.getErrorMessage());
+			e.printStackTrace();
+			forwardJSP(request, response, e.getMessage());
 		} catch (DaoRequestFailException e) {
-			forwardJSP(request, response, e.getErrorMessage());
+			e.printStackTrace();
+			forwardJSP(request, response, e.getMessage());
 		}
 	}
 

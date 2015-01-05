@@ -43,9 +43,11 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute(SESSION_LOGIN_USR, user);
 			response.sendRedirect("/jsp/");
 		} catch (UserNotFoundException e) {
-			forwardJSP(request, response, e.getErrorMessage());
+			e.printStackTrace();
+			forwardJSP(request, response, e.getMessage());
 		} catch (PasswordMismatchException e) {
-			forwardJSP(request, response, e.getErrorMessage());
+			e.printStackTrace();
+			forwardJSP(request, response, e.getMessage());
 		}
 	}
 

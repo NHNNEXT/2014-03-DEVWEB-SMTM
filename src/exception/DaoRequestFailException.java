@@ -1,32 +1,10 @@
 package exception;
 
-public class DaoRequestFailException extends ErrorMessageException {
+public class DaoRequestFailException extends Exception {
 	private static final long serialVersionUID = 1L;
-	private final String DEFAULT_ERROR_MESSAGE = "db 요청에 기대하던 값을 받지 못하였습니다.";
+	private static final String DEFAULT_ERROR_MESSAGE = "db 요청에 기대하던 값을 받지 못하였습니다.";
 
 	public DaoRequestFailException() {
-		super();
-		errorMessage = DEFAULT_ERROR_MESSAGE;
-	}
-
-	public DaoRequestFailException(String message, Throwable cause, boolean enableSuppression,
-			boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-		errorMessage = message;
-	}
-
-	public DaoRequestFailException(String message, Throwable cause) {
-		super(message, cause);
-		errorMessage = message;
-	}
-
-	public DaoRequestFailException(String message) {
-		super(message);
-		errorMessage = message;
-	}
-
-	public DaoRequestFailException(Throwable cause) {
-		super(cause);
-		errorMessage = DEFAULT_ERROR_MESSAGE;
+		super(DEFAULT_ERROR_MESSAGE);
 	}
 }

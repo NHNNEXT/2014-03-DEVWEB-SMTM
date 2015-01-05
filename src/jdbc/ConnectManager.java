@@ -13,7 +13,7 @@ public class ConnectManager {
 			Class.forName("com.mysql.jdbc.Driver");
 			return DriverManager.getConnection(address, id, pw);
 		} catch (Exception e) {
-			System.out.println(e.toString());
+			e.printStackTrace();
 			return null;
 		}
 	}
