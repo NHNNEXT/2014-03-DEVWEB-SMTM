@@ -36,7 +36,7 @@
 					<label class=" col-sm-2 control-label">전화 번호</label>
 					<div class="col-sm-6">
 						<input type="text" class="form-control phone"
-							name="registerPhone0" value="010"> - <input type="text"
+							name="registerPhone0"> - <input type="text"
 							class="form-control phone" name="registerPhone1"> - <input
 							type="text" class="form-control phone" name="registerPhone2">
 					</div>

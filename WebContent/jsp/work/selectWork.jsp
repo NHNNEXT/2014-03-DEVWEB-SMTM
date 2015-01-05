@@ -39,7 +39,7 @@
 									<th><fmt:formatDate value="${start}" pattern="yyyy-MM-dd" /></th>
 									<th><fmt:formatDate value="${start}" pattern="HH:mm" /></th>
 									<c:choose>
-										<c:when test="${not empty work.finish}">
+										<c:when test="${work.status=='1002' || work.status=='1004'}">
 											<fmt:parseDate value="${work.finish}" var="finish" pattern="yyyy-MM-dd HH:mm:ss" />
 											<th><fmt:formatDate value="${finish}" pattern="HH:mm" /></th>
 										</c:when>

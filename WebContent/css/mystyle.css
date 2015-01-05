@@ -114,7 +114,7 @@
   }
 }
 .navbar-nav > li > a:after {
-  background: #a7463d;
+  background: #FCD419;
   bottom: 0;
   content: "";
   display: block;
@@ -136,7 +136,7 @@
 .blog .navbar-nav > .current_page_parent > a,
 .single-post .navbar-nav > .current_page_parent > a,
 .single-work .navbar-nav > .menu-item-work > a {
-  color: #a7463d;
+  color: #FCD419;
 }
 .blog .navbar-nav > .current_page_parent > a:after,
 .single-post .navbar-nav > .current_page_parent > a:after,

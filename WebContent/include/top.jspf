@@ -26,6 +26,9 @@
 <div class="navbar">
 	<div class="navbar-header">
 		<h2 class="navbar-page-title">
+			<span class="icon-box-8-icon">
+				<span class="glyphicon glyphicon-briefcase"></span>
+			</span>
 			<span class="home"><a href="/jsp/index.jsp">SMTM</a></span>
 		</h2>
 	</div>
