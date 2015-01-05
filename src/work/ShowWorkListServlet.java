@@ -37,8 +37,9 @@ public class ShowWorkListServlet extends HttpServlet {
 
 		workMap = biz.selectWork(usr, storeSeq);
 		try {
-			confirmedMoneyMap = biz.calculateConfirmedMoney();
-			totalMoneyMap = biz.calculateTotalMoney();
+			biz.calculate();
+			confirmedMoneyMap = biz.getConfirmedMoneyMap();
+			totalMoneyMap = biz.getTotalMoneyMap();
 		} catch (ParseException e) {
 			e.printStackTrace();
 			request.setAttribute("errorMessage", "날짜 형식에 문제가 발생할 수 있습니다.");

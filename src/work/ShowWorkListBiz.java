@@ -34,18 +34,16 @@ public class ShowWorkListBiz {
 		List<Work> workList = new ArrayList<Work>();
 		if (workMap.containsKey(key)) {
 			workList = workMap.get(key);
-			workMap.remove(key);
 		}
 		workList.add(work);
 		workMap.put(key, workList);
 	}
 
-	public Map<String, Long> calculateConfirmedMoney() throws ParseException {
+	public void calculate() throws ParseException {
 		for (String key : workMap.keySet()) {
 			confirmedMoneyMap.put(key, valueOfConfirmedMoney(workMap.get(key)));
+			totalMoneyMap.put(key, valueOfTotalMoney(workMap.get(key)));
 		}
-		return confirmedMoneyMap;
-
 	}
 
 	private Long valueOfConfirmedMoney(List<Work> list) throws ParseException {
@@ -55,16 +53,9 @@ public class ShowWorkListBiz {
 				result += Math.round(work.getTime() / 3600) * wage;
 		}
 		return result;
-
+		
 	}
-
-	public Map<String, Long> calculateTotalMoney() throws ParseException {
-		for (String key : workMap.keySet()) {
-			totalMoneyMap.put(key, valueOfTotalMoney(workMap.get(key)));
-		}
-		return totalMoneyMap;
-	}
-
+	
 	private Long valueOfTotalMoney(List<Work> list) throws ParseException {
 		long result = 0;
 		for (Work work : list) {
@@ -72,5 +63,15 @@ public class ShowWorkListBiz {
 		}
 		return result;
 	}
+	
+	public Map<String, Long> getConfirmedMoneyMap() {
+		return confirmedMoneyMap;
+	}
+
+	public Map<String, Long> getTotalMoneyMap() {
+		return totalMoneyMap;
+	}
+	
+	
 
 }
