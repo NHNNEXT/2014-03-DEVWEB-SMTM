@@ -57,7 +57,7 @@
 									</c:choose>
 									<c:choose>
 										<c:when test="${not empty work.finishConfirm}">
-										<fmt:parseDate var="finishConfirm" value="${work.finishConfirm}" pattern="yyyy-MM-dd HH:mm:ss.0"/>
+										<fmt:parseDate var="finishConfirm" value="${work.finishConfirm}" pattern="yyyy-MM-dd HH:mm:ss"/>
 										<th><fmt:formatDate value="${finishConfirm}" pattern="yy-MM-dd HH:mm"/></th>
 										</c:when>
 										<c:otherwise><th></th></c:otherwise>
