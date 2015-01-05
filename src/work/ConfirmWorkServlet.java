@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import login.LoginServlet;
 import support.SessionUtils;
 import entity.Work;
+import exception.DaoRequestFailException;
 import exception.InvalidAccessException;
 
 @WebServlet("/ConfirmWorkServlet")
@@ -22,23 +23,24 @@ public class ConfirmWorkServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-		if (SessionUtils.isEmpty(session, LoginServlet.SESSION_LOGIN_USR))
+		String workIdx = request.getParameter("workIdx");
+		if (SessionUtils.isEmpty(session, LoginServlet.SESSION_LOGIN_USR) || workIdx == null)
 			throw new InvalidAccessException();
 
 		ArrayList<Work> workList = (ArrayList<Work>) session.getAttribute("workList");
-		int idx = Integer.parseInt(request.getParameter("workIdx"));
+		int idx = Integer.parseInt(workIdx);
 		Work work = workList.get(idx);
 
-		ConfirmWorkBiz biz = new ConfirmWorkBiz();
-		int updatedRows = biz.confirmWork(work);
-
-		if (updatedRows > 0) {
-			RequestDispatcher rd = request.getRequestDispatcher("/jsp/index.jsp");
-			rd.forward(request, response);
-		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("/jsp/error.jsp");
+		WorkBiz biz = new WorkBiz();
+		try {
+			biz.confirmWork(work);
+			session.removeAttribute("workList");
+			response.sendRedirect("/jsp/success.jsp");
+		} catch (DaoRequestFailException e) {
+			session.removeAttribute("workList");
+			request.setAttribute("errorMessage", e.getErrorMessage());
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/");
 			rd.forward(request, response);
 		}
 	}
-
 }

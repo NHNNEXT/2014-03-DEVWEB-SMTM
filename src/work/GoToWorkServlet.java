@@ -12,8 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import support.SessionUtils;
 import login.LoginServlet;
-import dao.WorkDao;
 import entity.User;
+import exception.DaoRequestFailException;
 import exception.InvalidAccessException;
 
 @WebServlet("/GoToWorkServlet")
@@ -23,19 +23,18 @@ public class GoToWorkServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		User usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
-		if (usr == null)
+		String storeSeq = request.getParameter("storeSeq");
+		if (usr == null || storeSeq == null)
 			throw new InvalidAccessException();
 
-		String storeSeq = request.getParameter("storeSeq");
-		WorkDao dao = new WorkDao();
-		int updatedWorkSeq = dao.insertGoToWork(usr, storeSeq);
-
-		if (updatedWorkSeq > 0) {
-			request.setAttribute("updatedWorkSeq", updatedWorkSeq);
-			RequestDispatcher rd = request.getRequestDispatcher("/jsp/index.jsp");
+		WorkBiz biz = new WorkBiz();
+		try {
+			biz.goToWork(usr, storeSeq);
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/success.jsp");
 			rd.forward(request, response);
-		} else {
-			RequestDispatcher rd = request.getRequestDispatcher("/jsp/error.jsp");
+		} catch (DaoRequestFailException e) {
+			request.setAttribute("errorMessage", e.getErrorMessage());
+			RequestDispatcher rd = request.getRequestDispatcher("/jsp/work/selectStore.jsp");
 			rd.forward(request, response);
 		}
 	}

@@ -16,9 +16,9 @@
 			점포 : ${storeName}
 			<c:choose>
 				<c:when test="${empty workList}">
-             		<p>모든 출퇴근 요청을 승인 하셨습니다!</p>
-            	</c:when>
-            	<c:otherwise>
+					<p>모든 출퇴근 요청을 승인 하셨습니다!</p>
+				</c:when>
+				<c:otherwise>
 					<table class="table">
 						<thead>
 							<tr>
@@ -33,39 +33,45 @@
 						</thead>
 						<tbody>
 							<c:forEach items="${workList}" var="work" varStatus="status">
-							<tr>
-								<th>${work.name}</th>
-								<fmt:parseDate value="${work.start}" var="start" pattern="yyyy-MM-dd HH:mm:ss"/>
-								<th><fmt:formatDate value="${start}" pattern="yyyy-MM-dd"/></th>
-								<th><fmt:formatDate value="${start}" pattern="HH:mm"/></th>
-								<c:choose>
-									<c:when test="${not empty work.finish}">
-									<fmt:parseDate value="${work.finish}" var="finish" pattern="yyyy-MM-dd HH:mm:ss"/>
-									<th><fmt:formatDate value="${finish}" pattern="HH:mm"/></th>
-									</c:when>
-									<c:otherwise><th></th></c:otherwise>
-								</c:choose>
-								<c:choose>
-									<c:when test="${not empty work.startConfirm}">
-									<fmt:parseDate var="startConfirm" value="${work.startConfirm}" pattern="yyyy-MM-dd HH:mm:ss"/>
-									<th><fmt:formatDate value="${startConfirm}" pattern="yy-MM-dd HH:mm"/></th>
-									</c:when>
-									<c:otherwise><th></th></c:otherwise>
-								</c:choose>
-								<c:choose>
-									<c:when test="${not empty work.finishConfirm}">
-									<fmt:parseDate var="finishConfirm" value="${work.finishConfirm}" pattern="yyyy-MM-dd HH:mm:ss"/>
-									<th><fmt:formatDate value="${finishConfirm}" pattern="yy-MM-dd HH:mm"/></th>
-									</c:when>
-									<c:otherwise><th></th></c:otherwise>
-								</c:choose>
-								<th><a
-									href="<c:url value="/ConfirmWorkServlet">
-		  		<c:param name="workIdx" value="${status.index}"/>
-				</c:url>">
-										<button class="btn btn-default">승인</button>
-								</a></th>
-							</tr>
+								<tr>
+									<th>${work.name}</th>
+									<fmt:parseDate value="${work.start}" var="start" pattern="yyyy-MM-dd HH:mm:ss" />
+									<th><fmt:formatDate value="${start}" pattern="yyyy-MM-dd" /></th>
+									<th><fmt:formatDate value="${start}" pattern="HH:mm" /></th>
+									<c:choose>
+										<c:when test="${not empty work.finish}">
+											<fmt:parseDate value="${work.finish}" var="finish" pattern="yyyy-MM-dd HH:mm:ss" />
+											<th><fmt:formatDate value="${finish}" pattern="HH:mm" /></th>
+										</c:when>
+										<c:otherwise>
+											<th></th>
+										</c:otherwise>
+									</c:choose>
+									<c:choose>
+										<c:when test="${not empty work.startConfirm}">
+											<fmt:parseDate var="startConfirm" value="${work.startConfirm}" pattern="yyyy-MM-dd HH:mm:ss" />
+											<th><fmt:formatDate value="${startConfirm}" pattern="yy-MM-dd HH:mm" /></th>
+										</c:when>
+										<c:otherwise>
+											<th></th>
+										</c:otherwise>
+									</c:choose>
+									<c:choose>
+										<c:when test="${not empty work.finishConfirm}">
+											<fmt:parseDate var="finishConfirm" value="${work.finishConfirm}" pattern="yyyy-MM-dd HH:mm:ss" />
+											<th><fmt:formatDate value="${finishConfirm}" pattern="yy-MM-dd HH:mm" /></th>
+										</c:when>
+										<c:otherwise>
+											<th></th>
+										</c:otherwise>
+									</c:choose>
+									<th><a
+										href="<c:url value="/ConfirmWorkServlet">
+		  								<c:param name="workIdx" value="${status.index}"/>
+										</c:url>">
+											<button class="btn btn-default">승인</button>
+									</a></th>
+								</tr>
 							</c:forEach>
 						</tbody>
 					</table>

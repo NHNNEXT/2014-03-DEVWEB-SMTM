@@ -14,9 +14,7 @@
 			<%@ include file="/include/top.jspf"%>
 		</div>
 		<div class="section">
-			<c:if test="${not empty errorMessage}">
-				<p>${errorMessage}</p>
-			</c:if>
+			<%@ include file="/include/error.jspf"%>
 
 			<form class="form-horizontal" action="/RegisterServlet" method="POST">
 				<div class="line"></div>

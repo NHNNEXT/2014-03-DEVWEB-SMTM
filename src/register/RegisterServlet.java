@@ -42,15 +42,7 @@ public class RegisterServlet extends HttpServlet {
 
 		User user = new User(registerId, registerPw, registerName, registerType, registerPhone, registerGender,
 				registerBirth);
-
-		Validator validator = MyValidatorFactory.createValidator();
-		Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
-		if (constraintViolations.size() > 0) {
-			String errorMessage = MyValidatorFactory.getErrorMessage(constraintViolations);
-			request.setAttribute("inputUsr", user);
-			forwardJSP(request, response, errorMessage);
-			return;
-		}
+		checkValidateUser(request, response, user);
 
 		try {
 			RegisterBiz registerBiz = new RegisterBiz();
@@ -60,6 +52,18 @@ public class RegisterServlet extends HttpServlet {
 			forwardJSP(request, response, e.getErrorMessage());
 		} catch (DaoRequestFailException e) {
 			forwardJSP(request, response, e.getErrorMessage());
+		}
+	}
+
+	private void checkValidateUser(HttpServletRequest request, HttpServletResponse response, User user)
+			throws ServletException, IOException {
+		Validator validator = MyValidatorFactory.createValidator();
+		Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
+		if (constraintViolations.size() > 0) {
+			String errorMessage = MyValidatorFactory.getErrorMessage(constraintViolations);
+			request.setAttribute("inputUsr", user);
+			forwardJSP(request, response, errorMessage);
+			return;
 		}
 	}
 

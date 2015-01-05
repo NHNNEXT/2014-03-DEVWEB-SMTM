@@ -13,6 +13,10 @@
 			<%@ include file="/include/top.jspf"%>
 		</div>
 		<div class="section">
+			<c:when test="${empty storeList}">
+				<p>점포가 없습니다! 점포를 먼저 생성해주시기 바랍니다. </p>
+			</c:when>
+			
 			<div class="storeList">
 				<c:forEach items="${storeList}" var="store" varStatus="status">
 					<div class="store">
@@ -27,7 +31,6 @@
 						<a
 							href="<c:url value="/ShowWorkListServlet">
 							<c:param name="storeSeq" value="${store.seq}" />
-							<c:param name="storeName" value="${store.name}" />
 							</c:url>">
 							<button class="btn btn-default btn-right">선택</button>
 						</a>

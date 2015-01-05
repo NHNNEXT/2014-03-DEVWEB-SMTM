@@ -34,7 +34,7 @@ public class SaveStoreServlet extends HttpServlet {
 		try {
 			StoreBiz storeBiz = new StoreBiz();
 			storeBiz.save(empt);
-			response.sendRedirect("/jsp/store/success.jsp");
+			response.sendRedirect("/jsp/success.jsp");
 		} catch (DaoRequestFailException e) {
 			request.setAttribute("errorMessage", e.getErrorMessage());
 			RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/findStore.jsp");

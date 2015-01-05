@@ -28,23 +28,20 @@ public class ShowWorkListServlet extends HttpServlet {
 		User usr = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
 		if (usr == null)
 			throw new InvalidAccessException();
-
+		
+		String storeSeq = request.getParameter("storeSeq");
 		ShowWorkListBiz biz = new ShowWorkListBiz();
 		Map<String, List<Work>> workMap = null;
 		Map<String, Long> confirmedMoneyMap = null;
 		Map<String, Long> totalMoneyMap = null;
 
-		if (request.getParameter("storeSeq") == null) {
-			workMap = biz.selectWorkForAlba(usr);
-		} else {
-			String storeSeq = request.getParameter("storeSeq");
-			workMap = biz.selectWorkForManager(storeSeq);
-		}
+		workMap = biz.selectWork(usr, storeSeq);
 		try {
 			confirmedMoneyMap = biz.calculateConfirmedMoney();
 			totalMoneyMap = biz.calculateTotalMoney();
 		} catch (ParseException e) {
 			e.printStackTrace();
+			request.setAttribute("errorMessage", "날짜 형식에 문제가 발생할 수 있습니다.");
 		}
 		System.out.println(workMap);
 		request.setAttribute("workMap", workMap);

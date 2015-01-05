@@ -16,21 +16,17 @@ public class ShowWorkListBiz {
 	Map<String, Long> totalMoneyMap = new HashMap<String, Long>();
 	int wage = 5580;
 
-	public Map<String, List<Work>> selectWorkForAlba(User usr) {
+	public Map<String, List<Work>> selectWork(User usr, String storeSeq) {
 		WorkDao dao = new WorkDao();
-		List<Work> worklist = dao.selectWorkForAlba(usr);
-		for (Work work : worklist) {
-			inputWork(work.getName(), work);
-		}
-		return workMap;
-	}
+		List<Work> workList;
+		if (storeSeq == null)
+			workList = dao.selectWorkForAlba(usr);
+		else
+			workList = dao.selectWorkForManager(storeSeq);
 
-	public Map<String, List<Work>> selectWorkForManager(String storeSeq) {
-		WorkDao dao = new WorkDao();
-		List<Work> worklist = dao.selectWorkForManager(storeSeq);
-		for (Work work : worklist) {
+		for (Work work : workList)
 			inputWork(work.getName(), work);
-		}
+
 		return workMap;
 	}
 
@@ -48,7 +44,6 @@ public class ShowWorkListBiz {
 		for (String key : workMap.keySet()) {
 			confirmedMoneyMap.put(key, valueOfConfirmedMoney(workMap.get(key)));
 		}
-		// System.out.println("confirm " + confirmedMoneyMap.toString());
 		return confirmedMoneyMap;
 
 	}

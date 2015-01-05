@@ -42,8 +42,8 @@ public class MakeStoreServlet extends HttpServlet {
 		User user = SessionUtils.getValue(session, LoginServlet.SESSION_LOGIN_USR);
 		if (user == null)
 			throw new InvalidAccessException();
-		String registerUserSeq = user.getSeq();
 
+		String registerUserSeq = user.getSeq();
 		String registerName = request.getParameter("registerName");
 		String registerAddr = request.getParameter("registerAddr");
 		String registerPhone0 = request.getParameter("registerPhone0");
@@ -52,26 +52,28 @@ public class MakeStoreServlet extends HttpServlet {
 		String registerPhone = registerPhone0 + "-" + registerPhone1 + "-" + registerPhone2;
 
 		Store store = new Store(registerUserSeq, registerName, registerAddr, registerPhone);
+		checkValidateStore(request, response, store);
 
+		try {
+			StoreBiz storeBiz = new StoreBiz();
+			storeBiz.register(store);
+			response.sendRedirect("/jsp/success.jsp");
+		} catch (SameStoreExistException e) {
+			forwardJSP(request, response, e.getErrorMessage());
+		} catch (DaoRequestFailException e) {
+			forwardJSP(request, response, e.getErrorMessage());
+		}
+	}
+
+	private void checkValidateStore(HttpServletRequest request, HttpServletResponse response, Store store)
+			throws ServletException, IOException {
 		Validator validator = MyValidatorFactory.createValidator();
 		Set<ConstraintViolation<Store>> constraintViolations = validator.validate(store);
 		if (constraintViolations.size() > 0) {
 			String errorMessage = MyValidatorFactory.getErrorMessage(constraintViolations);
 			request.setAttribute("inputStore", store);
-			request.setAttribute("errorMessage", errorMessage);
-			RequestDispatcher rd = request.getRequestDispatcher("/jsp/store/makeStore.jsp");
-			rd.forward(request, response);
+			forwardJSP(request, response, errorMessage);
 			return;
-		}
-
-		try {
-			StoreBiz storeBiz = new StoreBiz();
-			storeBiz.register(store);
-			response.sendRedirect("/jsp/store/success.jsp");
-		} catch (SameStoreExistException e) {
-			forwardJSP(request, response, e.getErrorMessage());
-		} catch (DaoRequestFailException e) {
-			forwardJSP(request, response, e.getErrorMessage());
 		}
 	}
 

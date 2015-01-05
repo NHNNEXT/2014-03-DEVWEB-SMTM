@@ -83,7 +83,7 @@ public class User {
 	public boolean checkPassword(String loginPw) {
 		return this.pw.equals(loginPw);
 	}
-
+	
 	@Override
 	public String toString() {
 		return "Usr [seq=" + seq + ", id=" + id + ", pw=" + pw + ", name=" + name + ", type=" + type + ", phone1="

@@ -2,7 +2,7 @@ package exception;
 
 public class DaoRequestFailException extends ErrorMessageException {
 	private static final long serialVersionUID = 1L;
-	private final String DEFAULT_ERROR_MESSAGE = "요청 실패하였습니다.";
+	private final String DEFAULT_ERROR_MESSAGE = "db 요청에 기대하던 값을 받지 못하였습니다.";
 
 	public DaoRequestFailException() {
 		super();
