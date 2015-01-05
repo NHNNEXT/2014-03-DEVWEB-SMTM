@@ -7,20 +7,4 @@ public class InvalidAccessException extends RuntimeException {
 	public InvalidAccessException() {
 		super(DEFAULT_ERROR_MESSAGE);
 	}
-
-	public InvalidAccessException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
-		super(message, cause, enableSuppression, writableStackTrace);
-	}
-
-	public InvalidAccessException(String message, Throwable cause) {
-		super(message, cause);
-	}
-
-	public InvalidAccessException(String message) {
-		super(message);
-	}
-
-	public InvalidAccessException(Throwable cause) {
-		super(cause);
-	}
 }

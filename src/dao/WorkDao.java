@@ -19,7 +19,7 @@ public class WorkDao {
 
 	public int insertLeaveWork(final User user, final String storeSeq) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "UPDATE WORK SET WORK_STATUS=1002, WORK_FINISH=NOW() WHERE WORK_STATUS=1001 AND WORK_STO_SEQ=? AND WORK_USER_SEQ=?";
+		String sql = "UPDATE WORK SET WORK_STATUS=1002, WORK_FINISH=NOW() WHERE WORK_STO_SEQ=? AND WORK_USER_SEQ=?";
 		return jdbcTemplate.executeUpdate(sql, Integer.parseInt(storeSeq), user.getSeq());
 	}
 
