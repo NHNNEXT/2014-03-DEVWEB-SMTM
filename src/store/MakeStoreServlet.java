@@ -52,7 +52,8 @@ public class MakeStoreServlet extends HttpServlet {
 		String registerPhone = registerPhone0 + "-" + registerPhone1 + "-" + registerPhone2;
 
 		Store store = new Store(registerUserSeq, registerName, registerAddr, registerPhone);
-		checkValidateStore(request, response, store);
+		if(!isValidStore(request, response, store))
+			return;
 
 		try {
 			StoreBiz storeBiz = new StoreBiz();
@@ -67,7 +68,7 @@ public class MakeStoreServlet extends HttpServlet {
 		}
 	}
 
-	private void checkValidateStore(HttpServletRequest request, HttpServletResponse response, Store store)
+	private boolean isValidStore(HttpServletRequest request, HttpServletResponse response, Store store)
 			throws ServletException, IOException {
 		Validator validator = MyValidatorFactory.createValidator();
 		Set<ConstraintViolation<Store>> constraintViolations = validator.validate(store);
@@ -75,8 +76,9 @@ public class MakeStoreServlet extends HttpServlet {
 			String errorMessage = MyValidatorFactory.getErrorMessage(constraintViolations);
 			request.setAttribute("inputStore", store);
 			forwardJSP(request, response, errorMessage);
-			return;
+			return false;
 		}
+		return true;
 	}
 
 	private void forwardJSP(HttpServletRequest request, HttpServletResponse response, String message)

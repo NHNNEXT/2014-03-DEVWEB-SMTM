@@ -13,7 +13,7 @@ import entity.Work;
 public class WorkDao {
 	public int insertGoToWork(final User user, final String storeSeq) {
 		JdbcTemplate jdbcTemplate = new JdbcTemplate();
-		String sql = "INSERT INTO WORK(WORK_STO_SEQ, WORK_USER_SEQ, WORK_START) VALUES(?,?,NOW())";
+		String sql = "INSERT INTO WORK(WORK_STO_SEQ, WORK_USER_SEQ, WORK_START, WORK_FINISH) VALUES(?,?,NOW(),NOW())";
 		return jdbcTemplate.executeUpdate(sql, Integer.parseInt(storeSeq), user.getSeq());
 	}
 

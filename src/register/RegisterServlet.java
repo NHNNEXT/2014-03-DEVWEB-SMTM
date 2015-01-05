@@ -42,8 +42,9 @@ public class RegisterServlet extends HttpServlet {
 
 		User user = new User(registerId, registerPw, registerName, registerType, registerPhone, registerGender,
 				registerBirth);
-		checkValidateUser(request, response, user);
-
+		if (!isValidUser(request, response, user))
+			return;
+		
 		try {
 			RegisterBiz registerBiz = new RegisterBiz();
 			registerBiz.register(user);
@@ -57,7 +58,7 @@ public class RegisterServlet extends HttpServlet {
 		}
 	}
 
-	private void checkValidateUser(HttpServletRequest request, HttpServletResponse response, User user)
+	private boolean isValidUser(HttpServletRequest request, HttpServletResponse response, User user)
 			throws ServletException, IOException {
 		Validator validator = MyValidatorFactory.createValidator();
 		Set<ConstraintViolation<User>> constraintViolations = validator.validate(user);
@@ -65,8 +66,9 @@ public class RegisterServlet extends HttpServlet {
 			String errorMessage = MyValidatorFactory.getErrorMessage(constraintViolations);
 			request.setAttribute("inputUsr", user);
 			forwardJSP(request, response, errorMessage);
-			return;
+			return false;
 		}
+		return true;
 	}
 
 	private void forwardJSP(HttpServletRequest request, HttpServletResponse response, String message)

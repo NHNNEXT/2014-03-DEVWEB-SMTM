@@ -13,9 +13,9 @@
 			<%@ include file="/include/top.jspf"%>
 		</div>
 		<div class="section">
-			<c:when test="${empty storeList}">
+			<c:if test="${empty storeList}">
 				<p>점포가 없습니다! 점포를 먼저 생성해주시기 바랍니다. </p>
-			</c:when>
+			</c:if>
 			
 			<div class="storeList">
 				<c:forEach items="${storeList}" var="store" varStatus="status">

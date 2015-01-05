@@ -4,7 +4,7 @@
 <html>
 <head>
 <%@ include file="/include/header.jspf"%>
-<META http-equiv="refresh" content="3;url=/jsp/index.jsp">
+<META http-equiv="refresh" content="2;url=/jsp/index.jsp">
 </head>
 <body>
 
@@ -13,7 +13,7 @@
 			<%@ include file="/include/top.jspf"%>
 		</div>
 		<div class="section">
-			<p>요청 성공하였습니다. 3초 뒤, 홈 화면으로 이동합니다.</p>
+			<p>요청 성공하였습니다. 2초 뒤, 홈 화면으로 이동합니다.</p>
 		</div>
 		<div class="footer">
 			<%@ include file="/include/footer.jspf"%>
