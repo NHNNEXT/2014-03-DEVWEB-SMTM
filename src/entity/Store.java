@@ -13,6 +13,8 @@ public class Store {
 	private String userName;
 
 	@NotNull
+	@Size(min = 2, max = 45)
+	@Pattern(regexp="^[a-zA-Z0-9가-힣]*$")	
 	private String name;
 
 	@NotNull

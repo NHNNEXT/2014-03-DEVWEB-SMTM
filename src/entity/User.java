@@ -7,6 +7,9 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.NotBlank;
 
 public class User {
+	public static final String TYPE_ALBA = "2001";
+	public static final String TYPE_MANAGER = "2002";
+	
 	private String seq;
 
 	@NotNull
@@ -92,6 +95,14 @@ public class User {
 	public String toString() {
 		return "Usr [seq=" + seq + ", id=" + id + ", pw=" + pw + ", name=" + name + ", type=" + type + ", phone1="
 				+ phone + ", gender=" + gender + ", birth=" + birth + "]";
+	}
+
+	public boolean isAlba() {
+		return (this.type == TYPE_ALBA) ? true : false;
+	}
+
+	public boolean isManager() {
+		return (this.type == TYPE_MANAGER) ? true : false;
 	}
 
 }

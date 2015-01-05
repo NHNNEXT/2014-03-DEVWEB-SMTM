@@ -11,10 +11,10 @@ public class SelectStoreBiz {
 		StoreDao dao = new StoreDao();
 		ArrayList<Store> storeList = null;
 
-		if (usr.getType().equals("2001"))
+		if (usr.isAlba())
 			storeList = dao.selectStoreForAlba(usr);
 
-		if (usr.getType().equals("2002"))
+		if (usr.isManager())
 			storeList = dao.selectStoreForManager(usr);
 		
 		return storeList;
